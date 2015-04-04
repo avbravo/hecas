@@ -18,7 +18,7 @@
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
+                    HECAS
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
@@ -39,7 +39,11 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
+              <p:feedReader value="http://modis.gsfc.nasa.gov/rss/rss.xml" var="feed">
+    <h:outputText value="#{feed.title}" style="font-weight: bold;display:block"/>
+    <h:outputText value="#{feed.description.value}" escape="false"/>
+    <p:separator />
+</p:feedReader>
                 </p:layoutUnit>
 
             </p:layout>
