@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <composite:interface>
+        <!--el contenedor corresponde al elemento principal que tiene
+            los demas componentes :form:panel o :form:tabView
+        -->
+        <composite:attribute name="contenedor" />
+
+        <composite:attribute name="newRender" />
+        <composite:attribute name="newAction" 
+                             method-signature="java.lang.String action()" />
+
+        <composite:attribute name="refreshRender" />
+        <composite:attribute name="refreshAction" 
+                             method-signature="java.lang.String action()" />
+        <composite:attribute name="refreshUpdate" />
+
+        <composite:attribute name="searchRender" />
+        <composite:attribute name="searchUpdate" />
+        <composite:attribute name="searchOncomplete" />
+
+        <composite:attribute name="nivel6BotonRender" />
+        <composite:attribute name="nivel6BotonUpdate" />
+        <composite:attribute name="nivel6AddButtonAction" 
+                             method-signature="java.lang.String action()" />
+
+        <composite:attribute name="saveRender" />
+        <composite:attribute name="saveAction" 
+                             method-signature="java.lang.String action()" />
+
+
+
+        <composite:attribute name="editUpdate" />
+        <composite:attribute name="editRender" />
+        <composite:attribute name="editAction" 
+                             method-signature="java.lang.String action()" />
+
+
+
+        <composite:attribute name="printRender" />
+        <composite:attribute name="printAction" 
+                             method-signature="java.lang.String action()" />
+
+
+
+        <composite:attribute name="deleteUpdate" />
+        <composite:attribute name="deleteRender" />
+
+    </composite:interface>
+    <composite:implementation>
+
+
+
+ <p:toolbar id="toolbar"  > 
+                
+                    <f:facet name="left">
+                    <p:fragment autoUpdate="true">
+                        <p:commandButton  icon="ui-icon-document" 
+                                          update="toolbar,:form:growl,#{cc.attrs.contenedor}"
+                                          title="#{app['boton.new']}"
+                                          rendered="#{cc.attrs.newRender}"
+                                          action="#{cc.attrs.newAction}" />
+
+                        <p:commandButton icon="ui-icon-refresh" 
+                                         id="button_refresh"
+                                         rendered="#{cc.attrs.refreshRender}"
+                                         action="#{cc.attrs.refreshAction}" 
+                                         update="toolbar,:form:growl,#{cc.attrs.contenedor}"  
+                                         title="#{app['boton.query']}" >
+
+                        </p:commandButton>
+                        <p:commandButton  id="button_search"
+                                          icon="ui-icon-search"
+                                          update="toolbar,#{cc.attrs.searchUpdate},#{cc.attrs.contenedor}"
+                                          title="#{app['boton.search']}"
+                                          rendered="#{cc.attrs.searchRender}"
+                                          oncomplete="#{cc.attrs.searchOncomplete}" />
+
+                        <p:commandButton 
+                            icon="dolar-icon"
+                            title="#{app['title.searchregimen']}" 
+                            rendered="#{cc.attrs.nivel6BotonRender}"
+                            oncomplete="PF('nivel6ComponentDialogVar').show();"/>
+
+                        <p:commandButton 
+                            icon="ui-icon-arrow-1-s"
+                            rendered="false"
+                            action="#{cc.attrs.nivel6AddButtonAction}"
+                            title="#{app['title.addtodatatable']}" 
+                            update="#{cc.attrs.nivel6BotonUpdate}"/>
+                    </p:fragment>
+                    </f:facet>
+                      <f:facet name="right">
+                    <p:commandButton id="button_save"
+                                     icon="ui-icon-disk"
+                                     update="toolbar,:form:growl,#{cc.attrs.contenedor}"
+                                     rendered="#{cc.attrs.saveRender}"
+                                     title="#{app['boton.save']}"
+                                     action="#{cc.attrs.saveAction}"/>
+
+                    <p:commandButton id="button_edit"
+                                     update="toolbar,#{cc.attrs.contenedor},:form:growl,#{cc.attrs.editUpdate}"
+                                     rendered="#{cc.attrs.editRender}"
+                                     title="#{app['boton.update']}"
+                                     icon="ui-icon-pencil" 
+                                     action="#{cc.attrs.editAction}"/>
+
+                    <p:commandButton id="button_print"
+                                     rendered="#{cc.attrs.printRender}"
+                                     title="#{app['boton.print']}"                                 
+                                     action="#{cc.attrs.printAction}"
+                                     icon="ui-icon-print" ajax="false" />
+
+                    <p:commandButton id="button_delete" 
+                                     update="toolbar, #{cc.attrs.contenedor},:form:growl,#{cc.attrs.deleteUpdate}"
+                                     icon="ui-icon-trash"
+                                     rendered="#{cc.attrs.deleteRender}"
+                                     title="#{app['boton.delete']}"                                
+                                     onclick="PF('confirmationwidgetVar').show();" 
+                                     type="button" />
+                    </f:facet>
+ </p:toolbar>
+    </composite:implementation>
+
+</html>

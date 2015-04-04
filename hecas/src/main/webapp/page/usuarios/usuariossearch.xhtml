@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:javscaz="http://xmlns.jcp.org/jsf/composite/javscaz">
+
+    <body>
+
+        <ui:composition >
+            <p:dialog header="#{form['usuarios.search']}"
+                      closable="false" showEffect="clip"
+                      hideEffect="fade"
+                      height="335"  width="750"
+                      widgetVar="dialogSearchUsuarios">
+
+                <p:ajax onstart="#{usuariosSearchController.clear()}" update=":form:growl" listener="#{usuariosSearchController.clear()}"/>
+                <h:form id="formSearchUsuarios" rendered="#{menuBeans.usuarios.listar}">
+                    <h:panelGrid columns="2" id="panelSearchUsuarios">
+
+                        <p:outputLabel value="#{msg.username}"  />
+
+                        <h:panelGroup>
+                            <p:fragment autoUpdate="true"> 
+                                <p:inputText  value="#{usuariosSearchController.usuarios.username}"
+                                              title="#{msg.username}" />
+                                <p:commandButton icon="ui-icon-search" update=":formSearchUsuarios:datatableUsuarios,:formSearchUsuarios:panelSearchUsuarios"
+                                                 title="#{app['boton.search']}"
+                                                    onclick="PF('statusDialog').show();"
+                                    onsuccess="PF('statusDialog').hide();"
+                                                 action="#{usuariosSearchController.buscarUsername()}"/>
+
+                            </p:fragment> 
+                        </h:panelGroup>
+                        <p:outputLabel value="#{msg.nombre}"  />
+                        <h:panelGroup>
+                            <p:fragment autoUpdate="true"> 
+                                <p:inputText 
+                                    value="#{usuariosSearchController.usuarios.nombre}" title="#{msg.nombre}" />
+                                <p:commandButton icon="ui-icon-search" update=":formSearchUsuarios:datatableUsuarios,:formSearchUsuarios:panelSearchUsuarios"
+                                                 title="#{app['boton.search']}"
+                                                    onclick="PF('statusDialog').show();"
+                                    onsuccess="PF('statusDialog').hide();"
+                                                 action="#{usuariosSearchController.buscarNombre()}"/>
+                                <p:outputLabel value="#{app['label.similar']}" />
+                                <p:selectBooleanCheckbox value="#{usuariosSearchController.usarlike}"
+                                                         />
+                            </p:fragment> 
+                        </h:panelGroup>
+                        <p:outputLabel value="#{msg.activo}"  />
+                        <h:panelGroup>
+                            <p:fragment autoUpdate="true"> 
+                                <p:selectOneMenu value="#{usuariosSearchController.usuarios.activo}"
+                                                 filter="true" filterMatchMode="startsWith" effect="fade"
+                                                 requiredMessage="#{msg.activo} #{app['info.notnull']}">
+                                    <f:selectItem itemLabel="#{app['boton.yes']}" itemValue="si" />
+                                    <f:selectItem itemLabel="#{app['boton.no']}" itemValue="no" />
+                                </p:selectOneMenu>
+                                <p:commandButton icon="ui-icon-search" update=":formSearchUsuarios:datatableUsuarios,:formSearchUsuarios:panelSearchUsuarios"
+                                                 title="#{app['boton.search']}"
+                                                    onclick="PF('statusDialog').show();"
+                                    onsuccess="PF('statusDialog').hide();"
+                                                 action="#{usuariosSearchController.buscarActivo()}"/>
+                            </p:fragment> 
+
+                        </h:panelGroup>
+                        <f:facet name="footer">
+                        </f:facet>
+                    </h:panelGrid>
+
+
+                    <p:dataTable  id="datatableUsuarios" rows="7" value="#{usuariosSearchController.usuariosList}" 
+                                  var="item"
+                                  paginator="true"
+                                  rowKey="#{item.username}"
+                                  selectionMode="single"
+                                  selection="#{usuariosSearchController.selected}"
+                                  filteredValue="#{usuariosSearchController.filtered}"    >
+                        <p:column filterBy="#{item.username}" sortBy="#{item.username}" headerText="" >
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.username}"/>
+                               
+                            </f:facet>
+                            <h:outputText value="#{item.username}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.nombre}" sortBy="#{item.nombre}">
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.activo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.activo}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.idgrupousuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idgrupousuario.grupousuario}"/>
+                        </p:column>
+                       
+                        <p:column >  
+                            <p:fragment autoUpdate="true"> 
+                                <p:commandButton  update="#{contenedor},#{barra}"  action="#{usuariosSearchController.regresar()}"
+                                                  icon="ui-icon-circle-check" 
+                                                  oncomplete="PF('dialogSearchUsuarios').hide();"> 
+                                    <f:setPropertyActionListener value="#{item}" target="#{usuariosSearchController.selected}" />  
+                                    <f:setPropertyActionListener value="#{page_call}"  target="#{usuariosSearchController.page_call}" />
+                                </p:commandButton>  
+                            </p:fragment>
+                        </p:column>
+                          <p:column >  
+                            <p:fragment autoUpdate="true"> 
+                                <p:commandButton  update=":formSearchUsuarios" 
+                                                  oncomplete= "PF('confirmDelete').show()"
+                                                  icon="ui-icon-trash" 
+                                                  title="#{app['boton.delete']}"
+                                                  rendered="#{menuBeans.usuarios.eliminar}"
+                                                  >
+ 
+                                    <f:setPropertyActionListener value="#{item}" target="#{usuariosSearchController.selected}" />  
+                                </p:commandButton>  
+                            </p:fragment>
+                        </p:column>
+                        <f:facet name="header"> 
+                            <p:fragment autoUpdate="true"> 
+                                <p:commandButton icon="ui-icon-circle-arrow-w" 
+                                                 title="#{app['boton.return']}"
+                                                      update="#{contenedor},#{barra}" 
+                                                 oncomplete="PF('dialogSearchUsuarios').hide();"
+                                                 action="#{usuariosSearchController.regresarSinSeleccion}"/>
+                                <p:commandButton  
+                                    icon="ui-icon-gear"
+                                    title="#{app['boton.showall']}"
+                                       onclick="PF('statusDialog').show();"
+                                    onsuccess="PF('statusDialog').hide();"
+                                    update ="datatableUsuarios" action="#{usuariosSearchController.showAll()}"/>
+                            </p:fragment>
+                        </f:facet>
+                    </p:dataTable>
+                     <javscaz:dialogoeliminar
+                        contenedor=":formSearchUsuarios:datatableUsuarios"
+                        etiquetaValor="#{usuariosSearchController.selected.nombre}"
+                        buttonYesAction="#{usuariosSearchController.delete()}"
+                        />
+                       <javscaz:procesar/>
+                </h:form>
+            </p:dialog> 
+
+
+
+        </ui:composition>
+
+    </body>
+</html>
