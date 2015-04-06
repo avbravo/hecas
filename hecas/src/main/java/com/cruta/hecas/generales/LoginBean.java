@@ -5,30 +5,27 @@
  */
 package com.cruta.hecas.generales;
 
-
 import com.cruta.hecas.Usuarios;
 import com.cruta.hecas.ejb.UsuariosFacade;
 import com.cruta.hecas.menu.MenuBeans;
 import com.cruta.hecas.roles.ValidadorRoles;
 import java.io.IOException;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.management.monitor.Monitor;
 import javax.servlet.http.HttpSession;
-
 
 /**
  *
  * @author avbravo
  */
-@Named
+@Named(value = "loginBean")
 @SessionScoped
 public class LoginBean implements Serializable {
     
@@ -48,8 +45,7 @@ public class LoginBean implements Serializable {
     @Inject
     ManagementThemes managementThemes;
     String tema;
-    @Inject
-            Monitor monitor;
+  
     List<String> listPendientes = new ArrayList<>();
 
     public List<String> getListPendientes() {
@@ -133,7 +129,7 @@ public class LoginBean implements Serializable {
             setLogeado(Boolean.TRUE);
             if (validadorRoles.validarRoles(usuarios.getIdgrupousuario().getIdgrupousuario())) {
                 //verifica los requisitos
-            
+   
                 return "index";
             }
             
