@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            <ui:define name="center">
+             <f:view>
+                    <h:form>
+                        <h2>SUBIR ALERTAS</h2>
+                       El sistema debe permitir escojer el cultivo
+                       Muestra las plagas
+                       selecciona la plaga y detallar y subir la foto.
+                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+        <p:outputLabel for="console" value="Cultivo:" />
+        <p:selectOneMenu id="console" >
+            <f:selectItem itemLabel="Aji" itemValue="" />
+            <f:selectItem itemLabel="Tomate" itemValue="Xbox One" />
+            <f:selectItem itemLabel="Berengena" itemValue="PS4" />
+            
+        </p:selectOneMenu>
+  <p:outputLabel for="console" value="Plaga: (colocar la foto)" />
+        <p:selectOneMenu >
+            <f:selectItem itemLabel="Picudo" itemValue="" />
+            <f:selectItem itemLabel="Etc" itemValue="Xbox One" />
+            
+            
+        </p:selectOneMenu>
+  <p:outputLabel value="Descripcion"/>
+  <p:inputTextarea />
+  <p:outputLabel value="Ubicacion"/>
+  <p:inputText/>
+  <p:outputLabel value="Ataco"/>
+  <p:fieldset legend="Ataco">
+      <p:outputLabel value="Flor"/>
+       <p:selectBooleanCheckbox value="" />
+        <p:outputLabel value="Tallo"/>
+       <p:selectBooleanCheckbox value="" />
+        <p:outputLabel value="Hoja"/>
+       <p:selectBooleanCheckbox value="" />
+       <p:outputLabel value="Fruto"/>
+       <p:selectBooleanCheckbox value="" />
+  </p:fieldset>
+   
+  <p:outputLabel value="Fotos"/>
+  <p:commandLink value="Subir fotos"></p:commandLink>
+  <p:outputLabel value="hora"/>
+  <p:calendar/>
+  <p:outputLabel value="Fecha"/>
+  <p:calendar/>
+  
+                        </h:panelGrid>
+                    </h:form>
+                    
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

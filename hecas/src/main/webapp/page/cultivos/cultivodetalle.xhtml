@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+<!--            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="right">
+                right
+            </ui:define>-->
+
+            <ui:define name="center">
+               <f:view>
+                    <h:form>
+                        <h2>AJI</h2>
+                        <p:breadCrumb>
+  <p:menuitem value="Listado" url="#" />
+        <p:menuitem value="Cultivos" url="#" />
+    
+
+   
+</p:breadCrumb>
+                        <p:tabView>
+                            <p:tab title="AJI(Capsicum)">
+                               
+                            </p:tab>
+                            <p:tab title="Localizacion">
+                                <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:100%;height:400px" />
+
+                                
+                            </p:tab>
+                            <p:tab title="Siembra">
+                                
+                            </p:tab>
+                            <p:tab title="Plagas">
+                                <p:panelGrid columns="1">
+                                   <p:commandLink value="Picudo" action="/faces/page/cultivos/plagasdetalle.xhtml"/>
+                                <p:commandLink value="Etc"/>
+                                </p:panelGrid>
+                                
+                            </p:tab>
+                        </p:tabView>
+                    </h:form>
+                    
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
