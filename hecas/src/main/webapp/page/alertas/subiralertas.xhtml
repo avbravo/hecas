@@ -19,25 +19,41 @@
                        selecciona la plaga y detallar y subir la foto.
                         <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
         <p:outputLabel for="console" value="Cultivo:" />
-        <p:selectOneMenu id="console" >
+        <p:selectOneMenu rendered="true" id="console" >
             <f:selectItem itemLabel="Aji" itemValue="" />
             <f:selectItem itemLabel="Tomate" itemValue="Xbox One" />
             <f:selectItem itemLabel="Berengena" itemValue="PS4" />
             
         </p:selectOneMenu>
-  <p:outputLabel for="console" value="Plaga: (colocar la foto)" />
+  <p:outputLabel rendered="true" for="console" value="Plaga: (colocar la foto)" />
         <p:selectOneMenu >
+            <f:selectItem itemLabel="Desconocida" itemValue="" />
             <f:selectItem itemLabel="Picudo" itemValue="" />
             <f:selectItem itemLabel="Etc" itemValue="Xbox One" />
             
             
         </p:selectOneMenu>
+  <p:separator/>
+  <p:commandLink value="Detalles dialogo de la plaga"/>
   <p:outputLabel value="Descripcion"/>
-  <p:inputTextarea />
+  <p:inputTextarea placeholder="Ingrese el detalle, la temperatura, humedad" />
+  <p:outputLabel title="Impacto en el cultivo" value="Grado de afectacion"/>
+  <p:selectOneMenu >
+            <f:selectItem itemLabel="Alto" itemValue="" />
+            <f:selectItem itemLabel="Medio" itemValue="Xbox One" />
+            <f:selectItem itemLabel="Bajo" itemValue="Xbox One" />
+            
+        </p:selectOneMenu>
+  
   <p:outputLabel value="Ubicacion"/>
+  <p:inputText rendered="true"/>
+  
+<!--<p:outputLabel value="Temperatura"/>
   <p:inputText/>
-  <p:outputLabel value="Ataco"/>
-  <p:fieldset legend="Ataco">
+<p:outputLabel value="Humedad"/>
+  <p:inputText/>  -->
+  <p:outputLabel value="La plaga afecta"/>
+  <p:panelGrid columns="4">
       <p:outputLabel value="Flor"/>
        <p:selectBooleanCheckbox value="" />
         <p:outputLabel value="Tallo"/>
@@ -46,15 +62,31 @@
        <p:selectBooleanCheckbox value="" />
        <p:outputLabel value="Fruto"/>
        <p:selectBooleanCheckbox value="" />
-  </p:fieldset>
+       <p:outputLabel value="Raices"/>
+       <p:selectBooleanCheckbox value="" />
+ </p:panelGrid>
    
-  <p:outputLabel value="Fotos"/>
-  <p:commandLink value="Subir fotos"></p:commandLink>
-  <p:outputLabel value="hora"/>
-  <p:calendar/>
-  <p:outputLabel value="Fecha"/>
-  <p:calendar/>
+  <p:outputLabel value="% de Area Afectada"/>
+  <p:inputText size="50" placeholder="Anote que % de su cultivo esta siendo afectado"/>
   
+  
+   <p:outputLabel title="Etapa" value="Etapa"/>
+  <p:selectOneMenu >
+            <f:selectItem itemLabel="Brote" itemValue="" />
+            <f:selectItem itemLabel="Crecimiento" itemValue="Xbox One" />
+            <f:selectItem itemLabel="Floracion" itemValue="Xbox One" />
+            
+        </p:selectOneMenu>
+  
+   <p:outputLabel value="Fotos"/>
+  <p:commandLink value="Subir fotos"></p:commandLink>
+ 
+  
+  <p:outputLabel value="Fecha"/>
+  <p:calendar size="50" placeholder="Fecha en que se detecto la plaga"/>
+  
+  <p:rating  stars="5"/>
+
                         </h:panelGrid>
                     </h:form>
                     

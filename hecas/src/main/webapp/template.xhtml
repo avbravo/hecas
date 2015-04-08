@@ -63,6 +63,36 @@
                        <p:growl autoUpdate="true"/>
  
     <p:panelMenu style="width:300px" >
+        <p:submenu label="Menu">
+<p:menuitem value="Cultivos"  url="/faces/page/cultivos/cultivos.xhtml" />   
+
+
+<p:menuitem value="Mis Cultivos"  url="/faces/page/cultivos/miscultivos.xhtml" /> 
+                        <p:menuitem value="Alertas" url="/faces/page/alertas/alertas.xhtml" />  
+  <p:menuitem value="Identificar plagas desconocidas" url="/faces/page/alertas/alertas.xhtml" />  
+  <p:separator/>
+                <p:menuitem value="Estadisticas"/>
+                        <p:menuitem value="Articulos de investigacion"/>
+              <!--<p:menuitem value="Chat"/>-->
+                 <p:menuitem value="Bases datos"/>
+               <p:menuitem value="Drones"/>
+<!--                      <p:menuitem value="Busqueda de imagenes"/>-->
+                       <p:menuitem value="Mapas"/>
+                    </p:submenu>
+   <p:submenu label="Administracion" >
+                        <p:menuitem value="Plagas" url="#" />
+                          <p:menuitem value="Quimicos" url="#" />
+ <p:menuitem value="Cultivos"  url="/faces/page/cultivos/registroscultivos.xhtml" />   
+                            <p:submenu label="Agricultores" icon="ui-icon-search"/>
+                                <p:submenu label="Investigadores" icon="ui-icon-search"/>
+                            
+                          
+                      
+                    </p:submenu>
+                     
+
+
+<!--
         <p:submenu label="Menu" >
            
        
@@ -93,7 +123,7 @@
 
 <p:menuitem value="Ayuda" url="http://www.primefaces.org" icon="ui-icon-close" />
                     <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
-
+-->
     </p:panelMenu>
                </h:form>
                     </ui:insert>
