@@ -59,22 +59,51 @@
 
               <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
                     <ui:insert name="left">
-                        <p:accordionPanel rendered="#{loginBean.logeado}">
-                            <p:tab title="#{app['tab.notificaciones']}">
-                                <h:form id="templatenotificaciones">
-                                <p:orderList value="#{monitor.listPendientes}" var="pendientes" 
-                                             controlsLocation="none" itemLabel="#{pendientes}" itemValue="#{pendientes}" />
-                                </h:form>
-                            </p:tab>
-                            <p:tab title="#{app['tab.pendientes']}">
-                                
-                            </p:tab>
-                        </p:accordionPanel>
+                        <h:form>
+                       <p:growl autoUpdate="true"/>
+ 
+    <p:panelMenu style="width:300px" >
+        <p:submenu label="Menu" >
+           
+       
+                        <p:menuitem value="Cultivos"  url="/faces/page/cultivos/cultivos.xhtml" />   
+                 
+                        <p:menuitem value="Alertas" url="/faces/page/alertas/alertas.xhtml" />  
+                            
+                <p:menuitem value="Estadisticas"/>
+                        <p:menuitem value="Articulos de investigacion"/>
+              <p:menuitem value="Chat"/>
+                 <p:menuitem value="Bases datos"/>
+               <p:menuitem value="Drones"/>
+                      <p:menuitem value="Busqueda de imagenes"/>
+                       <p:menuitem value="Mapas"/>
+                    </p:submenu>
+   <p:submenu label="Administracion" >
+                        <p:menuitem value="Plagas" url="#" />
+                          <p:menuitem value="Quimicos" url="#" />
+ <p:menuitem value="Cultivos"  url="/faces/page/cultivos/registroscultivos.xhtml" />   
+                            <p:submenu label="Agricultores" icon="ui-icon-search"/>
+                                <p:submenu label="Investigadores" icon="ui-icon-search"/>
+                            
+                          
+                      
+                    </p:submenu>
+
+                    
+
+<p:menuitem value="Ayuda" url="http://www.primefaces.org" icon="ui-icon-close" />
+                    <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+
+    </p:panelMenu>
+               </h:form>
                     </ui:insert>
                 </p:layoutUnit>
-                <p:layoutUnit position="east" size="70" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">
+                <p:layoutUnit position="east" size="150" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">
                     <ui:insert name="right">
-                     Right
+                        <p:accordionPanel>
+                            <p:tab title="Alertas"/>
+                            <p:tab title="Chat"/>
+                        </p:accordionPanel>
 
                         </ui:insert>
                 </p:layoutUnit>

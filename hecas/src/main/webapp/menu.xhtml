@@ -9,50 +9,14 @@
         <ui:composition>
             <h:form id="menuForm" >
                 <p:menubar>
-                    <p:submenu label="Cultivos" >
-                        <p:menuitem value="Cultivos"  url="/faces/page/cultivos/cultivos.xhtml" />   
-                    </p:submenu>
+
                     
-                    <p:submenu label="Alertas">
-                        <p:menuitem value="Alertas" url="/faces/page/alertas/alertas.xhtml" />  
-                            
-               
-                    </p:submenu>
-                    <p:submenu label="Estadisticas"/>
-                         <p:submenu label="Articulos de investigacion"/>
-                    <p:submenu label="Chat"/>
-                                           <p:submenu label="Bases datos"/>
-                    <p:submenu label="Drones"/>
-                     <p:submenu label="Administracion" icon="ui-icon-help">
-                        <p:menuitem value="Plagas" url="#" />
-                          <p:menuitem value="Quimicos" url="#" />
-                        <p:submenu label="Cultivos" icon="ui-icon-search"/>
-                            <p:submenu label="Agricultores" icon="ui-icon-search"/>
-                                <p:submenu label="Investigadores" icon="ui-icon-search"/>
-                            
-                          
-                      
-                    </p:submenu>
+                    
 
-                    <p:submenu label="Help" icon="ui-icon-help">
-                        <p:menuitem value="Contents" url="#" />
-                        <p:submenu label="Search" icon="ui-icon-search">
-                            <p:submenu label="Text">
-                                <p:menuitem value="Workspace" url="#" />
-                            </p:submenu>
-                            <p:menuitem value="File" url="#" />
-                        </p:submenu>
-                    </p:submenu>
-
-
-
-
+<p:menuitem value="Ayuda" url="http://www.primefaces.org" icon="ui-icon-close" />
                     <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
 
-                    <f:facet name="options">
-                        <p:inputText style="margin-right:10px" placeholder="Search"/>
-                        <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
-                    </f:facet>
+                    
                 </p:menubar>
             </h:form>
         </ui:composition>
