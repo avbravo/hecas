@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+
+        <h:head>
+            <meta content='text/html; charset=UTF8' http-equiv="ContentType"/>
+
+
+            <h:outputStylesheet name="./css/default.css"/>
+            <h:outputStylesheet name="./css/cssLayout.css"/>
+
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF8' http-equiv="ContentType"/>
+                <f:view locale="#{idiomas.locale}"></f:view>
+                <f:loadBundle basename="com.cruta.hecas.properties.messages" var="msg" />
+                <f:loadBundle basename="com.cruta.hecas.properties.application" var="app" />
+                <f:loadBundle basename="com.cruta.hecas.properties.menu" var="men" />
+                <f:loadBundle basename="com.cruta.hecas.properties.entity" var="ent" />
+                <f:loadBundle basename="com.cruta.hecas.properties.form" var="form" />
+
+                <title><h:outputText value="#{app['application.title']}"/></title>
+
+            </f:facet>
+            <style type="text/css">
+                .ui-layout-north {
+                    z-index:20 !important;
+                    overflow:visible !important;;
+                }
+                .ui-layout-north .ui-layout-unit-content {
+                    overflow:visible !important;
+                }
+
+            </style>
+
+
+        </h:head>
+
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="60" resizable="true" closable="true"
+                              collapsible="false" >
+                    <ui:insert name="top">
+
+                        <p:panelGrid >
+                            <p:outputLabel value="Hecas"/>
+                        </p:panelGrid>
+                        <!--                        <ui:include src="menu.xhtml"/>-->
+                    </ui:insert>
+                </p:layoutUnit>
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true" style="south">
+                    <ui:insert name="bottom" >
+
+                        <p:outputLabel value="#{app['application.footer']}"/>
+                    </ui:insert>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175"  collapsible="true">
+                    <ui:insert name="left">
+                        <h:form>
+                            <p:growl autoUpdate="true"/>
+
+                            <p:panelMenu style="width:300px" >
+                                <p:submenu label="Menu">
+                                    <p:menuitem value="Cultivos"  url="/faces/page/cultivos/cultivos.xhtml" />   
+
+
+                                    <p:menuitem value="Mis Cultivos"  url="/faces/page/cultivos/miscultivos.xhtml" /> 
+                                    <p:menuitem value="Alertas" url="/faces/page/alertas/alertas.xhtml" />  
+                                    <p:menuitem value="Identificar plagas desconocidas" url="/faces/page/alertas/alertas.xhtml" />  
+                                    <p:separator/>
+                                    <p:menuitem value="Estadisticas"/>
+                                    <p:menuitem value="Articulos de investigacion"/>
+                                    <!--<p:menuitem value="Chat"/>-->
+                                    <p:menuitem value="Bases datos"/>
+                                    <p:menuitem value="Drones"/>
+                                    <!--                      <p:menuitem value="Busqueda de imagenes"/>-->
+                                    <p:menuitem value="Mapas"/>
+                                </p:submenu>
+                                <p:submenu label="Administracion" >
+                                    <p:menuitem value="Plagas" url="#" />
+                                    <p:menuitem value="Quimicos" url="#" />
+                                    <p:menuitem value="Cultivos"  url="/faces/page/cultivos/registroscultivos.xhtml" />   
+                                    <p:submenu label="Agricultores" icon="ui-icon-search"/>
+                                    <p:submenu label="Investigadores" icon="ui-icon-search"/>
+
+
+
+                                </p:submenu>
+
+
+
+
+                            </p:panelMenu>
+                        </h:form>
+                    </ui:insert>
+                </p:layoutUnit>
+                <p:layoutUnit position="east" size="150"  resizable="true" closable="true" collapsible="true" effect="drop">
+                    <ui:insert name="right">
+                        <p:accordionPanel>
+                            <p:tab title="Alertas"/>
+                            <p:tab title="Chat"/>
+                        </p:accordionPanel>
+
+                    </ui:insert>
+                </p:layoutUnit>
+
+                <p:layoutUnit   position="center">
+                    <ui:insert name="center" ></ui:insert>
+
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>

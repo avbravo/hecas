@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <composite:interface >
+
+
+        <composite:attribute name="contenedor" />
+        <composite:attribute name="etiquetaValor"/>
+        <composite:attribute name="buttonYesAction" 
+                             method-signature="java.lang.String action()" />
+
+    </composite:interface>
+    <composite:implementation>
+
+
+
+        <p:confirmDialog id="confirmDialog"
+                         widgetVar="confirmDelete" 
+                         header="#{app['dialog.delete']}"
+                         message="#{app['info.doyouwantdelete']} #{cc.attrs.etiquetaValor}"                       
+                         severity="alert"
+                         closeOnEscape="false"
+                         showEffect="slide"
+                         hideEffect="fold"
+                         appendTo="@(body)"
+                         closable="false">
+
+            <h:panelGrid id="paneldialogoeliminar" columns="2">
+            <p:commandButton id="btnYes"
+                             value="#{app['boton.yes']}"
+                             icon="ui-icon-check"
+                             process="@this"
+                             oncomplete="PF('confirmDelete').hide();"
+                             actionListener="#{cc.attrs.buttonYesAction}"
+                            
+                             update="#{cc.attrs.contenedor}"/>
+
+            <p:commandButton id="btnNo"
+                             value="#{app['boton.no']}"
+                             icon="ui-icon-close"
+                             onclick="PF('confirmDelete').hide();"
+                             type="button" />
+            </h:panelGrid>
+        </p:confirmDialog>
+    </composite:implementation>
+
+</html>

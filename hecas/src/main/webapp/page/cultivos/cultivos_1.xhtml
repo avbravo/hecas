@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+<!--            <ui:define name="top">
+                top
+            </ui:define>-->
+
+<!--            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="right">
+                right
+            </ui:define>-->
+
+            <ui:define name="content">
+                <f:view>
+                    <h:form>
+                        <h2>CULTIVOS</h2>
+                        
+                        <p:tabView>
+                            <p:tab title="Hortalizas">
+                                <p:panelGrid columns="1">
+                                    <p:commandLink value="Aji" action="/faces/page/cultivos/cultivodetalle.xhtml"/>
+                                <p:commandLink value="Berengena"/>
+                                <p:commandLink value="Sandia"/>
+                                <p:commandLink value="Tomate"/>
+                                </p:panelGrid>
+                                <p:dataTable>
+                                    <p:column>
+                                        
+                                    </p:column>
+                                      <p:column>
+                                        
+                                    </p:column>
+                                </p:dataTable>
+                                   
+                            </p:tab>
+                            <p:tab title="Granos Basicos">
+                                
+                            </p:tab>
+                            <p:tab title="Tuberculos">
+                                
+                            </p:tab>
+                            <p:tab title="Fruta">
+                                
+                            </p:tab>
+                        </p:tabView>
+                    </h:form>
+                    
+                </f:view>
+              
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

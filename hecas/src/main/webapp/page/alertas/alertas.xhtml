@@ -10,11 +10,31 @@
 
         <ui:composition template="./../../template.xhtml">
 
-            <ui:define name="center">
+            <ui:define name="content">
                 <f:view>
                     <h:form>
-                        <h2>ALERTAS</h2>
+                   <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">ALERTAS</h3>
+                            </div>
+                            <div class="panel-body">
 
+                                  <p:outputLabel value="Cultivos"/>
+                                 <p:selectOneMenu >
+                                <f:selectItem itemLabel="Hortalizas" itemValue="" />
+                                <f:selectItem itemLabel="Granos Basicos" itemValue="" />
+                                  <f:selectItem itemLabel="Tuberculos" itemValue="" />
+                                <f:selectItem itemLabel="Fruta" itemValue="" />
+                                </p:selectOneMenu>  
+                                  
+                                      <p:outputLabel value="Plagas"/>
+                                 <p:selectOneMenu >
+                                <f:selectItem itemLabel="Hortalizas" itemValue="" />
+                                <f:selectItem itemLabel="Granos Basicos" itemValue="" />
+                                  <f:selectItem itemLabel="Tuberculos" itemValue="" />
+                                <f:selectItem itemLabel="Fruta" itemValue="" />
+                                </p:selectOneMenu>  
+                                      
                         <p:tabView>
                             <p:tab title="Cultivos">
                                 <p:panelGrid columns="1">
@@ -96,6 +116,9 @@
 
                             </p:tab>
                         </p:tabView>
+                                  </div>
+                            <div class="panel-footer">Panel footer</div>
+                        </div>
                     </h:form>
 
                 </f:view>

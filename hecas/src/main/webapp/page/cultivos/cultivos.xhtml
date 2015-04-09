@@ -4,65 +4,67 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./../../template.xhtml">
 
-<!--            <ui:define name="top">
-                top
-            </ui:define>-->
+            <!--            <ui:define name="top">
+                            top
+                        </ui:define>-->
 
-<!--            <ui:define name="bottom">
-                bottom
-            </ui:define>
+            <!--            <ui:define name="bottom">
+                            bottom
+                        </ui:define>
+            
+                        <ui:define name="left">
+                            left
+                        </ui:define>
+            
+                        <ui:define name="right">
+                            right
+                        </ui:define>-->
 
-            <ui:define name="left">
-                left
-            </ui:define>
-
-            <ui:define name="right">
-                right
-            </ui:define>-->
-
-            <ui:define name="center">
+            <ui:define name="content">
                 <f:view>
                     <h:form>
-                        <h2>CULTIVOS</h2>
-                        
-                        <p:tabView>
-                            <p:tab title="Hortalizas">
-                                <p:panelGrid columns="1">
-                                    <p:commandLink value="Aji" action="/faces/page/cultivos/cultivodetalle.xhtml"/>
-                                <p:commandLink value="Berengena"/>
-                                <p:commandLink value="Sandia"/>
-                                <p:commandLink value="Tomate"/>
-                                </p:panelGrid>
-                                <p:dataTable>
-                                    <p:column>
-                                        
-                                    </p:column>
-                                      <p:column>
-                                        
-                                    </p:column>
-                                </p:dataTable>
-                                   
-                            </p:tab>
-                            <p:tab title="Granos Basicos">
-                                
-                            </p:tab>
-                            <p:tab title="Tuberculos">
-                                
-                            </p:tab>
-                            <p:tab title="Fruta">
-                                
-                            </p:tab>
-                        </p:tabView>
-                    </h:form>
-                    
-                </f:view>
+
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">CULTIVOS</h3>
+                            </div>
+                            <div class="panel-body">
               
+                                <p:outputLabel value="Cultivos"/>
+                                 <p:selectOneMenu >
+                                <f:selectItem itemLabel="Hortalizas" itemValue="" />
+                                <f:selectItem itemLabel="Granos Basicos" itemValue="" />
+                                  <f:selectItem itemLabel="Tuberculos" itemValue="" />
+                                <f:selectItem itemLabel="Fruta" itemValue="" />
+                                </p:selectOneMenu>  
+
+                          
+                                        <p:panelGrid columns="1">
+                                            <p:commandLink value="Aji" action="/faces/page/cultivos/cultivodetalle.xhtml"/>
+                                            <p:commandLink value="Berengena"/>
+                                            <p:commandLink value="Sandia"/>
+                                            <p:commandLink value="Tomate"/>
+                                        </p:panelGrid>
+                                     
+                                   
+                            </div>
+                            <div class="panel-footer">Panel footer</div>
+                        </div>
+
+
+
+                    </h:form>
+
+                </f:view>
+
             </ui:define>
 
         </ui:composition>
