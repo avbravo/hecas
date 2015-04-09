@@ -51,7 +51,7 @@
         <mime-type>image/x-icon</mime-type>
     </mime-mapping>
     
-    <context-param>
+<!--    <context-param>
     <param-name>BootsFaces_USETHEME</param-name>
     <param-value>true</param-value>
 </context-param>
@@ -60,5 +60,5 @@
      <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.jsf</url-pattern>
     <url-pattern>/javax.faces.resource/*</url-pattern>
-</servlet-mapping>
+</servlet-mapping>-->
 </web-app>
