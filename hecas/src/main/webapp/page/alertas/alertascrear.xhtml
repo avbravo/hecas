@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+                    <h:form>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">CREAR ALERTAS</h3>
+                            </div>
+                            <div class="panel-body">
+
+
+                                <div class="form-group">
+                                    <p:outputLabel  for="console" value="Cultivo:" />
+                                    <p:selectOneMenu rendered="true" id="console" >
+                                        <f:selectItem itemLabel="Aji" itemValue="Aji" />
+                                        <f:selectItem itemLabel="Tomate" itemValue="Tomate" />
+                                        <f:selectItem itemLabel="Berengena" itemValue="PS4" />
+
+                                    </p:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <p:outputLabel  rendered="true" value="Plaga: (colocar la foto)" />
+                                    <p:selectOneMenu >
+                                        <f:selectItem itemLabel="Desconocida" itemValue="Desconocida" />
+                                        <f:selectItem itemLabel="Picudo" itemValue="Picudo" />
+                                        <f:selectItem itemLabel="Etc" itemValue="Xbox One" />
+                                    </p:selectOneMenu>
+                                </div>
+
+                                <div class="form-group">
+                                    <p:outputLabel  value="Descripcion"/>
+                                    <p:inputTextarea placeholder="Ingrese el detalle, la temperatura, humedad" />
+                                </div>
+                                <div class="form-group"> 
+                                    <p:outputLabel  title="Impacto en el cultivo" value="Grado de afectacion"/>
+                                    <p:selectOneMenu >
+                                        <f:selectItem itemLabel="Alto" itemValue="" />
+                                        <f:selectItem itemLabel="Medio" itemValue="Xbox One" />
+                                        <f:selectItem itemLabel="Bajo" itemValue="Xbox One" />
+
+                                    </p:selectOneMenu>
+                                </div>
+
+                                <div class="form-group">
+                                    <p:outputLabel  value="Ubicacion"/>
+                                    <p:inputText rendered="true"/>
+                                </div>
+
+
+                                <div class="form-group"> 
+                                    <p:outputLabel  value="La plaga afecta"/>
+                                    <p:panelGrid columns="4">
+                                        <div class="form-group"> 
+                                            <p:outputLabel  value="Flor"/>
+                                            <p:selectBooleanCheckbox value="" />
+                                        </div>
+                                        <div class="form-group"> 
+                                            <p:outputLabel  value="Tallo"/>
+                                            <p:selectBooleanCheckbox value="" />
+                                        </div>
+                                        <div class="form-group"> 
+                                            <p:outputLabel  value="Hoja"/>
+                                            <p:selectBooleanCheckbox value="" />
+                                        </div>
+                                        <div class="form-group"> 
+                                            <p:outputLabel  value="Fruto"/>
+                                            <p:selectBooleanCheckbox value="" />
+                                        </div>
+                                        <div class="form-group"> <p:outputLabel  value="Raices"/>
+                                            <p:selectBooleanCheckbox value="" />
+                                        </div>
+                                    </p:panelGrid>
+   </div>
+
+                                    <div class="form-group"> 
+                                        <p:outputLabel  value="% de Area Afectada"/>
+                                        <p:inputText size="50" placeholder="Anote que % de su cultivo esta siendo afectado"/>
+                                    </div>
+
+                                    <div class="form-group"> 
+                                        <p:outputLabel  title="Etapa" value="Etapa del cultivo"/>
+                                        <p:selectOneMenu >
+                                            <f:selectItem itemLabel="Brote" itemValue="" />
+                                            <f:selectItem itemLabel="Crecimiento" itemValue="Xbox One" />
+                                            <f:selectItem itemLabel="Floracion" itemValue="Xbox One" />
+
+                                        </p:selectOneMenu>
+                                    </div>
+                                    <div class="form-group">
+                                        <p:outputLabel  value="Fotos"/>
+                                        <p:commandLink value="Subir fotos">
+
+                                        </p:commandLink>
+                                    </div>
+
+                                    <div class="form-group"> 
+                                        <p:outputLabel  value="Fecha"/>
+                                        <p:calendar size="50" placeholder="Fecha en que se detecto la plaga"/>
+                                    </div>
+                                    <div class="form-group"> 
+                                        <p:rating  stars="5"/>
+                                    </div>
+
+                                </div>
+                                <div class="panel-footer">Panel footer</div>
+                            </div>
+                    </h:form>
+
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

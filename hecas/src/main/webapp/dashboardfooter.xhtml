@@ -5,20 +5,7 @@
 
     <ui:composition>
         <!-- /.panel -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa fa-clock-o fa-fw"></i> Noticias
-                <p:scrollPanel style="width:450px;height:200px">
-
-                    <p:feedReader size="4" value="http://www.fao.org/americas/noticias/rss/feed/es/?key=33" var="feed">
-                        <h:outputText value="#{feed.title}" style="font-weight: bold;display:block"/>
-                        <h:outputText value="#{feed.description.value}" escape="false"/>
-                        <p:separator />
-                    </p:feedReader>  
-
-                </p:scrollPanel>
-            </div>
-        </div>
+        
 
         <div class="col-lg-4">
             <div class="panel panel-default">

@@ -13,20 +13,21 @@
             <ui:define name="content">
                 <f:view>
                     <h:form>
-                   <div class="panel panel-primary">
+                        <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">CONFIGURAR ALERTAS</h3>
                             </div>
                             <div class="panel-body">
 
-                                
-                                      
-                      
-                          
 
-                                <p:panelGrid columns="2">
 
-                                    <p:outputLabel value="Frecuencia de alertas"/>
+
+
+
+
+
+                                <div class="form-group"> 
+                                    <p:outputLabel  value="Frecuencia de alertas"/>
                                     <p:selectOneMenu >
                                         <f:selectItem itemLabel="Por aparacion de plaga" itemValue="" />
                                         <f:selectItem itemLabel="Diario" itemValue="" />
@@ -36,53 +37,66 @@
 
 
                                     </p:selectOneMenu>
-                                    <p:outputLabel value="Plagas"/>
+                                </div>
+
+                                <div class="form-group"> 
+                                    <p:outputLabel  value="Plagas"/>
                                     <p:selectOneMenu >
                                         <f:selectItem itemLabel="Todas" itemValue="" />
                                         <f:selectItem itemLabel="Plaga1" itemValue="" />
                                         <f:selectItem itemLabel="Plaga2" itemValue="Xbox One" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="form-group"> 
+                                <p:outputLabel  value="Cultivo"/>
+                                <p:selectOneMenu >
+                                    <f:selectItem itemLabel="Todas" itemValue="" />
+                                    <f:selectItem itemLabel="Cultivo1" itemValue="" />
+                                    <f:selectItem itemLabel="Cultivo2" itemValue="Xbox One" />
+                                </p:selectOneMenu>
+                            </div>
+
+                            <div class="form-group">
+                                <p:outputLabel  value="Region"/>
+                                <p:selectOneMenu >
+                                    <f:selectItem itemLabel="Todas" itemValue="" />
+                                    <f:selectItem itemLabel="Region1" itemValue="" />
+                                    <f:selectItem itemLabel="Region2" itemValue="Xbox One" />
+                                </p:selectOneMenu>   
+                            </div>
+                            <div class="form-group"> 
+                                <p:outputLabel  value="Email"/>
+                                <p:inputText/>
+                            </div>
+                            <div class="form-group"> 
+                                <p:outputLabel  value="Twitter"/>
+                                <p:inputText/>
+                            </div>
+                            <div class="form-group"> 
+                                <p:outputLabel  value="Facebook"/>
+                                <p:inputText/>
+                            </div>
+                            <div class="form-group"> 
+                                <p:outputLabel  value="Instagram"/>
+                                <p:inputText/>
+                            </div>
+                            <div class="form-group"> 
+                                <p:outputLabel  value="No telefono(sms)"/>
+                                <p:inputText/>
+                            </div>
 
 
-                                    </p:selectOneMenu>
-                                    <p:outputLabel value="Cultivo"/>
-                                    <p:selectOneMenu >
-                                        <f:selectItem itemLabel="Todas" itemValue="" />
-                                        <f:selectItem itemLabel="Cultivo1" itemValue="" />
-                                        <f:selectItem itemLabel="Cultivo2" itemValue="Xbox One" />
 
 
-                                    </p:selectOneMenu>
-                                    <p:outputLabel value="Region"/>
-                                    <p:selectOneMenu >
-                                        <f:selectItem itemLabel="Todas" itemValue="" />
-                                        <f:selectItem itemLabel="Region1" itemValue="" />
-                                        <f:selectItem itemLabel="Region2" itemValue="Xbox One" />
-
-
-                                    </p:selectOneMenu>   
-                                    <p:outputLabel value="Email"/>
-                                    <p:inputText/>
-                                    <p:outputLabel value="Twitter"/>
-                                    <p:inputText/>
-                                    <p:outputLabel value="Facebook"/>
-                                    <p:inputText/>
-                                    <p:outputLabel value="Instagram"/>
-                                    <p:inputText/>
-                                    <p:outputLabel value="No telefono(sms)"/>
-                                    <p:inputText/>
-                                </p:panelGrid>
-
-
-                          
-                                  </div>
-                            <div class="panel-footer">Panel footer</div>
                         </div>
-                    </h:form>
+                        <div class="panel-footer">Panel footer</div>
+                    </div>
+                </h:form>
 
-                </f:view>
-            </ui:define>
+            </f:view>
+        </ui:define>
 
-        </ui:composition>
+    </ui:composition>
 
-    </body>
+</body>
 </html>
