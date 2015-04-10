@@ -24,12 +24,15 @@
                             <p>...</p>
                             <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
                         </div>
-                      <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+<!--                      <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
     <p:graphicImage name="/resources/galeria/#{image}" alt="Image Description for #{image}" title="#{image}"/>
+</p:galleria>-->
+                
+                                  <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+    <p:graphicImage name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
 </p:galleria>
-                     <p:graphicImage value="/resources/imagenes/candado.png" width="50" height="50"/>
-                        <p:graphicImage value="/resources/imagenes/plagas1.jpg" width="50" height="50"/>
-                            <p:graphicImage value="/resources/galeria/plagas1.jpg" width="50" height="50"/>
+                        
+                       <p:graphicImage value="/resources/imagenes/plagas1.jpg" width="350" height="350"/>
 <!--                         <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID"  
         style="width:600px;height:400px"/>  -->
 <ui:include src="dashboard.xhtml" />

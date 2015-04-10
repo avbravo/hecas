@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+                    <h:form>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">NOTICIAS</h3>
+                            </div>
+                            <div class="panel-body">
+
+
+                                <p:tabView>
+                                    <p:tab title="Agricultura y Cultivos">
+
+
+                                            <p:feedReader  value="http://www.fao.org/americas/noticias/rss/feed/es/?key=33" var="feed">
+                                                <h:outputText value="#{feed.title}" style="font-weight: bold;display:block"/>
+                                                <h:outputText value="#{feed.description.value}" escape="false"/>
+                                                <p:separator />
+                                            </p:feedReader>  
+
+              
+                                    </p:tab>
+                                    <p:tab title="Comercio y Economia">
+                                        
+
+                                            <p:feedReader  value="http://www.fao.org/americas/noticias/rss/feed/es/?key=43" var="feed">
+                                                <h:outputText value="#{feed.title}" style="font-weight: bold;display:block"/>
+                                                <h:outputText value="#{feed.description.value}" escape="false"/>
+                                                <p:separator />
+                                            </p:feedReader>  
+
+                                    
+
+
+                                    </p:tab>
+                                    <p:tab title="Desarrollo rural o agricola">
+                                      
+
+                                            <p:feedReader  value="http://www.fao.org/americas/noticias/rss/feed/es/?key=53" var="feed">
+                                                <h:outputText value="#{feed.title}" style="font-weight: bold;display:block"/>
+                                                <h:outputText value="#{feed.description.value}" escape="false"/>
+                                                <p:separator />
+                                            </p:feedReader>  
+
+                          
+
+
+
+                                    </p:tab>
+                                    <p:tab title="IDIAP">
+
+
+                                        <p:feedReader  value="http://www.idiap.gob.pa/index.php/notas-prensa/index.php/notas-prensa?format=feed&amp;type=rss" var="feed">
+                                            <h:outputText value="#{feed.title}" style="font-weight: bold;display:block"/>
+                                            <h:outputText value="#{feed.description.value}" escape="false"/>
+                                            <p:separator />
+                                        </p:feedReader>  
+
+
+
+
+
+                                    </p:tab>
+                                    <p:tab title="Agro Panamá">
+
+
+                                        <p:feedReader value="http://www.panamaagro.com/rss/2-agricultura/" var="feed">
+                                            <h:outputText value="#{feed.title}" style="font-weight: bold;display:block"/>
+                                            <h:outputText value="#{feed.description.value}" escape="false"/>
+                                            <p:separator />
+                                        </p:feedReader>  
+
+
+
+
+
+                                    </p:tab>
+                                </p:tabView>
+                            </div>
+                            <div class="panel-footer">Panel footer</div>
+                        </div>
+                    </h:form>
+
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

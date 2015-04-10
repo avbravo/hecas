@@ -32,7 +32,9 @@ public class ImagesView implements Serializable{
         System.out.println("llego");
         images = new ArrayList<String>();
         for (int i = 1; i <= 6; i++) {
-            images.add("plagas" + i + ".jpg");
+       //     images.add("plagas" + i + ".jpg");
+             images.add("/resources/galeria/plagas" + i + ".jpg");
+       
             System.out.println("plagas" +i+".jpg");
         }
     }
