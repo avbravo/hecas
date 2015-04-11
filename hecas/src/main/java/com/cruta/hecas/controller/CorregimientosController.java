@@ -118,7 +118,7 @@ public class CorregimientosController implements Serializable, IController {
     public String save() {
         try {
 //            corregimientos.setUsername(loginBean.getUsuarios());
-            corregimientos.setIdmunicipio(loginBean.getUsuarios().getIdmunicipio());
+            //corregimientos.setIdmunicipio(loginBean.getUsuarios().getIdmunicipio());
 
 //            corregimientos.setFecha(JSFUtil.getFechaActual());
             if (corregimientosFacade.find(corregimientos.getIdcorregimiento()) != null) {
@@ -139,7 +139,7 @@ public class CorregimientosController implements Serializable, IController {
     public String edit() {
         try {
 //            corregimientos.setUsername(loginBean.getUsuarios());
-            corregimientos.setIdmunicipio(loginBean.getUsuarios().getIdmunicipio());
+//            corregimientos.setIdmunicipio(loginBean.getUsuarios().getIdmunicipio());
 
 //            corregimientos.setFecha(JSFUtil.getFechaActual());
             corregimientosFacade.edit(corregimientos);
@@ -186,7 +186,7 @@ public class CorregimientosController implements Serializable, IController {
     public String imprimirTodos() {
         String ruta = "/resources/reportes/corregimientos/corregimientos.jasper";
         HashMap parameters = new HashMap();
-        gestorImpresion.imprimir(corregimientosFacade.getCorregimientosList(), ruta, parameters);
+        //gestorImpresion.imprimir(corregimientosFacade.getCorregimientosList(), ruta, parameters);
         return null;
     }
 

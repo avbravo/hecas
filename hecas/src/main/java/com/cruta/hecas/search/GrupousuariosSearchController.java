@@ -151,11 +151,9 @@ public class GrupousuariosSearchController implements Serializable,ISearchContro
     public String buscarNombre() {
         try {
               grupousuarios.setIdgrupousuario("");
-            if (!usarlike) {
+        
                 grupousuariosList = grupousuariosFacade.findByGrupousuarios(grupousuarios.getGrupousuario());
-            } else {
-                grupousuariosList = grupousuariosFacade.findByNombreLike(grupousuarios.getGrupousuario());
-            }
+           
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
         }

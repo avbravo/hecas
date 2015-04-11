@@ -12,6 +12,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,7 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Provincias.findAll", query = "SELECT p FROM Provincias p"),
     @NamedQuery(name = "Provincias.findByIdprovincia", query = "SELECT p FROM Provincias p WHERE p.idprovincia = :idprovincia"),
     @NamedQuery(name = "Provincias.findByProvincia", query = "SELECT p FROM Provincias p WHERE p.provincia = :provincia"),
-    @NamedQuery(name = "Provincias.findByActivo", query = "SELECT p FROM Provincias p WHERE p.activo = :activo")})
+    @NamedQuery(name = "Provincias.findByActivo", query = "SELECT p FROM Provincias p WHERE p.activo = :activo"),
+    @NamedQuery(name = "Provincias.findByLatitud", query = "SELECT p FROM Provincias p WHERE p.latitud = :latitud"),
+    @NamedQuery(name = "Provincias.findByLongitud", query = "SELECT p FROM Provincias p WHERE p.longitud = :longitud")})
 public class Provincias implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,6 +52,13 @@ public class Provincias implements Serializable {
     @Size(max = 2)
     @Column(name = "activo")
     private String activo;
+    @Column(name = "latitud")
+    private Integer latitud;
+    @Column(name = "longitud")
+    private Integer longitud;
+    @JoinColumn(name = "idpais", referencedColumnName = "idpais")
+    @ManyToOne
+    private Pais idpais;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idprovincia")
     private Collection<Municipios> municipiosCollection;
 
@@ -85,6 +96,30 @@ public class Provincias implements Serializable {
 
     public void setActivo(String activo) {
         this.activo = activo;
+    }
+
+    public Integer getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Integer latitud) {
+        this.latitud = latitud;
+    }
+
+    public Integer getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Integer longitud) {
+        this.longitud = longitud;
+    }
+
+    public Pais getIdpais() {
+        return idpais;
+    }
+
+    public void setIdpais(Pais idpais) {
+        this.idpais = idpais;
     }
 
     @XmlTransient

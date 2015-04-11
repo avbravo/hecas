@@ -30,7 +30,8 @@ public class CorregimientosFacade extends AbstractFacade<Corregimientos> {
     public CorregimientosFacade() {
         super(Corregimientos.class);
     }
-     public List<Corregimientos> getCorregimientosList() {
+    
+ public List<Corregimientos> getCorregimientosList() {
         return em.createNamedQuery("Corregimientos.findAll").getResultList();
     }
 

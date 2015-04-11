@@ -5,17 +5,21 @@
  */
 package com.cruta.hecas;
 
+import javax.inject.Named;
+import javax.enterprise.context.Dependent;
+
 /**
  *
  * @author avbravo
  */
-public class NewMain {
+@Named(value = "newJSFManagedBean")
+@Dependent
+public class NewJSFManagedBean {
 
     /**
-     * @param args the command line arguments
+     * Creates a new instance of NewJSFManagedBean
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public NewJSFManagedBean() {
     }
     
 }

@@ -12,7 +12,10 @@
 
             <ui:define name="content">
                 <f:view>
-                    <h:form>
+                
+                    <h:form id="form" prependId="false">
+                        <!--<p:growl id="growl"/>-->
+                        <p:messages id="growl" autoUpdate="true"/>
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">REGISTRO</h3>
@@ -32,56 +35,48 @@
 
                                 <div class="form-group">
                                     <p:outputLabel value="Nombre"/>
-                                    <p:inputText value=""/>
+                                    <p:inputText value="#{usuariosController.usuarios.nombre}"/>
                                 </div>
 
                                 <div class="form-group">
-                                    <p:outputLabel value ="Username"/>
-                                    <p:inputText value=""/>
+                                    <p:outputLabel value="Email"/>
+                                    <p:inputText value="#{usuariosController.usuarios.email}" size="40"/>
                                 </div>
-
 
 
                                 <div class="form-group">
                                     <p:outputLabel value="Password"/>
-                                    <p:password/>
+                                    <p:password value="#{usuariosController.usuarios.password}"/>
                                 </div>
-                                <div class="form-group">
-                                    <p:outputLabel value="Email"/>
-                                    <p:inputText value=""/>
-                                </div>
+                              
                                 <div class="form-group">
                                     <p:outputLabel value="Telefono"/>
-                                    <p:inputText value=""/>   
+                                    <p:inputText value="#{usuariosController.usuarios.telefono}"/>   
+                                      </div> 
+                                <div class="form-group">
                                      <p:outputLabel value="Celular"/>
-                                    <p:inputText value=""/>  
+                                    <p:inputText value="#{usuariosController.usuarios.celular}"/>  
 
                                 </div>
                                
                                 <div class="form-group">
                                     <p:outputLabel value="Sexo"/>
 
-                                    <p:selectOneMenu >
-                                        <f:selectItem itemLabel="Masculino" itemValue="" />
-                                        <f:selectItem itemLabel="Femenino" itemValue="" />
+                                    <p:selectOneMenu value="#{usuariosController.usuarios.sexo}">
+                                        <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                                        <f:selectItem itemLabel="Femenino" itemValue="Femenino" />
                                     </p:selectOneMenu>  
                                 </div>
                                 <div class="form-group">
-                                    <p:outputLabel value="Provincia"/>                               
-                                    <p:selectOneMenu >
-                                        <f:selectItem itemLabel="Los Santos" itemValue="" />
-                                        <f:selectItem itemLabel="Herrera" itemValue="" />                              
-                                    </p:selectOneMenu>  
-                                      <p:outputLabel value="Municipio"/>
-                                    <p:selectOneMenu >
-                                        <f:selectItem itemLabel="La Villa" itemValue="" />
-                                        <f:selectItem itemLabel="Las Tablas" itemValue="" />
-                                    </p:selectOneMenu> 
-                                </div>
+                                    <p:outputLabel value="Profesion"/>
+                                    <p:inputText value="#{usuariosController.usuarios.profesion}"/> 
+                                     </div> 
                                 
+                                
+                             
                             </div>
                             <div class="panel-footer">
-                                <p:commandButton value="Guardar"/>
+                                <p:commandButton value="Guardar" update="form,growl" actionListener="#{usuariosController.save()}"/>
                             </div>
                         </div>
                     </h:form>

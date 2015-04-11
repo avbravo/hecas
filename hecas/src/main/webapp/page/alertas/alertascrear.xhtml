@@ -52,35 +52,26 @@
                                     </p:selectOneMenu>
                                 </div>
 
-                                <div class="form-group">
-                                    <p:outputLabel  value="Ubicacion"/>
-                                    <p:inputText rendered="true"/>
-                                </div>
+                              
 
 
                                 <div class="form-group"> 
                                     <p:outputLabel  value="La plaga afecta"/>
-                                    <p:panelGrid columns="4">
+<!--                                    <p:panelGrid columns="4">-->
                                         <div class="form-group"> 
                                             <p:outputLabel  value="Flor"/>
                                             <p:selectBooleanCheckbox value="" />
-                                        </div>
-                                        <div class="form-group"> 
-                                            <p:outputLabel  value="Tallo"/>
+                                             <p:outputLabel  value="Tallo"/>
                                             <p:selectBooleanCheckbox value="" />
-                                        </div>
-                                        <div class="form-group"> 
-                                            <p:outputLabel  value="Hoja"/>
+                                             <p:outputLabel  value="Hoja"/>
                                             <p:selectBooleanCheckbox value="" />
-                                        </div>
-                                        <div class="form-group"> 
                                             <p:outputLabel  value="Fruto"/>
                                             <p:selectBooleanCheckbox value="" />
-                                        </div>
-                                        <div class="form-group"> <p:outputLabel  value="Raices"/>
+                                            <p:outputLabel  value="Raices"/>
                                             <p:selectBooleanCheckbox value="" />
                                         </div>
-                                    </p:panelGrid>
+                                      
+                                    <!--</p:panelGrid>-->
    </div>
 
                                     <div class="form-group"> 
@@ -97,6 +88,39 @@
 
                                         </p:selectOneMenu>
                                     </div>
+                                
+                                  <div class="form-group">
+                                    <p:outputLabel  value="Latitud"/>
+                                    <p:inputText rendered="true"/>
+                                </div>
+                                
+                                  <div class="form-group">
+                                    <p:outputLabel  value="Longitud"/>
+                                    <p:inputText rendered="true"/>
+                                </div>
+                                
+                                  <div class="form-group">
+                                    <p:outputLabel value="Pais"/>                               
+                                    <p:selectOneMenu >
+                                        <f:selectItem itemLabel="Los Santos" itemValue="" />
+                                        <f:selectItem itemLabel="Herrera" itemValue="" />                              
+                                    </p:selectOneMenu>   
+                                     </div> 
+                                <div class="form-group">
+                                    <p:outputLabel value="Provincia"/>                               
+                                    <p:selectOneMenu >
+                                        <f:selectItem itemLabel="Los Santos" itemValue="" />
+                                        <f:selectItem itemLabel="Herrera" itemValue="" />                              
+                                    </p:selectOneMenu>  
+                                    
+                                      </div> 
+                                <div class="form-group">
+                                      <p:outputLabel value="Municipio"/>
+                                    <p:selectOneMenu >
+                                        <f:selectItem itemLabel="La Villa" itemValue="" />
+                                        <f:selectItem itemLabel="Las Tablas" itemValue="" />
+                                    </p:selectOneMenu> 
+                                </div>
                                     <div class="form-group">
                                         <p:outputLabel  value="Fotos"/>
                                         <p:commandLink value="Subir fotos">
@@ -113,7 +137,10 @@
                                     </div>
 
                                 </div>
-                                <div class="panel-footer">Panel footer</div>
+                                <div class="panel-footer">
+                                   <p:commandButton value="Send" actionListener="#{notifyView.send}" />
+                                
+                                </div>
                             </div>
                     </h:form>
 

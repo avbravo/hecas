@@ -5,7 +5,7 @@
  */
 package com.cruta.hecas.ejb;
 
-import com.cruta.hecas.Errores;
+import com.cruta.hecas.Alertas;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author avbravo
  */
 @Stateless
-public class ErroresFacade extends AbstractFacade<Errores> {
+public class AlertasFacade extends AbstractFacade<Alertas> {
     @PersistenceContext(unitName = "com.cruta_hecas_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -24,8 +24,8 @@ public class ErroresFacade extends AbstractFacade<Errores> {
         return em;
     }
 
-    public ErroresFacade() {
-        super(Errores.class);
+    public AlertasFacade() {
+        super(Alertas.class);
     }
     
 }

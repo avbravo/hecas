@@ -30,7 +30,8 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
     public UsuariosFacade() {
         super(Usuarios.class);
     }
-     public Usuarios findById(String id) {
+    
+   public Usuarios findById(String id) {
         return em.find(Usuarios.class, id);
     }
 
@@ -38,12 +39,9 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         return em.createNamedQuery("Usuarios.findAll").getResultList();
     }
 
-    public List<Usuarios> findByActivo(String value) {
-        Query query = em.createNamedQuery("Usuarios.findByActivo");
-        return query.setParameter("activo", value).getResultList();
-    }
- public List<Usuarios> findByUsername(String value) {
-        Query query = em.createNamedQuery("Usuarios.findByUsername");
+   
+ public List<Usuarios> findByEmail(String value) {
+        Query query = em.createNamedQuery("Usuarios.findByEmail");
         return query.setParameter("username", value).getResultList();
     }
  
@@ -51,10 +49,7 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         Query query = em.createNamedQuery("Usuarios.findByPassword");
         return query.setParameter("password", value).getResultList();
     }
-    public List<Usuarios> findByCedula(String value) {
-        Query query = em.createNamedQuery("Usuarios.findByCedula");
-        return query.setParameter("cedula", value).getResultList();
-    }
+  
 
     public List<Usuarios> findByNombre(String value) {
         Query query = em.createNamedQuery("Usuarios.findByNombre");
@@ -82,3 +77,4 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         deleteRecords = query.executeUpdate();
     }
 }
+

@@ -29,7 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Corregimientos.findAll", query = "SELECT c FROM Corregimientos c"),
     @NamedQuery(name = "Corregimientos.findByIdcorregimiento", query = "SELECT c FROM Corregimientos c WHERE c.idcorregimiento = :idcorregimiento"),
-    @NamedQuery(name = "Corregimientos.findByCorregimiento", query = "SELECT c FROM Corregimientos c WHERE c.corregimiento = :corregimiento")})
+    @NamedQuery(name = "Corregimientos.findByCorregimiento", query = "SELECT c FROM Corregimientos c WHERE c.corregimiento = :corregimiento"),
+    @NamedQuery(name = "Corregimientos.findByLatitud", query = "SELECT c FROM Corregimientos c WHERE c.latitud = :latitud"),
+    @NamedQuery(name = "Corregimientos.findByLongitud", query = "SELECT c FROM Corregimientos c WHERE c.longitud = :longitud")})
 public class Corregimientos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,6 +44,10 @@ public class Corregimientos implements Serializable {
     @Size(min = 1, max = 60)
     @Column(name = "corregimiento")
     private String corregimiento;
+    @Column(name = "latitud")
+    private Integer latitud;
+    @Column(name = "longitud")
+    private Integer longitud;
     @JoinColumn(name = "idmunicipio", referencedColumnName = "idmunicipio")
     @ManyToOne(optional = false)
     private Municipios idmunicipio;
@@ -72,6 +78,22 @@ public class Corregimientos implements Serializable {
 
     public void setCorregimiento(String corregimiento) {
         this.corregimiento = corregimiento;
+    }
+
+    public Integer getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Integer latitud) {
+        this.latitud = latitud;
+    }
+
+    public Integer getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Integer longitud) {
+        this.longitud = longitud;
     }
 
     public Municipios getIdmunicipio() {

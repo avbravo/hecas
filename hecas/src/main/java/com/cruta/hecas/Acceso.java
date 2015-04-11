@@ -62,9 +62,6 @@ public class Acceso implements Serializable {
     @JoinColumn(name = "idmunicipio", referencedColumnName = "idmunicipio")
     @ManyToOne(optional = false)
     private Municipios idmunicipio;
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    @ManyToOne(optional = false)
-    private Usuarios username;
 
     public Acceso() {
     }
@@ -118,14 +115,6 @@ public class Acceso implements Serializable {
 
     public void setIdmunicipio(Municipios idmunicipio) {
         this.idmunicipio = idmunicipio;
-    }
-
-    public Usuarios getUsername() {
-        return username;
-    }
-
-    public void setUsername(Usuarios username) {
-        this.username = username;
     }
 
     @Override

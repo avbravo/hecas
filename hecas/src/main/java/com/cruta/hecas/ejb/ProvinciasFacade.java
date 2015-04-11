@@ -29,7 +29,8 @@ public class ProvinciasFacade extends AbstractFacade<Provincias> {
     public ProvinciasFacade() {
         super(Provincias.class);
     }
-     public List<Provincias> getProvinciasList() {
+    
+public List<Provincias> getProvinciasList() {
         return em.createNamedQuery("Provincias.findAll").getResultList();
     }
 

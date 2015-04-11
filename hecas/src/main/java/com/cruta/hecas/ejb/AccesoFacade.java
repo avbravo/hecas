@@ -5,7 +5,7 @@
  */
 package com.cruta.hecas.ejb;
 
-import com.cruta.hecas.Historial;
+import com.cruta.hecas.Acceso;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author avbravo
  */
 @Stateless
-public class HistorialFacade extends AbstractFacade<Historial> {
+public class AccesoFacade extends AbstractFacade<Acceso> {
     @PersistenceContext(unitName = "com.cruta_hecas_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -24,8 +24,8 @@ public class HistorialFacade extends AbstractFacade<Historial> {
         return em;
     }
 
-    public HistorialFacade() {
-        super(Historial.class);
+    public AccesoFacade() {
+        super(Acceso.class);
     }
     
 }

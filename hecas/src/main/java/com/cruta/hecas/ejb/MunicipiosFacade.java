@@ -30,7 +30,8 @@ public class MunicipiosFacade extends AbstractFacade<Municipios> {
     public MunicipiosFacade() {
         super(Municipios.class);
     }
-     public List<Municipios> getMunicipiosList() {
+    
+ public List<Municipios> getMunicipiosList() {
         return em.createNamedQuery("Municipios.findAll").getResultList();
     }
 

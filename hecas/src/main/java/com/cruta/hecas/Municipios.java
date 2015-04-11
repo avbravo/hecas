@@ -34,7 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Municipios.findAll", query = "SELECT m FROM Municipios m"),
     @NamedQuery(name = "Municipios.findByIdmunicipio", query = "SELECT m FROM Municipios m WHERE m.idmunicipio = :idmunicipio"),
     @NamedQuery(name = "Municipios.findByMunicipio", query = "SELECT m FROM Municipios m WHERE m.municipio = :municipio"),
-    @NamedQuery(name = "Municipios.findByActivo", query = "SELECT m FROM Municipios m WHERE m.activo = :activo")})
+    @NamedQuery(name = "Municipios.findByActivo", query = "SELECT m FROM Municipios m WHERE m.activo = :activo"),
+    @NamedQuery(name = "Municipios.findByLatitud", query = "SELECT m FROM Municipios m WHERE m.latitud = :latitud"),
+    @NamedQuery(name = "Municipios.findByLongitud", query = "SELECT m FROM Municipios m WHERE m.longitud = :longitud")})
 public class Municipios implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,6 +52,11 @@ public class Municipios implements Serializable {
     @Size(max = 2)
     @Column(name = "activo")
     private String activo;
+    @Column(name = "latitud")
+    private Integer latitud;
+    @Size(max = 45)
+    @Column(name = "longitud")
+    private String longitud;
     @JoinColumn(name = "idprovincia", referencedColumnName = "idprovincia")
     @ManyToOne(optional = false)
     private Provincias idprovincia;
@@ -57,12 +64,6 @@ public class Municipios implements Serializable {
     private Collection<Corregimientos> corregimientosCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmunicipio")
     private Collection<Acceso> accesoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmunicipio")
-    private Collection<Historial> historialCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmunicipio")
-    private Collection<Usuarios> usuariosCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmunicipio")
-    private Collection<Errores> erroresCollection;
 
     public Municipios() {
     }
@@ -100,6 +101,22 @@ public class Municipios implements Serializable {
         this.activo = activo;
     }
 
+    public Integer getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Integer latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
     public Provincias getIdprovincia() {
         return idprovincia;
     }
@@ -124,33 +141,6 @@ public class Municipios implements Serializable {
 
     public void setAccesoCollection(Collection<Acceso> accesoCollection) {
         this.accesoCollection = accesoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Historial> getHistorialCollection() {
-        return historialCollection;
-    }
-
-    public void setHistorialCollection(Collection<Historial> historialCollection) {
-        this.historialCollection = historialCollection;
-    }
-
-    @XmlTransient
-    public Collection<Usuarios> getUsuariosCollection() {
-        return usuariosCollection;
-    }
-
-    public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
-        this.usuariosCollection = usuariosCollection;
-    }
-
-    @XmlTransient
-    public Collection<Errores> getErroresCollection() {
-        return erroresCollection;
-    }
-
-    public void setErroresCollection(Collection<Errores> erroresCollection) {
-        this.erroresCollection = erroresCollection;
     }
 
     @Override

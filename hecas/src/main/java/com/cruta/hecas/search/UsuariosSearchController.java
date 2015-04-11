@@ -109,7 +109,7 @@ public class UsuariosSearchController implements Serializable, ISearchController
     public String load() {
         try {
             usuarios = usuariosController.getUsuarios();
-            selected = usuariosFacade.find(usuarios.getUsername());
+            selected = usuariosFacade.find(usuarios.getEmail());
             if (selected == null) {
                 JSFUtil.warningDialog(rf.getMensajeArb("info.message"), rf.getMensajeArb("warning.noexiste"));
                 usuariosController.setEncontrado(false);
@@ -135,14 +135,14 @@ public class UsuariosSearchController implements Serializable, ISearchController
 
     @Override
     public void iniciar(String value) {
-        usuariosList = usuariosFacade.findByActivo(value);
+//        usuariosList = usuariosFacade.findByActivo(value);
     }
 
-    public String buscarUsername() {
+    public String buscarEmail() {
         try {
 
             usuarios.setNombre("");
-            usuariosList = usuariosFacade.findByUsername(usuarios.getUsername());
+            usuariosList = usuariosFacade.findByEmail(usuarios.getEmail());
           
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
@@ -151,23 +151,12 @@ public class UsuariosSearchController implements Serializable, ISearchController
         return "";
     }
 
-    public String buscarCedula() {
-        try {
-
-            usuarios.setNombre("");
-            usuariosList = usuariosFacade.findByCedula(usuarios.getCedula());
-
-        } catch (Exception e) {
-            JSFUtil.addErrorMessage(e.getLocalizedMessage());
-        }
-
-        return "";
-    }
+  
 
     public String buscarNombre() {
         try {
 
-            usuarios.setUsername("");
+            usuarios.setEmail("");
             if (!usarlike) {
                 usuariosList = usuariosFacade.findByNombre(usuarios.getNombre());
             } else {
@@ -179,23 +168,14 @@ public class UsuariosSearchController implements Serializable, ISearchController
         return "";
     }
 
-    public String buscarActivo() {
-        try {
-            usuarios.setUsername("");
-            usuarios.setNombre("");
-            usuariosList = usuariosFacade.findByActivo(usuarios.getActivo());
-        } catch (Exception e) {
-            JSFUtil.addErrorMessage(e.getLocalizedMessage());
-        }
-        return "";
-    }
+  
     /*
      buscar por el idnivel1 para filtrar por el entity relacionado
      */
 
     public String buscarIdgrupousuario() {
         try {
-            usuarios.setUsername("");
+            usuarios.setEmail("");
             usuarios.setNombre("");
             usuariosList = usuariosFacade.findByIdgrupousuario(usuarios.getIdgrupousuario());
         } catch (Exception e) {
@@ -253,8 +233,8 @@ usuariosController.setDesactivar(false);
     public List<Usuarios> getItems() {
         try {
             if (items == null) {
-                //   items = usuariosFacade.findAll();
-                items = usuariosFacade.findByActivo("si");
+              items = usuariosFacade.findAll();
+            
             }
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
@@ -270,7 +250,7 @@ usuariosController.setDesactivar(false);
     @Override
     public String changeItems() {
         try {
-            itemsEntity = usuariosFacade.findByActivo("si");
+            itemsEntity = usuariosFacade.findAll();
 
         } catch (Exception e) {
             JSFUtil.addErrorMessage("changeItems() " + e.getLocalizedMessage());

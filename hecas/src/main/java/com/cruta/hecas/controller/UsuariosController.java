@@ -7,7 +7,9 @@
 package com.cruta.hecas.controller;
 
 
+import com.cruta.hecas.Grupousuarios;
 import com.cruta.hecas.Usuarios;
+import com.cruta.hecas.ejb.GrupousuariosFacade;
 import com.cruta.hecas.ejb.UsuariosFacade;
 import com.cruta.hecas.generales.GestorImpresion;
 import com.cruta.hecas.generales.JSFUtil;
@@ -34,6 +36,8 @@ import javax.inject.Named;
 public class UsuariosController implements Serializable, IController {
 
     private static final long serialVersionUID = 1L;
+@Inject
+GrupousuariosFacade grupousuariosFacade;
 
     @Inject
     UsuariosFacade usuariosFacade;
@@ -95,7 +99,7 @@ public class UsuariosController implements Serializable, IController {
 
     @Override
     public String buscar() {
-        usuarios = usuariosFacade.find(usuarios.getUsername());
+        usuarios = usuariosFacade.find(usuarios.getEmail());
         if(usuarios == null){
             encontrado=false;
             JSFUtil.addWarningMessage(rf.getMensajeArb("warning.noexiste"));
@@ -124,9 +128,18 @@ public class UsuariosController implements Serializable, IController {
     @Override
     public String save() {
         try {
-        
-            usuarios.setIdmunicipio(loginBean.getUsuarios().getIdmunicipio());
-            if (usuariosFacade.find(usuarios.getUsername()) != null) {
+            System.out.println("save()");    
+            usuarios.setFoto("");
+         
+         
+                   
+            List<Grupousuarios> list = grupousuariosFacade.findByGrupousuarios("agricultor");
+            if(list == null || list.isEmpty()){
+                JSFUtil.addWarningMessage("No existe un grupo de usuario agricultores");
+                return null;
+            }
+            usuarios.setIdgrupousuario(list.get(0));
+            if (usuariosFacade.find(usuarios.getEmail()) != null) {
                 JSFUtil.warningDialog(rf.getMensajeArb("info.message"), rf.getMensajeArb("warning.idexist"));
                 return null;
             }
@@ -143,7 +156,7 @@ public class UsuariosController implements Serializable, IController {
     @Override
     public String edit() {
         try {
-                       usuarios.setIdmunicipio(loginBean.getUsuarios().getIdmunicipio());
+            
            usuariosFacade.edit(usuarios);
             JSFUtil.addSuccessMessage(rf.getMensajeArb("info.update"));
         } catch (Exception e) {
@@ -175,7 +188,7 @@ public class UsuariosController implements Serializable, IController {
             list.add(usuarios);
             String ruta = "/resources/reportes/usuarios/usuarios.jasper";
             HashMap parameters = new HashMap();
-              parameters.put("P_MUNICIPIO", loginBean.getUsuarios().getIdmunicipio().getMunicipio());
+
             gestorImpresion.imprimir(list, ruta, parameters);
         } catch (Exception ex) {
             JSFUtil.addErrorMessage("imprimir() " + ex.getLocalizedMessage());
@@ -208,7 +221,8 @@ public class UsuariosController implements Serializable, IController {
     }
     @Override
     public String habilitarConsultar() {        desactivar=true; 
-        usuarios.setUsername(""); 
+        usuarios.setEmail(
+                ""); 
         this.nuevoregistro = false; 
         return ""; 
     } 

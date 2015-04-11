@@ -144,7 +144,7 @@ public class MunicipiosController implements Serializable, IController {
     public String edit() {
         try {
 //            municipios.setUsername(loginBean.getUsuarios());
-            municipios.setIdmunicipio(Integer.valueOf(loginBean.getUsuarios().getIdmunicipio().toString()));
+//            municipios.setIdmunicipio(Integer.valueOf(loginBean.getUsuarios().getIdmunicipio().toString()));
 
 //            municipios.setFecha(JSFUtil.getFechaActual());
             municipiosFacade.edit(municipios);

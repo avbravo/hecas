@@ -109,23 +109,18 @@ public class LoginBean implements Serializable {
         try {
             menuBeans.habilitarTodo(false);
             setLogeado(Boolean.FALSE);
-            Usuarios u = usuariosFacade.find(usuarios.getUsername());
+            Usuarios u = usuariosFacade.find(usuarios.getEmail());
             if (u == null) {
                 JSFUtil.addWarningMessage(rf.getMensajeArb("login.usernamenotvalid"));
                 return null;
             }
-            if (!u.getActivo().equals("si")) {
-                JSFUtil.addSuccessMessage(rf.getMensajeArb("login.inactive"));
-                return "";
-            }
+         
             if (!u.getPassword().equals(usuarios.getPassword())) {
                 JSFUtil.addSuccessMessage(rf.getMensajeArb("login.passwordnotvalid"));
                 return "";
             }
             usuarios = u;
-            if (!usuarios.getTema().equals("")) {
-                managementThemes.setTema(usuarios.getTema());
-            }
+           
             setLogeado(Boolean.TRUE);
             if (validadorRoles.validarRoles(usuarios.getIdgrupousuario().getIdgrupousuario())) {
                 //verifica los requisitos

@@ -257,7 +257,7 @@ public class CorregimientosSearchController implements Serializable, ISearchCont
     public List<Corregimientos> getItemsFiltrados() {
         try {
             // if (itemsFiltrados == null) {
-            itemsFiltrados = corregimientosFacade.findByIdMunicipio(loginBean.getUsuarios().getIdmunicipio());
+//            itemsFiltrados = corregimientosFacade.findByIdMunicipio(loginBean.getUsuarios().getIdmunicipio());
             //}
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
@@ -268,7 +268,7 @@ public class CorregimientosSearchController implements Serializable, ISearchCont
     @Override
     public List<Corregimientos> getItemsCollection() {
         try {
-            itemsCollection = new ArrayList(corregimientos.getIdmunicipio().getUsuariosCollection());
+//            itemsCollection = new ArrayList(corregimientos.getIdmunicipio().getUsuariosCollection());
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
         }

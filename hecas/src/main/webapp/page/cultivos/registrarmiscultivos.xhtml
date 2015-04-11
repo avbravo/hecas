@@ -38,17 +38,43 @@
                                     <p:inputTextarea/>
                                 </div>
 
-                                <div class="form-group"> 
-                                    <p:outputLabel  value="Datos de localizacion"/>
-                                    <p:inputTextarea/>
-                                </div>
+                              
                                 <div class="form-group">
                                     <p:outputLabel  value="Datos de siembra"/>
                                     <p:inputTextarea/>
                                 </div>
                             
-
-
+  <div class="form-group">
+                                    <p:outputLabel  value="Latitud"/>
+                                    <p:inputText rendered="true"/>
+                                </div>
+ <div class="form-group">
+                                    <p:outputLabel  value="Longitud"/>
+                                    <p:inputText rendered="true"/>
+                                </div>
+                                
+                                  <div class="form-group">
+                                    <p:outputLabel value="Pais"/>                               
+                                    <p:selectOneMenu >
+                                        <f:selectItem itemLabel="Los Santos" itemValue="" />
+                                        <f:selectItem itemLabel="Herrera" itemValue="" />                              
+                                    </p:selectOneMenu>   
+                                     </div> 
+                                <div class="form-group">
+                                    <p:outputLabel value="Provincia"/>                               
+                                    <p:selectOneMenu >
+                                        <f:selectItem itemLabel="Los Santos" itemValue="" />
+                                        <f:selectItem itemLabel="Herrera" itemValue="" />                              
+                                    </p:selectOneMenu>  
+                                    
+                                      </div> 
+                                <div class="form-group">
+                                      <p:outputLabel value="Municipio"/>
+                                    <p:selectOneMenu >
+                                        <f:selectItem itemLabel="La Villa" itemValue="" />
+                                        <f:selectItem itemLabel="Las Tablas" itemValue="" />
+                                    </p:selectOneMenu> 
+                                </div>
 
                             </div>
                             <div class="panel-footer">Panel footer</div>

@@ -29,7 +29,8 @@ public class GrupousuariosFacade extends AbstractFacade<Grupousuarios> {
     public GrupousuariosFacade() {
         super(Grupousuarios.class);
     }
-  public Grupousuarios findById(String id) {
+    
+ public Grupousuarios findById(String id) {
         return em.find(Grupousuarios.class, id);
     }
 
@@ -52,11 +53,7 @@ public class GrupousuariosFacade extends AbstractFacade<Grupousuarios> {
         return query.setParameter("grupousuario", value).getResultList();
     }
 
-    public List<Grupousuarios> findByNombreLike(String value) {
-        Query query = em.createNamedQuery("Grupousuarios.findByGrupousuarioLike");
-        value = "%" + value.trim() + "%";
-        return query.setParameter("grupousuario", value).getResultList();
-    }
+  
 public Long contadorActivo(String value) {
         Query query = em.createNamedQuery("Grupousuarios.contadorActivo");
         return (Long) query.setParameter("activo", value).getSingleResult();
@@ -66,5 +63,5 @@ public Long contadorActivo(String value) {
         Query query = em.createQuery("DELETE FROM Grupousuarios");
         int deleteRecords;
         deleteRecords = query.executeUpdate();
-    }   
+    }
 }
