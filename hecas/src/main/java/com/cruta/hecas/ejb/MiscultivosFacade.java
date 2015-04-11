@@ -5,10 +5,15 @@
  */
 package com.cruta.hecas.ejb;
 
+import com.cruta.hecas.Cultivos;
 import com.cruta.hecas.Miscultivos;
+import com.cruta.hecas.Miscultivos;
+import com.cruta.hecas.Usuarios;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,5 +32,42 @@ public class MiscultivosFacade extends AbstractFacade<Miscultivos> {
     public MiscultivosFacade() {
         super(Miscultivos.class);
     }
+    public List<Miscultivos> getMiscultivosList() {
+        return em.createNamedQuery("Miscultivos.findAll").getResultList();
+    }
+
+   
     
+ public List<Miscultivos> findByIdmiscultivos(Integer idmiscultivos) {
+        Query query = em.createNamedQuery("Miscultivos.findByIdmiscultivos");
+        return query.setParameter("idmiscultivos", idmiscultivos).getResultList();
+    }
+ 
+ 
+
+   
+    public void deleteAll() {
+        Query query = em.createQuery("DELETE FROM Miscultivos");
+        int deleteRecords;
+        deleteRecords = query.executeUpdate();
+    }
+        
+     public List<Usuarios> findByCultivo(Cultivos nombrecultivo){
+         Query query = em.createQuery("SELECT m FROM Miscultivos m WHERE m.nombrecultivo= :nombrecultivo ");
+        return query.setParameter("nombrecultivo", nombrecultivo).getResultList();
+    }
+     
+     
+      public Integer getMaximo() {
+        try {
+
+            Query q = em.createQuery("SELECT MAX(m.idmiscultivos) FROM Miscultivos m");
+
+            Number result = (Number) q.getSingleResult();
+            return result.intValue();
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
 }

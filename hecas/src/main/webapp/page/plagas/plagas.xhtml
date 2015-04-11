@@ -34,12 +34,12 @@
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h3 class="panel-title">CULTIVOS</h3>
+                                <h3 class="panel-title">PLAGAS</h3>
                             </div>
                             <div class="panel-body">
               
-                                <p:dataTable  id="datatableCultivos"
-                                              value="#{cultivosSearchController.cultivosList}"
+                                <p:dataTable  id="datatablePlagas"
+                                              value="#{plagasSearchController.plagasList}"
                                       var="item"
                                       rows="7"
                                       paginator="true"
@@ -53,12 +53,12 @@
                                 </f:facet>
                                
                                      <p:fragment autoUpdate="true"> 
-                                         <p:commandLink  update=":form:panelCultivos" 
+                                         <p:commandLink  update=":form:panelPlagas" 
                                                       oncomplete= "PF('dialogoCultivo').show()"
-                                                  value="#{item.nombrecultivo}"                                                 
+                                                  value="#{item.nombreplaga}"                                                 
                                                title="Haga clic aqui"
                                                       >
-                                        <f:setPropertyActionListener value="#{item}" target="#{cultivosSearchController.selected}" />  
+                                        <f:setPropertyActionListener value="#{item}" target="#{plagasSearchController.selected}" />  
                                          </p:commandLink>>  
                                 </p:fragment>
                             </p:column>
@@ -89,23 +89,23 @@
 
                                    
                             </div>
-                            <div class="panel-footer">Haga clic en el nombre del cultivo para ver detalles</div>
+                            <div class="panel-footer">Haga clic en el nombre de la plaga para ver detalles</div>
                         </div>
 
-<p:dialog id="confirmDialog" modal="false" header="DETALLE DEL CULTIVO"
+<p:dialog id="confirmDialog" modal="false" header="DETALLE DE LA PLAGA"
                   height="250"  width="450" 
                   
                   widgetVar="dialogoCultivo">
-            <h:panelGrid columns="2" id="panelCultivos">
+            <h:panelGrid columns="2" id="panelPlagas">
                 <p:outputLabel value="Foto"/>
      
-                 <h:graphicImage id="foto" value="/resources/fotos/#{cultivosSearchController.selected.foto}" height="50" width="50"/>
+                 <h:graphicImage id="foto" value="/resources/fotos/#{plagasSearchController.selected.foto}" height="50" width="50"/>
                 <p:outputLabel value="Nombre "/>
-                <p:outputLabel value="#{cultivosSearchController.selected.nombrecultivo}"/>
+                <p:outputLabel value="#{plagasSearchController.selected.nombreplaga}"/>
                 <p:outputLabel value="Nombre Cientifico"/>
-                <p:outputLabel value="#{cultivosSearchController.selected.nombrecientifico}"/>
+                <p:outputLabel value="#{plagasSearchController.selected.nombrecientifico}"/>
                  <p:outputLabel value="Descripcion"/>
-                 <p:outputLabel value="#{cultivosSearchController.selected.descripcion}"/>
+                 <p:outputLabel value="#{plagasSearchController.selected.descripcion}"/>
             </h:panelGrid>
             <f:facet name="footer">
           

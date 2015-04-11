@@ -3,47 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.cruta.hecas.controller;
 
-
-import com.cruta.hecas.Grupousuarios;
-import com.cruta.hecas.Usuarios;
-import com.cruta.hecas.ejb.GrupousuariosFacade;
-import com.cruta.hecas.ejb.UsuariosFacade;
+import com.cruta.hecas.Plagas;
+import com.cruta.hecas.ejb.PlagasFacade;
 import com.cruta.hecas.generales.GestorImpresion;
 import com.cruta.hecas.generales.JSFUtil;
 import com.cruta.hecas.generales.LoginBean;
 import com.cruta.hecas.generales.ResourcesFiles;
 import com.cruta.hecas.interfaces.IController;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
-
-
 
 /**
  *
  * @author avbravo
  */
-@Named
+@Named(value = "plagasController")
 @SessionScoped
-public class UsuariosController implements Serializable, IController {
+public class PlagasController implements Serializable, IController {
 
     private static final long serialVersionUID = 1L;
-@Inject
-GrupousuariosFacade grupousuariosFacade;
 
     @Inject
-    UsuariosFacade usuariosFacade;
-    Usuarios usuarios = new Usuarios();
+    PlagasFacade plagasFacade;
+    Plagas plagas = new Plagas();
     private Boolean encontrado = false;
     @Inject
     ResourcesFiles rf;
@@ -75,12 +67,12 @@ private String imagen="foto.png";
         this.nuevoregistro = nuevoregistro; 
     } 
 
-    public Usuarios getUsuarios() {
-        return usuarios;
+    public Plagas getPlagas() {
+        return plagas;
     }
 
-    public void setUsuarios(Usuarios usuarios) {
-        this.usuarios = usuarios;
+    public void setPlagas(Plagas plagas) {
+        this.plagas = plagas;
     }
 
     public Boolean getEncontrado() {
@@ -92,9 +84,9 @@ private String imagen="foto.png";
     }
 
     /**
-     * Creates a new instance of UsuariosController
+     * Creates a new instance of PlagasController
      */
-    public UsuariosController() {
+    public PlagasController() {
     }
 
     @PostConstruct
@@ -105,11 +97,11 @@ private String imagen="foto.png";
 
     @Override
     public String buscar() {
-        usuarios = usuariosFacade.find(usuarios.getEmail());
-        if(usuarios == null){
+        plagas = plagasFacade.find(plagas.getNombreplaga());
+        if(plagas == null){
             encontrado=false;
             JSFUtil.addWarningMessage(rf.getMensajeArb("warning.noexiste"));
-            usuarios = new Usuarios();
+            plagas = new Plagas();
         }
         else{
             encontrado = true;
@@ -123,9 +115,9 @@ private String imagen="foto.png";
             nuevoregistro = true; 
 
             encontrado = false;
-            usuarios = new Usuarios();
-            usuarios.setNombre("");
-            usuarios.setPassword("");
+            plagas = new Plagas();
+        
+        
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
         }
@@ -135,19 +127,11 @@ private String imagen="foto.png";
     public String save() {
         try {
             
-            List<Grupousuarios> list = grupousuariosFacade.findByGrupousuarios("agricultor");
-            if(list == null || list.isEmpty()){
-                JSFUtil.addWarningMessage("No existe un grupo de usuario agricultores");
-                return null;
-            }
-            usuarios.setIdgrupousuario(list.get(0));
-            if (usuariosFacade.find(usuarios.getEmail()) != null) {
-                JSFUtil.warningDialog(rf.getMensajeArb("info.message"), rf.getMensajeArb("warning.idexist"));
-                return null;
-            }
-            usuariosFacade.create(usuarios);
+           
+          
+            plagasFacade.create(plagas);
             JSFUtil.addSuccessMessage(rf.getMensajeArb("info.save"));
-            usuarios = new Usuarios();
+            plagas = new Plagas();
             this.nuevoregistro = false;
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
@@ -159,7 +143,7 @@ private String imagen="foto.png";
     public String edit() {
         try {
             
-           usuariosFacade.edit(usuarios);
+           plagasFacade.edit(plagas);
             JSFUtil.addSuccessMessage(rf.getMensajeArb("info.update"));
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
@@ -170,10 +154,10 @@ private String imagen="foto.png";
     @Override
     public String delete() {
         try {
-            usuariosFacade.remove(usuarios);
+            plagasFacade.remove(plagas);
             JSFUtil.addSuccessMessage(rf.getMensajeArb("info.delete"));
             encontrado = false;
-            usuarios = new Usuarios();
+            plagas = new Plagas();
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
         }
@@ -186,9 +170,9 @@ private String imagen="foto.png";
     @Override
     public String imprimir() {
         try {
-            List<Usuarios> list = new ArrayList<>();
-            list.add(usuarios);
-            String ruta = "/resources/reportes/usuarios/usuarios.jasper";
+            List<Plagas> list = new ArrayList<>();
+            list.add(plagas);
+            String ruta = "/resources/reportes/plagas/plagas.jasper";
             HashMap parameters = new HashMap();
 
             gestorImpresion.imprimir(list, ruta, parameters);
@@ -200,18 +184,17 @@ private String imagen="foto.png";
 
     @Override
     public String imprimirTodos() {
-        String ruta = "/resources/reportes/usuarios/usuarios.jasper";
+        String ruta = "/resources/reportes/plagas/plagas.jasper";
         HashMap parameters = new HashMap();
-        gestorImpresion.imprimir(usuariosFacade.getUsuariosList(), ruta, parameters);
+        gestorImpresion.imprimir(plagasFacade.getPlagasList(), ruta, parameters);
         return null;
     }
 
    
     @Override
      public Integer contador(){
-        return usuariosFacade.count();
+        return plagasFacade.count();
     }
-
 
 
 
@@ -221,8 +204,7 @@ private String imagen="foto.png";
     }
     @Override
     public String habilitarConsultar() {        desactivar=true; 
-        usuarios.setEmail(
-                ""); 
+        plagas.setNombreplaga(""); 
         this.nuevoregistro = false; 
         return ""; 
     } 
@@ -237,7 +219,7 @@ private String imagen="foto.png";
 
             UploadedFile file = event.getFile();
 //application code
-            String destination = JSFUtil.getPathFotosUsuarios();
+            String destination = JSFUtil.getPathFotosPlagas();
             if (destination == null) {
                 JSFUtil.addErrorMessage(rf.getMensajeArb("warning.noseobtuvopath"));
             } else {
@@ -248,8 +230,8 @@ private String imagen="foto.png";
                 String nuevoNombreLogo = "";
                 while (continuarGenerado) {
                     nuevoNombreLogo = JSFUtil.getUUID() + JSFUtil.getExtension(file.getFileName());
-                    usuarios.setFoto(nuevoNombreLogo);
-                    List<Usuarios> list = usuariosFacade.findByFoto(nuevoNombreLogo);
+                    plagas.setFoto(nuevoNombreLogo);
+                    List<Plagas> list = plagasFacade.findByFoto(nuevoNombreLogo);
                     if (list == null || list.isEmpty()) {
                         continuarGenerado = false;
                     }

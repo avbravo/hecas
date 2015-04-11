@@ -217,6 +217,7 @@ CREATE TABLE `cultivos` (
 
 LOCK TABLES `cultivos` WRITE;
 /*!40000 ALTER TABLE `cultivos` DISABLE KEYS */;
+INSERT INTO `cultivos` VALUES ('Mosca Blanca','mos','ataca tomates','0e688445-cad8-4ad5-b7d4-e12c306d860b.jpg','moscas'),('Picudo','Picudo RX','plaga que afecta a los cultivos','18ce9d7b-b06a-459a-a3fe-9c4852456653.jpg','plagas');
 /*!40000 ALTER TABLE `cultivos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,7 +242,7 @@ CREATE TABLE `grupousuarios` (
 
 LOCK TABLES `grupousuarios` WRITE;
 /*!40000 ALTER TABLE `grupousuarios` DISABLE KEYS */;
-INSERT INTO `grupousuarios` VALUES ('administrador','Administrador','si'),('alcalde','Alcalde','si'),('auditor','Auditor','si'),('cajera','Cajeros','si'),('contable','Contable','si'),('contribuyente','Contribuyente','si'),('desarrollador','Desarrollador','si'),('Programador','Desarrollador','si'),('tesorero','Tesorero','si'),('we','rwerwer','si'),('weqr','qweeqw','si');
+INSERT INTO `grupousuarios` VALUES ('administrador','Administrador','si'),('agricultor','Agricultor','si'),('investigador','Investigador','si');
 /*!40000 ALTER TABLE `grupousuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -305,6 +306,7 @@ CREATE TABLE `miscultivos` (
 
 LOCK TABLES `miscultivos` WRITE;
 /*!40000 ALTER TABLE `miscultivos` DISABLE KEYS */;
+INSERT INTO `miscultivos` VALUES (0,'Mosca Blanca','w3rw','r',7.885147283424331,-80.41326999664307,NULL),(1,'Mosca Blanca','asdasd','ads',7.819847426192587,-80.40515899658203,NULL);
 /*!40000 ALTER TABLE `miscultivos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -413,6 +415,7 @@ CREATE TABLE `plagas` (
 
 LOCK TABLES `plagas` WRITE;
 /*!40000 ALTER TABLE `plagas` DISABLE KEYS */;
+INSERT INTO `plagas` VALUES ('Mancha purpura','oosos','dakjdkajs','dadd','32ad67bf-78a0-4aa7-a2fb-5b187dd855b8.JPG');
 /*!40000 ALTER TABLE `plagas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -504,6 +507,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES ('avbravo@gmail.com','Aristides Villarreal Bravo','denver','','','Masculino','00358f89-04e6-484d-92ac-5225f681cfdb.png','programador','agricultor'),('test@gmail.com','test','test','','','Masculino','e3ec24de-1507-4fe1-80cc-4c0645662bb7.jpg','testing','agricultor');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -516,4 +520,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-11  0:06:14
+-- Dump completed on 2015-04-11 12:42:03

@@ -6,9 +6,12 @@
 package com.cruta.hecas.ejb;
 
 import com.cruta.hecas.Plagas;
+import com.cruta.hecas.Plagas;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,5 +30,26 @@ public class PlagasFacade extends AbstractFacade<Plagas> {
     public PlagasFacade() {
         super(Plagas.class);
     }
-    
+public List<Plagas> getPlagasList() {
+        return em.createNamedQuery("Plagas.findAll").getResultList();
+    }
+
+   
+ public List<Plagas> findByNombreplaga(String nombreplaga) {
+        Query query = em.createNamedQuery("Plagas.findByNombreplaga");
+        return query.setParameter("nombreplaga", nombreplaga).getResultList();
+    }
+ 
+ 
+public List<Plagas> findByFoto(String foto) {
+        Query query = em.createNamedQuery("Plagas.findByFoto");
+        return query.setParameter("foto", foto).getResultList();
+    }
+   
+    public void deleteAll() {
+        Query query = em.createQuery("DELETE FROM Plagas");
+        int deleteRecords;
+        deleteRecords = query.executeUpdate();
+    }
+        
 }

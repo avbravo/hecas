@@ -67,14 +67,16 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         return query.setParameter("idgrupousuario", value).getResultList();
     }
 
-    public Long contadorActivo(String value) {
-        Query query = em.createNamedQuery("Usuarios.contadorActivo");
-        return (Long) query.setParameter("activo", value).getSingleResult();
-    }
+   
     public void deleteAll() {
-        Query query = em.createQuery("DELETE FROM Usuarios u WHERE u.username !='avbravo'");
+        Query query = em.createQuery("DELETE FROM Usuarios");
         int deleteRecords;
         deleteRecords = query.executeUpdate();
+    }
+    
+      public List<Usuarios> findByFoto(String foto){
+         Query query = em.createQuery("SELECT u FROM Usuarios u WHERE u.foto= :foto");
+        return query.setParameter("foto", foto).getResultList();
     }
 }
 

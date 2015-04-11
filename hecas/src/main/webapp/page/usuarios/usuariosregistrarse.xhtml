@@ -23,10 +23,11 @@
                             <div class="panel-body">
 
                                 <div class="form-group">
-                                    <h:graphicImage  value="/resources/fotos/foto.png" height="80" width="80"/>
-                                    <p:fileUpload auto="true"/>
-                                </div>
+                              <h:graphicImage id="foto" value="/resources/fotos/#{usuariosController.usuarios.foto}" height="80" width="80"/>
+                                    <p:fileUpload   auto="true" label="#{app['boton.foto']}" fileUploadListener="#{usuariosController.handleFileUpload}" update="growl,foto"/>
 
+
+                                </div>
 
 
 
@@ -35,7 +36,7 @@
 
                                 <div class="form-group">
                                     <p:outputLabel value="Nombre"/>
-                                    <p:inputText value="#{usuariosController.usuarios.nombre}"/>
+                                    <p:inputText size="40" value="#{usuariosController.usuarios.nombre}"/>
                                 </div>
 
                                 <div class="form-group">
@@ -46,16 +47,16 @@
 
                                 <div class="form-group">
                                     <p:outputLabel value="Password"/>
-                                    <p:password value="#{usuariosController.usuarios.password}"/>
+                                    <p:password size="25" value="#{usuariosController.usuarios.password}"/>
                                 </div>
                               
                                 <div class="form-group">
                                     <p:outputLabel value="Telefono"/>
-                                    <p:inputText value="#{usuariosController.usuarios.telefono}"/>   
+                                    <p:inputText size="15" value="#{usuariosController.usuarios.telefono}"/>   
                                       </div> 
                                 <div class="form-group">
                                      <p:outputLabel value="Celular"/>
-                                    <p:inputText value="#{usuariosController.usuarios.celular}"/>  
+                                    <p:inputText size="15" value="#{usuariosController.usuarios.celular}"/>  
 
                                 </div>
                                
@@ -69,7 +70,7 @@
                                 </div>
                                 <div class="form-group">
                                     <p:outputLabel value="Profesion"/>
-                                    <p:inputText value="#{usuariosController.usuarios.profesion}"/> 
+                                    <p:inputText size="40" value="#{usuariosController.usuarios.profesion}"/> 
                                      </div> 
                                 
                                 

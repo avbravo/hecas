@@ -408,9 +408,9 @@ public static Integer getEdad(Date fecha){
         try {
             HashMap<String, String> map = new HashMap<String, String>();
            
-            String path = getPath() + "resources/fotos/usuarios/";
+            String path = getPath() + "resources/fotos/";
             map.put("path", path);
-            map.put("url", "/resources/fotos/usuarios/");
+            map.put("url", "/resources/fotos/");
             return map;
         } catch (Exception e) {
 
@@ -426,7 +426,7 @@ public static Integer getEdad(Date fecha){
     public static String getPathFotosUsuarios() {
         try {             
         
-            String path = getPath() + "resources/fotos/usuarios/";
+            String path = getPath() + "resources/fotos/";
  return path;
         } catch (Exception e) {
 
@@ -439,7 +439,7 @@ public static Integer getEdad(Date fecha){
      public static String getPathFotosPlagas() {
         try {             
         
-            String path = getPath() + "resources/fotos/plagas/";
+            String path = getPath() + "resources/fotos/";
  return path;
         } catch (Exception e) {
 
@@ -451,7 +451,19 @@ public static Integer getEdad(Date fecha){
           public static String getPathFotosCultivos() {
         try {             
         
-            String path = getPath() + "resources/fotos/cultivos/";
+            String path = getPath() + "resources/fotos/";
+ return path;
+        } catch (Exception e) {
+
+            addErrorMessage("getPathFotosCultivos() " + e.getLocalizedMessage());
+        }
+        return null;
+
+    }
+             public static String getPathFotosMisCultivos() {
+        try {             
+        
+            String path = getPath() + "resources/fotos/";
  return path;
         } catch (Exception e) {
 

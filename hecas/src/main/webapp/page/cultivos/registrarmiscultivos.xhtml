@@ -12,7 +12,9 @@
 
             <ui:define name="content">
                 <f:view>
-                    <h:form>
+                    <h:form id="form" prependId="false">
+                        <p:messages id="growl" autoUpdate="true"/>
+
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">REGISTAR MIS CULTIVOS</h3>
@@ -24,60 +26,54 @@
                                 <div class="form-group"> 
                                     <p:outputLabel  value="Cultivo"/>
 
-                       
-                                 <p:selectOneMenu value="">
-                                <f:selectItem itemLabel="Hortalizas" itemValue="Hortalizas" />
-                                <f:selectItem itemLabel="Granos Basicos" itemValue="Granos Basicos" />
-                                  <f:selectItem itemLabel="Tuberculos" itemValue="Tuberculos" />
-                                <f:selectItem itemLabel="Fruta" itemValue="Fruta" />
-                                </p:selectOneMenu> 
-                                </div>
-                                
-                                <div class="form-group"> 
-                                    <p:outputLabel  value="Descripcion"/>
-                                    <p:inputTextarea/>
+                                    <p:selectOneMenu converter="cultivosConverter" id="idprovincia"
+                                                     value="#{miscultivosController.miscultivos.nombrecultivo}"
+                                                     filter="true" filterMatchMode="startsWith" effect="fade">
+
+                                        <!-- TODO: update below reference to list of available items-->
+                                        <f:selectItem itemLabel="Seleccione " itemValue="#{null}"/>
+                                        <f:selectItems value="#{cultivosSearchController.items}"
+                                                       var="itemp"
+                                                       itemValue="#{itemp}"
+                                                       itemLabel="#{itemp.nombrecultivo}" /> 
+
+
+                                    </p:selectOneMenu>
+
+
                                 </div>
 
-                              
+                               <div class="form-group"> 
+                                    <p:outputLabel  value="Descripcion"/>
+                                    <p:inputTextarea  value="#{miscultivosController.miscultivos.descripcion}"/>
+                                </div>
+
+
+
                                 <div class="form-group">
                                     <p:outputLabel  value="Datos de siembra"/>
-                                    <p:inputTextarea/>
+                                    <p:inputTextarea  value="#{miscultivosController.miscultivos.datossiembra}"/>
                                 </div>
-                            
-  <div class="form-group">
+
+                                <div class="form-group">
                                     <p:outputLabel  value="Latitud"/>
-                                    <p:inputText rendered="true"/>
+                                    <p:inputText id="latitud" size="40" value="#{miscultivosController.miscultivos.latitud}"/>
                                 </div>
- <div class="form-group">
+                                <div class="form-group">
                                     <p:outputLabel  value="Longitud"/>
-                                    <p:inputText rendered="true"/>
+                                    <p:inputText size="40" id="longitud" value="#{miscultivosController.miscultivos.longitud}"/>
                                 </div>
-                                
-                                  <div class="form-group">
-                                    <p:outputLabel value="Pais"/>                               
-                                    <p:selectOneMenu >
-                                        <f:selectItem itemLabel="Los Santos" itemValue="" />
-                                        <f:selectItem itemLabel="Herrera" itemValue="" />                              
-                                    </p:selectOneMenu>   
-                                     </div> 
+
                                 <div class="form-group">
-                                    <p:outputLabel value="Provincia"/>                               
-                                    <p:selectOneMenu >
-                                        <f:selectItem itemLabel="Los Santos" itemValue="" />
-                                        <f:selectItem itemLabel="Herrera" itemValue="" />                              
-                                    </p:selectOneMenu>  
-                                    
-                                      </div> 
-                                <div class="form-group">
-                                      <p:outputLabel value="Municipio"/>
-                                    <p:selectOneMenu >
-                                        <f:selectItem itemLabel="La Villa" itemValue="" />
-                                        <f:selectItem itemLabel="Las Tablas" itemValue="" />
-                                    </p:selectOneMenu> 
+                                    <p:gmap   id="gmap2" center="8.4941381542, -78.122893" zoom="15" type="ROADMAP" style="width:90%;height:350px">
+                                        <p:ajax event="pointSelect" listener="#{miscultivosController.onPointSelect}" update="growl,latitud,longitud" />
+                                    </p:gmap>
                                 </div>
 
                             </div>
-                            <div class="panel-footer">Panel footer</div>
+                            <div class="panel-footer"> 
+                                <p:commandButton value="Guardar" update="form,growl" actionListener="#{miscultivosController.save()}"/>
+                            </div>
                         </div>
                     </h:form>
 

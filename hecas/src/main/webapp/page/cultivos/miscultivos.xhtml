@@ -2,46 +2,134 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./../../template.xhtml">
 
+            <!--            <ui:define name="top">
+                            top
+                        </ui:define>-->
+
+            <!--            <ui:define name="bottom">
+                            bottom
+                        </ui:define>
+            
+                        <ui:define name="left">
+                            left
+                        </ui:define>
+            
+                        <ui:define name="right">
+                            right
+                        </ui:define>-->
+
             <ui:define name="content">
                 <f:view>
-                    <h:form>
+                    <h:form id="form" prependId="false">
+                          <p:messages id="growl" autoUpdate="true"/>
+
+
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h3 class="panel-title">MIS CULTIVOS</h3>
+                                <h3 class="panel-title">CULTIVOS</h3>
                             </div>
                             <div class="panel-body">
+              
+                                <p:dataTable  id="datatableMismiscultivos"
+                                              value="#{miscultivosSearchController.miscultivosList}"
+                                      var="item"
+                                      rows="7"
+                                      paginator="true"
 
-                               <!-- Table -->
-  <table class="table">
-   <tr>
-    <td>Cultivo</td>
-    <td>Localizacion</td> 
-    <td>Area</td>
-  </tr>
-  <tr>
-    <td>Aji</td>
-    <td>Los Santos</td> 
-    <td>94</td>
-  </tr>
-  </table>
+                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                      rowsPerPageTemplate="5,10,15"
+                                      >
+                            <p:column>
+                                <f:facet name="header">
+                                    <p:outputLabel value="Nombre"/>
+                                </f:facet>
                                
+                                     <p:fragment autoUpdate="true"> 
+                                         <p:commandLink  update=":form:panelMismiscultivos" 
+                                                      oncomplete= "PF('dialogoMisCultivo').show()"
+                                                      value="#{item.nombrecultivo.nombrecultivo}"                                                 
+                                               title="Haga clic aqui"
+                                                      >
+                                        <f:setPropertyActionListener value="#{item}" target="#{miscultivosSearchController.selected}" />  
+                                         </p:commandLink>>  
+                                </p:fragment>
+                            </p:column>
+               
+                       
+                            <p:column>
+                                 <f:facet name="header">
+                                    <p:outputLabel value="Nombre Cientifico"/>
+                                </f:facet>
+                                <p:outputLabel value="#{item.nombrecultivo.nombrecientifico}" />
+                                
+
+                            </p:column>
+
+
+
                           
+
+                         
+                          
+                        </p:dataTable>
+
+
+                                   
                             </div>
-                            <div class="panel-footer">
-                            
-                            </div>
+                            <div class="panel-footer">Haga clic en el nombre del cultivo para ver detalles</div>
                         </div>
+
+<p:dialog id="confirmDialog" modal="false" header="DETALLE DEL CULTIVO"
+                  height="550"  width="550" 
+                  
+                  widgetVar="dialogoMisCultivo">
+            <h:panelGrid columns="2" id="panelMismiscultivos">
+               
+                <p:outputLabel value="Nombre "/>
+                <p:outputLabel value="#{miscultivosSearchController.selected.nombrecultivo.nombrecultivo}"/>
+                <p:outputLabel value="Nombre Cientifico"/>
+                <p:outputLabel value="#{miscultivosSearchController.selected.nombrecultivo.nombrecultivo}"/>
+                 <p:outputLabel value="Descripcion"/>
+                 <p:outputLabel value="#{miscultivosSearchController.selected.descripcion}"/>
+                   <p:outputLabel value="Descripcion"/>
+                   <p:outputLabel value="#{miscultivosSearchController.selected.datossiembra}"/>
+                   
+                
+                                    <p:outputLabel  value="Latitud"/>
+                              <p:outputLabel value="#{miscultivosSearchController.selected.latitud}"/>
+                             
+                            
+                                    <p:outputLabel  value="Longitud"/>
+                               <p:outputLabel value="#{miscultivosSearchController.selected.longitud}"/>
+                           
+
+                           
+                                    <p:gmap   id="gmap2" center="#{miscultivosSearchController.selected.latitud},#{miscultivosSearchController.selected.longitud}" zoom="15" type="ROADMAP" style="width:350px;height:350px">
+
+                                    </p:gmap>
+                                
+            </h:panelGrid>
+            <f:facet name="footer">
+          
+
+                <p:commandButton id="cancelButton" value="#{app['boton.no']}"
+                                 icon="ui-icon-close"
+                                 onclick="PF('dialogoMisCultivo').hide();" type="button" />
+            </f:facet>
+        </p:dialog>
+
                     </h:form>
 
                 </f:view>
+
             </ui:define>
 
         </ui:composition>

@@ -107,26 +107,30 @@ public class LoginBean implements Serializable {
     
     public String verificarLogin() {
         try {
-            menuBeans.habilitarTodo(false);
+      
+            System.out.println("verificarLogin()");
             setLogeado(Boolean.FALSE);
             Usuarios u = usuariosFacade.find(usuarios.getEmail());
             if (u == null) {
-                JSFUtil.addWarningMessage(rf.getMensajeArb("login.usernamenotvalid"));
+                System.out.println("email");
+                JSFUtil.addWarningMessage("Email no esta registrado");
                 return null;
             }
          
             if (!u.getPassword().equals(usuarios.getPassword())) {
-                JSFUtil.addSuccessMessage(rf.getMensajeArb("login.passwordnotvalid"));
+                System.out.println("password");
+                JSFUtil.addSuccessMessage("Password no valido");
                 return "";
             }
             usuarios = u;
-           
+                  
             setLogeado(Boolean.TRUE);
-            if (validadorRoles.validarRoles(usuarios.getIdgrupousuario().getIdgrupousuario())) {
+            JSFUtil.addSuccessMessage("Bienvenido "+usuarios.getNombre());
+//            if (validadorRoles.validarRoles(usuarios.getIdgrupousuario().getIdgrupousuario())) {
                 //verifica los requisitos
    
-                return "index";
-            }
+                return "/faces/index";
+//            }
             
             
         } catch (Exception e) {
@@ -141,7 +145,7 @@ public class LoginBean implements Serializable {
             if (session != null) {
                 session.invalidate();
             }
-            String url = ("/hecas/faces/login.xhtml?faces-redirect=true");
+            String url = ("/hecas/faces/index.xhtml?faces-redirect=true");
             FacesContext fc = FacesContext.getCurrentInstance();
             ExternalContext ec = fc.getExternalContext();
             try {
@@ -149,7 +153,7 @@ public class LoginBean implements Serializable {
             } catch (IOException ex) {
                 JSFUtil.addErrorMessage(ex.getLocalizedMessage());
             }
-            return "/hecas/faces/login.xhtml?faces-redirect=true";
+            return "/hecas/faces/index.xhtml?faces-redirect=true";
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e, "logout()");
         }

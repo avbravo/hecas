@@ -6,9 +6,13 @@
 package com.cruta.hecas.ejb;
 
 import com.cruta.hecas.Cultivos;
+import com.cruta.hecas.Grupousuarios;
+import com.cruta.hecas.Cultivos;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,5 +31,32 @@ public class CultivosFacade extends AbstractFacade<Cultivos> {
     public CultivosFacade() {
         super(Cultivos.class);
     }
+    public Cultivos findById(String id) {
+        return em.find(Cultivos.class, id);
+    }
+
+    public List<Cultivos> getCultivosList() {
+        return em.createNamedQuery("Cultivos.findAll").getResultList();
+    }
+
+   
+ public List<Cultivos> findByNombrecultivo(String nombrecultivo) {
+        Query query = em.createNamedQuery("Cultivos.findByNombrecultivo");
+        return query.setParameter("nombrecultivo", nombrecultivo).getResultList();
+    }
+ 
+ 
+public List<Cultivos> findByFoto(String foto) {
+        Query query = em.createNamedQuery("Cultivos.findByFoto");
+        return query.setParameter("foto", foto).getResultList();
+    }
+   
+    public void deleteAll() {
+        Query query = em.createQuery("DELETE FROM Cultivos");
+        int deleteRecords;
+        deleteRecords = query.executeUpdate();
+    }
+    
+  
     
 }
