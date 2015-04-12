@@ -37,7 +37,7 @@
                                 style="width:600px;height:400px"/>  -->
                         <ui:include src="dashboard.xhtml" />
 
-<!--                        HOLA-->
+
                         <p:growl id="growl" showDetail="true" />
 
                         <p:gmap id="gmap" center="36.890257,30.707417" zoom="5" type="HYBRID"  model="#{draggableMarkersView.draggableModel}" style="width:100%;height:400px">
@@ -45,12 +45,7 @@
                         </p:gmap>
                         
                          <p:growl id="messages" showDetail="true" life="2000" />
- 
-    <p:gmap id="gmap2" center="8.4941381542, -78.122893" zoom="15" type="ROADMAP" style="width:100%;height:300px">
-        <p:ajax event="stateChange" listener="#{eventView.onStateChange}" update="messages" />
-        <p:ajax event="pointSelect" listener="#{eventView.onPointSelect}" update="messages" />
-    </p:gmap>
-                         
+            
                     </h:form>
                 </f:view>
 
