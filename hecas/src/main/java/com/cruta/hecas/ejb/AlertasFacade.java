@@ -52,5 +52,16 @@ public class AlertasFacade extends AbstractFacade<Alertas> {
         int deleteRecords;
         deleteRecords = query.executeUpdate();
     }
-    
+       public Integer getMaximo() {
+        try {
+
+            Query q = em.createQuery("SELECT MAX(a.idalerta) FROM Alertas a");
+
+            Number result = (Number) q.getSingleResult();
+            return result.intValue();
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
 }

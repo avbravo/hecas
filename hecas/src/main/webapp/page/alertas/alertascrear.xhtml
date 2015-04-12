@@ -12,130 +12,110 @@
 
             <ui:define name="content">
                 <f:view>
-                    <h:form>
+                    <h:form id="form" prependId="false">
+                        <p:messages id="growl" autoUpdate="true"/>
+
+
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">CREAR ALERTAS</h3>
                             </div>
                             <div class="panel-body">
+                                        <p:panelGrid columns="2">
+
+                                            <p:outputLabel  value="Cultivo"/>
+
+                                            <p:selectOneMenu converter="cultivosConverter" 
+                                                             value="#{alertasController.cultivos}"
+                                                             filter="true" filterMatchMode="startsWith" effect="fade">
+
+                                                <!-- TODO: update below reference to list of available items-->
+                                                <f:selectItem itemLabel="Seleccione " itemValue="#{null}"/>
+                                                <f:selectItems value="#{cultivosSearchController.items}"
+                                                               var="itemp"
+                                                               itemValue="#{itemp}"
+                                                               itemLabel="#{itemp.nombrecultivo}" /> 
 
 
-                                <div class="form-group"> 
-                                    <p:outputLabel  value="Cultivo"/>
-
-                                    <p:selectOneMenu converter="cultivosConverter" id="idprovincia"
-                                                     value="#{alertasController.cultivos}"
-                                                     filter="true" filterMatchMode="startsWith" effect="fade">
-
-                                        <!-- TODO: update below reference to list of available items-->
-                                        <f:selectItem itemLabel="Seleccione " itemValue="#{null}"/>
-                                        <f:selectItems value="#{cultivosSearchController.items}"
-                                                       var="itemp"
-                                                       itemValue="#{itemp}"
-                                                       itemLabel="#{itemp.nombrecultivo}" /> 
+                                            </p:selectOneMenu>
 
 
-                                    </p:selectOneMenu>
+                                            <p:outputLabel  value="Plaga"/>
+
+                                            <p:selectOneMenu converter="plagasConverter" 
+                                                             value="#{alertasController.plagas}"
+                                                             filter="true" filterMatchMode="startsWith" effect="fade">
+
+                                                <!-- TODO: update below reference to list of available items-->
+                                                <f:selectItem itemLabel="Seleccione " itemValue="#{null}"/>
+                                                <f:selectItems value="#{plagasSearchController.items}"
+                                                               var="itemp"
+                                                               itemValue="#{itemp}"
+                                                               itemLabel="#{itemp.nombreplaga}" /> 
 
 
-                                </div>
-                               
-                                <div class="form-group"> 
-                                    <p:outputLabel  value="Plaga"/>
+                                            </p:selectOneMenu>
+                                            <p:outputLabel  value="Descripcion"/>
+                                            <p:inputTextarea value="#{alertasController.alertas.descripcion}" placeholder="Ingrese el detalle, la temperatura, humedad" />
 
-                                    <p:selectOneMenu converter="plagaConverter" id="idprovincia"
-                                                     value="#{alertasController.plagas}"
-                                                     filter="true" filterMatchMode="startsWith" effect="fade">
+                                            <p:outputLabel  title="Impacto en el cultivo" value="Grado de afectacion"/>
+                                            <p:selectOneMenu value="#{alertasController.alertas.gradoafectacion}">
+                                                <f:selectItem itemLabel="Alto" itemValue="Alto" />
+                                                <f:selectItem itemLabel="Medio" itemValue="Medio" />
+                                                <f:selectItem itemLabel="Bajo" itemValue="Bajo" />
 
-                                        <!-- TODO: update below reference to list of available items-->
-                                        <f:selectItem itemLabel="Seleccione " itemValue="#{null}"/>
-                                        <f:selectItems value="#{plagasSearchController.items}"
-                                                       var="itemp"
-                                                       itemValue="#{itemp}"
-                                                       itemLabel="#{itemp.nombreplaga}" /> 
+                                            </p:selectOneMenu>
+
+                                            <p:outputLabel  value="La plaga afecta"/>
+                                            <h:panelGroup>
+                                                <p:outputLabel  value="Flor"/>
+                                                <p:selectBooleanCheckbox value="#{alertasController.bflor}" />
+                                                <p:outputLabel  value="Tallo"/>
+                                                <p:selectBooleanCheckbox value="#{alertasController.btallo}" />
+                                                <p:outputLabel  value="Hoja"/>
+                                                <p:selectBooleanCheckbox value="#{alertasController.bhoja}" />
+                                                <p:outputLabel  value="Fruto"/>
+                                                <p:selectBooleanCheckbox value="#{alertasController.bfruto}" />
+                                                <p:outputLabel  value="Raices"/>
+                                                <p:selectBooleanCheckbox value="#{alertasController.braices}" />
+                                            </h:panelGroup>
+                                            <p:outputLabel  value="% de Area Afectada"/>
+                                            <p:inputText size="50" value="#{alertasController.alertas.porcentajeafectacion}" placeholder="Anote que % de su cultivo esta siendo afectado"/>
+                                            <p:outputLabel  title="Etapa" value="Etapa del cultivo"/>
+                                            <p:selectOneMenu value="#{alertasController.alertas.etapadelcultivo}" >
+                                                <f:selectItem itemLabel="Brote" itemValue="Brote" />
+                                                <f:selectItem itemLabel="Crecimiento" itemValue="Crecimiento" />
+                                                <f:selectItem itemLabel="Floracion" itemValue="Floracion" />
+
+                                            </p:selectOneMenu>
+                                            <p:outputLabel  value="Fecha"/>
+                                            <p:calendar size="50" value="#{alertasController.alertas.fecha}" pattern="dd/MM/yyyy" placeholder="Fecha en que se detecto la plaga"/>
 
 
-                                    </p:selectOneMenu>
 
+                                        </p:panelGrid>
 
-                                </div>
+                                        <p:outputLabel value='Localizacion'/>
+                                        <h:panelGroup>
+                                            <p:outputLabel  value="Latitud"/>
+                                            <p:inputText id="latitud" size="40" value="#{alertasController.alertas.latitud}"/>
+                                            <p:outputLabel  value="Longitud"/>
+
+                                            <p:inputText size="40" id="longitud" value="#{alertasController.alertas.longitud}"/>
+
+                                            <p:gmap   id="gmap2" center="8.4941381542, -78.122893" zoom="15" type="ROADMAP" style="width:90%;height:250px">
+                                                <p:ajax event="pointSelect" listener="#{alertasController.onPointSelect}" update="growl,latitud,longitud" />
+                                            </p:gmap>
+
+                                        </h:panelGroup>   
+
                                 
-
-                                <div class="form-group">
-                                    <p:outputLabel  value="Descripcion"/>
-                                    <p:inputTextarea value="#{alertasController.alertas.descripcion}" placeholder="Ingrese el detalle, la temperatura, humedad" />
-                                </div>
-                                <div class="form-group"> 
-                                    <p:outputLabel  title="Impacto en el cultivo" value="Grado de afectacion"/>
-                                    <p:selectOneMenu value="#{alertasController.alertas.gradoafectacion}">
-                                        <f:selectItem itemLabel="Alto" itemValue="" />
-                                        <f:selectItem itemLabel="Medio" itemValue="Xbox One" />
-                                        <f:selectItem itemLabel="Bajo" itemValue="Xbox One" />
-
-                                    </p:selectOneMenu>
-                                </div>
-
-                              
-
-
-                                <div class="form-group"> 
-                                    <p:outputLabel  value="La plaga afecta"/>
-<!--                                    <p:panelGrid columns="4">-->
-                                        <div class="form-group"> 
-                                            <p:outputLabel  value="Flor"/>
-                                            <p:selectBooleanCheckbox value="#{alertasController.alertas.flor}" />
-                                             <p:outputLabel  value="Tallo"/>
-                                             <p:selectBooleanCheckbox value="#{alertasController.alertas.tallo}" />
-                                             <p:outputLabel  value="Hoja"/>
-                                             <p:selectBooleanCheckbox value="#{alertasController.alertas.hoja}" />
-                                            <p:outputLabel  value="Fruto"/>
-                                            <p:selectBooleanCheckbox value="#{alertasController.alertas.fruto}" />
-                                            <p:outputLabel  value="Raices"/>
-                                            <p:selectBooleanCheckbox value="#{alertasController.alertas.raices}" />
-                                        </div>
-                                      
-                                    <!--</p:panelGrid>-->
-   </div>
-
-                                    <div class="form-group"> 
-                                        <p:outputLabel  value="% de Area Afectada"/>
-                                        <p:inputText size="50" value="#{alertasController.alertas.porcentajeafectacion}" placeholder="Anote que % de su cultivo esta siendo afectado"/>
-                                    </div>
-
-                                    <div class="form-group"> 
-                                        <p:outputLabel  title="Etapa" value="Etapa del cultivo"/>
-                                        <p:selectOneMenu value="#{alertasController.alertas.etapadelcultivo}" >
-                                            <f:selectItem itemLabel="Brote" itemValue="Brote" />
-                                            <f:selectItem itemLabel="Crecimiento" itemValue="Crecimiento" />
-                                            <f:selectItem itemLabel="Floracion" itemValue="Floracion" />
-
-                                        </p:selectOneMenu>
-                                    </div>
-                                
-                                  <div class="form-group">
-                                    <p:outputLabel  value="Latitud"/>
-                                    <p:inputText id="latitud" size="40" value="#{alertasController.alertas.latitud}"/>
-                                </div>
-                                <div class="form-group">
-                                    <p:outputLabel  value="Longitud"/>
-                                    <p:inputText size="40" id="longitud" value="#{alertasController.alertas.longitud}"/>
-                                </div>
-                                
-                                   
-                                    <div class="form-group"> 
-                                        <p:outputLabel  value="Fecha"/>
-                                        <p:calendar size="50" placeholder="Fecha en que se detecto la plaga"/>
-                                    </div>
-                                    <div class="form-group"> 
-                                        <p:rating  stars="5"/>
-                                    </div>
-
-                                </div>
-                                <div class="panel-footer">
-                                   <p:commandButton value="Send" actionListener="#{notifyView.send}" />
-                                
-                                </div>
                             </div>
+                            <div class="panel-footer">
+                                <p:commandButton value="Guardar" update="form,growl" actionListener="#{alertasController.save()}"/>
+                            </div>    
+                        </div>
+
                     </h:form>
 
                 </f:view>

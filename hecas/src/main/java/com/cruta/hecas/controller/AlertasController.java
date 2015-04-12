@@ -23,7 +23,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.map.PointSelectEvent;
 import org.primefaces.model.UploadedFile;
+import org.primefaces.model.map.LatLng;
 
 /**
  *
@@ -52,6 +54,54 @@ private String imagen="foto.png";
 Cultivos cultivos= new Cultivos();
 Plagas plagas =  new Plagas();
 
+
+ private Boolean bflor;
+ private Boolean btallo;
+ private Boolean bhoja;
+ private Boolean bfruto;
+ private Boolean braices;
+
+    public Boolean getBflor() {
+        return bflor;
+    }
+
+    public void setBflor(Boolean bflor) {
+        this.bflor = bflor;
+    }
+
+    public Boolean getBtallo() {
+        return btallo;
+    }
+
+    public void setBtallo(Boolean btallo) {
+        this.btallo = btallo;
+    }
+
+    public Boolean getBhoja() {
+        return bhoja;
+    }
+
+    public void setBhoja(Boolean bhoja) {
+        this.bhoja = bhoja;
+    }
+
+    public Boolean getBfruto() {
+        return bfruto;
+    }
+
+    public void setBfruto(Boolean bfruto) {
+        this.bfruto = bfruto;
+    }
+
+    public Boolean getBraices() {
+        return braices;
+    }
+
+    public void setBraices(Boolean braices) {
+        this.braices = braices;
+    }
+ 
+                                        
     public Plagas getPlagas() {
         return plagas;
     }
@@ -146,11 +196,18 @@ Plagas plagas =  new Plagas();
     @Override
     public String save() {
         try {
-            
-           
-          
+            System.out.println("Guardar");
+            alertas.setTallo(btallo?"si":"no");
+            alertas.setHoja(bhoja?"si":"no");
+            alertas.setFruto(bfruto?"si":"no");
+            alertas.setRaices(braices?"si":"no");
+            alertas.setIdalerta(alertasFacade.getMaximo()+1);
+ 
+           alertas.setPuntos(0);
+          alertas.setNombrecultivo(cultivos.getNombrecultivo());
+          alertas.setNombreplaga(plagas.getNombreplaga());
             alertasFacade.create(alertas);
-            JSFUtil.addSuccessMessage(rf.getMensajeArb("info.save"));
+            JSFUtil.addSuccessMessage("Guardado exitosamente");
             alertas = new Alertas();
             this.nuevoregistro = false;
         } catch (Exception e) {
@@ -234,5 +291,20 @@ Plagas plagas =  new Plagas();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void onPointSelect(PointSelectEvent event) {
+      System.out.println("onPointSelect");
+      try{
+        LatLng latlng = event.getLatLng();
+        alertas.setLatitud(latlng.getLat());
+        
+                  alertas.setLongitud(String.valueOf(latlng.getLng()));
+          System.out.println("codigo");
+      }catch(Exception ex){
+        JSFUtil.addErrorMessage("Error "+ex.getLocalizedMessage());
+      }
+                  
+       // addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Point Selected", "Lat:" + latlng.getLat() + ", Lng:" + latlng.getLng()));
+    }
+   
      
 }
