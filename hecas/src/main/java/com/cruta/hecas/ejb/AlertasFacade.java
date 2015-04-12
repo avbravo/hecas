@@ -6,9 +6,12 @@
 package com.cruta.hecas.ejb;
 
 import com.cruta.hecas.Alertas;
+import com.cruta.hecas.Alertas;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +29,28 @@ public class AlertasFacade extends AbstractFacade<Alertas> {
 
     public AlertasFacade() {
         super(Alertas.class);
+    }
+    
+    public Alertas findById(String id) {
+        return em.find(Alertas.class, id);
+    }
+
+    public List<Alertas> getAlertasList() {
+        return em.createNamedQuery("Alertas.findAll").getResultList();
+    }
+
+   
+ public List<Alertas> findByIdalerta(Integer idalerta) {
+        Query query = em.createNamedQuery("Alertas.findByIdalerta");
+        return query.setParameter("idalerta", idalerta).getResultList();
+    }
+ 
+ 
+   
+    public void deleteAll() {
+        Query query = em.createQuery("DELETE FROM Alertas");
+        int deleteRecords;
+        deleteRecords = query.executeUpdate();
     }
     
 }

@@ -2,55 +2,127 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./../../template.xhtml">
 
+            <!--            <ui:define name="top">
+                            top
+                        </ui:define>-->
+
+            <!--            <ui:define name="bottom">
+                            bottom
+                        </ui:define>
+            
+                        <ui:define name="left">
+                            left
+                        </ui:define>
+            
+                        <ui:define name="right">
+                            right
+                        </ui:define>-->
+
             <ui:define name="content">
                 <f:view>
-                    <h:form>
-                   <div class="panel panel-primary">
+                    <h:form id="form" prependId="false">
+                          <p:messages id="growl" autoUpdate="true"/>
+
+
+                        <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">ALERTAS</h3>
                             </div>
                             <div class="panel-body">
+              
+                                <p:dataTable  id="datatableAlertas"
+                                              value="#{alertasSearchController.alertasList}"
+                                      var="item"
+                                      rows="7"
+                                      paginator="true"
 
+                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                      rowsPerPageTemplate="5,10,15"
+                                      >
+                            <p:column>
+                                <f:facet name="header">
+                                    <p:outputLabel value="Cultivo"/>
+                                </f:facet>
+                               
+                                     <p:fragment autoUpdate="true"> 
+                                         <p:commandLink  update=":form:panelAlertas" 
+                                                      oncomplete= "PF('dialogoCultivo').show()"
+                                                  value="#{item.nombrecultivo}"                                                 
+                                               title="Haga clic aqui"
+                                                      >
+                                        <f:setPropertyActionListener value="#{item}" target="#{alertasSearchController.selected}" />  
+                                         </p:commandLink>>  
+                                </p:fragment>
+                            </p:column>
+               
+                       
+                            <p:column>
+                                 <f:facet name="header">
+                                    <p:outputLabel value="Plaga"/>
+                                </f:facet>
+                                <p:outputLabel value="#{item.nombreplaga}" />
                                 
-                                      
-                        <p:tabView>
-                            <p:tab title="Cultivos">
-                                <p:panelGrid columns="1">
-                                    <p:commandLink value="Aji" action="/faces/page/cultivos/cultivodetalle.xhtml"/>
-                                    <p:commandLink value="Berengena"/>
-                                    <p:commandLink value="Sandia"/>
-                                    <p:commandLink value="Tomate"/>
-                                </p:panelGrid>
-                            </p:tab>
-                            <p:tab title="Plaga">
-                                <p:panelGrid columns="1">
-                                    <p:commandLink value="Picudo" action="/faces/page/cultivos/plagasdetalle.xhtml"/>
-                                    <p:commandLink value="Etc"/>
-                                </p:panelGrid>
+
+                            </p:column>
+<p:column>
+                                 <f:facet name="header">
+                                    <p:outputLabel value="Descripcion"/>
+                                </f:facet>
+    <p:outputLabel value="#{item.descripcion}" />
+                                
+
+                            </p:column>
 
 
-                            </p:tab>
-                            <p:tab title="Localizacion">
-
-
-
-                            </p:tab>
+                            
+                         
                           
-                        </p:tabView>
-                                  </div>
-                            <div class="panel-footer">Panel footer</div>
+                        </p:dataTable>
+
+
+                                   
+                            </div>
+                            <div class="panel-footer">Haga clic en el nombre del cultivo para ver detalles</div>
                         </div>
+
+<p:dialog id="confirmDialog" modal="false" header="DETALLE DE LA ALERTA"
+                  height="250"  width="450" 
+                  
+                  widgetVar="dialogoCultivo">
+            <h:panelGrid columns="2" id="panelAlertas">
+               
+                <p:outputLabel value="Cultivo"/>
+                <p:outputLabel value="#{alertasSearchController.selected.nombrecultivo}"/>
+                <p:outputLabel value="Plaga"/>
+                <p:outputLabel value="#{alertasSearchController.selected.nombreplaga}"/>
+                 <p:outputLabel value="Descripcion"/>
+                 <p:outputLabel value="#{alertasSearchController.selected.descripcion}"/>
+                 <p:outputLabel value="Latitud"/>
+                 <p:outputLabel value="#{alertasSearchController.selected.latitud}"/>
+                 <p:outputLabel value="Longitud"/>
+                 <p:outputLabel value="#{alertasSearchController.selected.longitud}"/>
+            </h:panelGrid>
+            <f:facet name="footer">
+          
+
+                <p:commandButton id="cancelButton" value="#{app['boton.no']}"
+                                 icon="ui-icon-close"
+                                 onclick="PF('dialogoCultivo').hide();" type="button" />
+            </f:facet>
+        </p:dialog>
+
                     </h:form>
 
                 </f:view>
+
             </ui:define>
 
         </ui:composition>

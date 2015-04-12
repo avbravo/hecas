@@ -14,71 +14,71 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    
+
                     <!--<a class="navbar-brand" href="#"><p:graphicImage value="/resources/imagenes/hecas.png" width="30" height="30"/></a>--> 
                     <a class="navbar-brand" href="/hecas/faces/index.xhtml">HECAS</a> 
 
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                           <li><a href="#">Alerta</a></li>
+                        <li><a href="#">Alerta</a></li>
                         <c:if test="#{!loginBean.logeado}">
                             <li><a href="/hecas/faces/page/usuarios/usuariosregistrarse.xhtml">Registrarse</a></li>
                         </c:if>
-                         <li><a href=""> <h:graphicImage  rendered="#{loginBean.logeado}" value="/resources/fotos/#{loginBean.usuarios.foto}" height="30" width="30"/></a></li>
-                       
+                        <li><a href=""> <h:graphicImage  rendered="#{loginBean.logeado}" value="/resources/fotos/#{loginBean.usuarios.foto}" height="30" width="30"/></a></li>
+
                         <c:if test="#{!loginBean.logeado}">
                             <li><a href="/hecas/faces/page/login/login.xhtml">Entrar</a></li>
                         </c:if>
-                      
-
-                     
 
 
-    <c:if test="#{loginBean.logeado}">
-                        <li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><p:outputLabel rendered="#{loginBean.logeado}" value="#{loginBean.usuarios.nombre}" style="color: white"/><span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/hecas/faces/page/alertas/alertasconfigurar.xhtml" >Configurar Alertas</a></li>
-                                    <li><a href="/hecas/faces/page/alertas/alertascrear.xhtml">Crear Alertas</a></li>
-                                    <li><a href="/hecas/faces/page/alertas/misalertas.xhtml">Mis Alertas</a></li>
 
-                                    <li class="divider"></li>
 
-                                    <li><a href="/hecas/faces/page/cultivos/registrarmiscultivos.xhtml" >Registrar Mis Cultivos</a></li>
-                                    <li><a href="/hecas/faces/page/cultivos/miscultivos.xhtml" >Mis Cultivos</a></li>
 
-                                </ul>
-                            </li>
-
-                        </li>
-    </c:if>
-                 
                         <c:if test="#{loginBean.logeado}">
-                        <li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Expertos<span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/hecas/faces/page/plagas/registrarplagasexpertos.xhtml" >Plagas</a></li>
+                            <li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><p:outputLabel rendered="#{loginBean.logeado}" value="#{loginBean.usuarios.nombre}" style="color: white"/><span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="/hecas/faces/page/alertas/alertasconfigurar.xhtml" >Configurar Alertas</a></li>
+                                        <li><a href="/hecas/faces/page/alertas/alertascrear.xhtml">Crear Alertas</a></li>
+                                        <li><a href="/hecas/faces/page/alertas/misalertas.xhtml">Mis Alertas</a></li>
 
-                                    <!--<li><a href="#">Quimicos</a></li>-->
-                                    <li class="divider"></li>
-                                    <li><a href="/hecas/faces/page/cultivos/registrarcultivosexpertos.xhtml" >Registrar Cultivos</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="">Bases datos</a></li>
-                                    <li><a href="">Drones</a></li>
+                                        <li class="divider"></li>
 
+                                        
+                                        <li><a href="/hecas/faces/page/cultivos/miscultivos.xhtml" >Mis Cultivos</a></li>
 
-                                </ul>
+                                    </ul>
+                                </li>
+
                             </li>
+                        </c:if>
 
-                        </li>
+                        <c:if test="#{loginBean.logeado}">
+                            <li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Expertos<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="/hecas/faces/page/plagas/registrarplagasexpertos.xhtml" >Plagas</a></li>
+
+                                        <!--<li><a href="#">Quimicos</a></li>-->
+                                        <li class="divider"></li>
+                                        <li><a href="/hecas/faces/page/cultivos/registrarcultivosexpertos.xhtml" >Cultivos</a></li>
+<!--                                        <li class="divider"></li>
+                                        <li><a href="">Bases datos</a></li>
+                                        <li><a href="">Drones</a></li>-->
+
+
+                                    </ul>
+                                </li>
+
+                            </li>
                         </c:if>
                         <li>
-  <c:if test="#{loginBean.logeado}">
-                            <li><a href="/hecas/faces/page/logout/logout.xhtml">Salir</a></li>
-                        </c:if>
+                            <c:if test="#{loginBean.logeado}">
+                                <li><a href="/hecas/faces/page/logout/logout.xhtml">Salir</a></li>
+                            </c:if>
                         </li>
                     </ul>
                     <!--                    <form class="navbar-form navbar-right">
