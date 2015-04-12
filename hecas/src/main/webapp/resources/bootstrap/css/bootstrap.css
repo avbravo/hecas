@@ -267,11 +267,11 @@ th {
 @font-face {
   font-family: 'Glyphicons Halflings';
 
-  src: url("#{resource['bootstrap/fonts/glyphicons-halflings-regular.eot']}");
-  src: url("#{resource['bootstrap/fonts/glyphicons-halflings-regular.eot']}&#iefix") format('embedded-opentype'),
-      url("#{resource['bootstrap/fonts/glyphicons-halflings-regular.woff']}") format('woff'),
-      url("#{resource['bootstrap/fonts/glyphicons-halflings-regular.ttf']}") format('truetype'),
-      url("#{resource['bootstrap/fonts/glyphicons-halflings-regular.svg']}#glyphicons_halflingsregular") format('svg');
+  src: url("/hecas/faces/javax.faces.resource/bootstrap/fonts/glyphicons-halflings-regular.eot");
+  src: url("/hecas/faces/javax.faces.resource/bootstrap/fonts/glyphicons-halflings-regular.eot&#iefix") format('embedded-opentype'),
+      url("/hecas/faces/javax.faces.resource/bootstrap/fonts/glyphicons-halflings-regular.woff") format('woff'),
+      url("/hecas/faces/javax.faces.resource/bootstrap/fonts/glyphicons-halflings-regular.ttf") format('truetype'),
+      url("/hecas/faces/javax.faces.resource/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format('svg');
 }
 .glyphicon {
   position: relative;
@@ -1104,7 +1104,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #337AA7;
   text-decoration: none;
 }
 a:hover,
@@ -5561,11 +5561,14 @@ a.list-group-item-danger.active:focus {
 }
 .panel-primary > .panel-heading {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #337ab7;
+  background-color: #4cae4c;
+  border-color: #4cae4c;
+/*  background-color: #337ab7;
+  border-color: #337ab7;*/
 }
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #337ab7;
+    border-top-color: #5cb85c;
+  /*border-top-color: #337ab7;*/
 }
 .panel-primary > .panel-heading .badge {
   color: #337ab7;
