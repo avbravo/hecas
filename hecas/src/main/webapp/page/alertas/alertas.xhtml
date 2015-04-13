@@ -28,6 +28,7 @@
 
             <ui:define name="content">
                 <f:view>
+                  
                     <h:form id="form" prependId="false">
                           <p:messages id="growl" autoUpdate="true"/>
 
@@ -47,7 +48,7 @@
                                       paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                       rowsPerPageTemplate="5,10,15"
                                       >
-                            <p:column>
+                                    <p:column  filterBy="#{item.nombrecultivo}" sortBy="#{item.nombrecultivo}">
                                 <f:facet name="header">
                                     <p:outputLabel value="Cultivo"/>
                                 </f:facet>
@@ -64,7 +65,7 @@
                             </p:column>
                
                        
-                            <p:column>
+                            <p:column filterBy="#{item.nombreplaga}" sortBy="#{item.nombreplaga}">
                                  <f:facet name="header">
                                     <p:outputLabel value="Plaga"/>
                                 </f:facet>
@@ -109,6 +110,10 @@
                  <p:outputLabel value="#{alertasSearchController.selected.latitud}"/>
                  <p:outputLabel value="Longitud"/>
                  <p:outputLabel value="#{alertasSearchController.selected.longitud}"/>
+                 <p:outputLabel value="Comentarios"/>
+                 <p:inputTextarea/>
+                 <p:rating stars="5"/>
+                 
             </h:panelGrid>
             <f:facet name="footer">
           

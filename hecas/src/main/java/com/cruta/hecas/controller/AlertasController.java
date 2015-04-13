@@ -21,11 +21,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.map.PointSelectEvent;
 import org.primefaces.model.UploadedFile;
 import org.primefaces.model.map.LatLng;
+import org.primefaces.push.EventBus;
+import org.primefaces.push.EventBusFactory;
 
 /**
  *
@@ -210,6 +214,7 @@ Plagas plagas =  new Plagas();
             JSFUtil.addSuccessMessage("Guardado exitosamente");
             alertas = new Alertas();
             this.nuevoregistro = false;
+//             notificarPUSH();
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
         }
@@ -307,4 +312,13 @@ Plagas plagas =  new Plagas();
     }
    
      
+//    public void notificarPUSH() {
+//
+//        String summary = "Nuevo Elemento";
+//        String detail = "Se agrego a la lista";
+//        String CHANNEL = "/notify";
+//
+//        EventBus eventBus = EventBusFactory.getDefault().eventBus();
+//        eventBus.publish(CHANNEL, new FacesMessage(StringEscapeUtils.escapeHtml(summary), StringEscapeUtils.escapeHtml(detail)));
+//    }
 }
