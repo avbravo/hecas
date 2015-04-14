@@ -77,6 +77,7 @@ CREATE TABLE `alertas` (
 
 LOCK TABLES `alertas` WRITE;
 /*!40000 ALTER TABLE `alertas` DISABLE KEYS */;
+INSERT INTO `alertas` VALUES (1,'Aji','El picudo, barrenillo','la plaga ingreso en la noche','Alto',8.44218663317722,'-80.25163656100631',60,'Brote',NULL,'si','si','no','no','2015-04-16',0),(2,'Aji','El picudo, barrenillo','situacion critica','Alto',8.493401843406648,'-78.1397056581045',6,'Brote',NULL,'si','no','no','no','2015-04-07',0),(3,'Aji','El picudo, barrenillo','situacion critica','Alto',8.493401843406648,'-78.1397056581045',6,'Brote',NULL,'si','no','no','no','2015-04-07',0),(4,'Aji','El picudo, barrenillo','situacion critica','Alto',8.493401843406648,'-78.1397056581045',6,'Brote',NULL,'si','no','no','no','2015-04-07',0),(5,'Aji','El picudo, barrenillo','AS','Alto',8.495184516095525,'-78.13473835631157',2,'Brote',NULL,'no','no','no','no','2015-04-02',0),(6,'Aji','El picudo, barrenillo','AAA','Alto',7.985495533767262,'-80.71855550631881',5,'Brote',NULL,'no','no','no','no','2015-04-10',0);
 /*!40000 ALTER TABLE `alertas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,7 +218,7 @@ CREATE TABLE `cultivos` (
 
 LOCK TABLES `cultivos` WRITE;
 /*!40000 ALTER TABLE `cultivos` DISABLE KEYS */;
-INSERT INTO `cultivos` VALUES ('Mosca Blanca','mos','ataca tomates','0e688445-cad8-4ad5-b7d4-e12c306d860b.jpg','moscas'),('Picudo','Picudo RX','plaga que afecta a los cultivos','18ce9d7b-b06a-459a-a3fe-9c4852456653.jpg','plagas');
+INSERT INTO `cultivos` VALUES ('Aji','aji','Son plantas arbustivas','bad264c8-5b2b-431d-861b-1ce9b3d1087d.jpg','Familias Solanaceas');
 /*!40000 ALTER TABLE `cultivos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -306,7 +307,7 @@ CREATE TABLE `miscultivos` (
 
 LOCK TABLES `miscultivos` WRITE;
 /*!40000 ALTER TABLE `miscultivos` DISABLE KEYS */;
-INSERT INTO `miscultivos` VALUES (0,'Mosca Blanca','w3rw','r',7.885147283424331,-80.41326999664307,NULL),(1,'Mosca Blanca','asdasd','ads',7.819847426192587,-80.40515899658203,NULL);
+INSERT INTO `miscultivos` VALUES (1,'Aji','Son plantas arbustivas, anuales o perennes que pueden alcanzar 4 m de altura, aunque la mayoría no llega a los 2 m.','Requiere para su cultivo adecuado temperaturas de entre 7°C y 29°C con condiciones de precipitación de entre 300 mm',7.815917105379916,-80.3089237678796,NULL);
 /*!40000 ALTER TABLE `miscultivos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,7 +416,7 @@ CREATE TABLE `plagas` (
 
 LOCK TABLES `plagas` WRITE;
 /*!40000 ALTER TABLE `plagas` DISABLE KEYS */;
-INSERT INTO `plagas` VALUES ('Mancha purpura','oosos','dakjdkajs','dadd','32ad67bf-78a0-4aa7-a2fb-5b187dd855b8.JPG');
+INSERT INTO `plagas` VALUES ('El picudo, barrenillo','Anthonomus eugenii Cano','Plaga','Cultivos','b1021f6d-dae8-482e-b245-88a79e7d47aa.jpg');
 /*!40000 ALTER TABLE `plagas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -507,7 +508,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('avbravo@gmail.com','Aristides Villarreal Bravo','denver','','','Masculino','00358f89-04e6-484d-92ac-5225f681cfdb.png','programador','agricultor'),('test@gmail.com','test','test','','','Masculino','e3ec24de-1507-4fe1-80cc-4c0645662bb7.jpg','testing','agricultor');
+INSERT INTO `usuarios` VALUES ('avbravo@gmail.com','Aristides Villarreal','denver','','','Masculino',NULL,'programador','agricultor');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -520,4 +521,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-11 12:42:03
+-- Dump completed on 2015-04-13 11:43:00
