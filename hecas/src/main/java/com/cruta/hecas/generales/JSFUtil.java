@@ -448,6 +448,18 @@ public static Integer getEdad(Date fecha){
         return null;
 
     }
+     public static String getPathFotosAlertas() {
+        try {             
+        
+            String path = getPath() + "resources/fotos/";
+ return path;
+        } catch (Exception e) {
+
+            addErrorMessage("getPathFotosAlertas() " + e.getLocalizedMessage());
+        }
+        return null;
+
+    }
           public static String getPathFotosCultivos() {
         try {             
         

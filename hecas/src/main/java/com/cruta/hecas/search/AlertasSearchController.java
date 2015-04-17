@@ -139,7 +139,8 @@ iniciar();
 
     @Override
     public void iniciar() {
-        alertasList = alertasFacade.getAlertasList();
+        //alertasList = alertasFacade.getAlertasList();
+        alertasList = alertasFacade.getAlertasOrdenados();
     }
 
     @Override

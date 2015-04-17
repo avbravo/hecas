@@ -43,10 +43,8 @@
                                         ALERTAS
                                     </f:facet>
 
-                                    <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-                                        <p:gmap id="gmap" center="#{car.latitud},#{car.longitud}" zoom="10" type="HYBRID"  
-                                                style="width:340px;height:240px">
-                                        </p:gmap>
+                                    <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
+                                     <p:graphicImage value="/resources/fotos/#{car.foto}" height="150" width="150"/>   
 
 
 
@@ -85,7 +83,12 @@
                                             </h:panelGrid>
 
                                         </p:outputPanel>
-                                        <p:graphicImage name="demo/images/car/#{car.fruto}-big.gif" /> 
+                                        
+                                        
+                                        
+                                         <p:gmap id="gmap" center="#{car.latitud},#{car.longitud}" zoom="10" type="HYBRID"  
+                                                style="width:220px;height:220px">
+                                        </p:gmap>
                                     </h:panelGrid>
                                 </p:dataScroller>
 

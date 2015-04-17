@@ -21,26 +21,15 @@
 
                         <div class="jumbotron">
                             <h3><center>HEealthy Crops Assistence System!</center></h3>
-                            <center>  <p:graphicImage value="/resources/imagenes/cultivos.jpg" width="60%" height="60%"/></center>
-                         
+                            <center> <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="500" showCaption="true">
+    <p:graphicImage name="/galeria/#{image}" alt="" title=""/>
+</p:galleria>
+                         </center>
 <!--                            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
                             <a class="btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=4_m4GVBnv5o">Video</a>
                         </div>
-<!--                      <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
-    <p:graphicImage name="/resources/galeria/#{image}" alt="Image Description for #{image}" title="#{image}"/>
-</p:galleria>-->
 
-<!--                        <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
-                            <p:graphicImage name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
-                        </p:galleria>-->
 
-                        
-                        <!--                         <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID"  
-                                style="width:600px;height:400px"/>  -->
-                        
-                        <!--<p:media value="http://www.youtube.com/v/KZnUr8lcqjo" width="420" height="315" player="flash"/>-->
-                        
-                       
                         <ui:include src="dashboard.xhtml" />
 
 

@@ -21,6 +21,12 @@
                                 <h3 class="panel-title">CREAR ALERTAS</h3>
                             </div>
                             <div class="panel-body">
+                                 <div class="form-group">
+                                    <h:graphicImage id="foto" value="/resources/fotos/#{alertasController.alertas.foto}" height="80" width="80"/>
+                                    <p:fileUpload   auto="true" label="Foto" fileUploadListener="#{alertasController.handleFileUpload}" update="growl,foto"/>
+
+
+                                </div>
                                         <p:panelGrid columns="2">
 
                                             <p:outputLabel  value="Cultivo"/>

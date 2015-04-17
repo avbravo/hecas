@@ -29,14 +29,11 @@ public class ImagesView implements Serializable{
      
     @PostConstruct
     public void init() {
-        System.out.println("llego");
-        images = new ArrayList<String>();
-        for (int i = 1; i <= 6; i++) {
-       //     images.add("plagas" + i + ".jpg");
-             images.add("/resources/galeria/plagas" + i + ".jpg");
-       
-            System.out.println("plagas" +i+".jpg");
+         images = new ArrayList<String>();
+        for (int i = 1; i <= 3; i++) {
+           images.add("galeria" + i + ".jpg");    
         }
+
     }
  
     public List<String> getImages() {

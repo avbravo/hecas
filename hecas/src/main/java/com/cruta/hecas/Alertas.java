@@ -50,6 +50,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Alertas.findByFecha", query = "SELECT a FROM Alertas a WHERE a.fecha = :fecha"),
     @NamedQuery(name = "Alertas.findByPuntos", query = "SELECT a FROM Alertas a WHERE a.puntos = :puntos")})
 public class Alertas implements Serializable {
+    @Size(max = 200)
+    @Column(name = "foto")
+    private String foto;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -291,6 +294,14 @@ public class Alertas implements Serializable {
     @Override
     public String toString() {
         return "com.cruta.hecas.Alertas[ idalerta=" + idalerta + " ]";
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
     
 }

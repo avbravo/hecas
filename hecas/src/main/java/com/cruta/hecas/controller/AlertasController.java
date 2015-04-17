@@ -190,7 +190,7 @@ Plagas plagas =  new Plagas();
 
             encontrado = false;
             alertas = new Alertas();
-        
+        alertas.setFecha(JSFUtil.getFechaActual());
         
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
@@ -321,4 +321,39 @@ Plagas plagas =  new Plagas();
 //        EventBus eventBus = EventBusFactory.getDefault().eventBus();
 //        eventBus.publish(CHANNEL, new FacesMessage(StringEscapeUtils.escapeHtml(summary), StringEscapeUtils.escapeHtml(detail)));
 //    }
+    
+    public void handleFileUpload(FileUploadEvent event) {
+        try {
+
+            UploadedFile file = event.getFile();
+//application code
+            String destination = JSFUtil.getPathFotosAlertas();
+            if (destination == null) {
+                JSFUtil.addErrorMessage(rf.getMensajeArb("warning.noseobtuvopath"));
+            } else {
+                Boolean continuarGenerado = true;
+                /*
+                 verifica que no exista una imagen con ese nombre
+                 */
+                String nuevoNombreLogo = "";
+                while (continuarGenerado) {
+                    nuevoNombreLogo = JSFUtil.getUUID() + JSFUtil.getExtension(file.getFileName());
+                    alertas.setFoto(nuevoNombreLogo);
+                    List<Alertas> list = alertasFacade.findByFoto(nuevoNombreLogo);
+                    if (list == null || list.isEmpty()) {
+                        continuarGenerado = false;
+                    }
+
+                }
+
+                if (JSFUtil.copyFile(nuevoNombreLogo, file.getInputstream(), destination)) {
+
+                }
+            }
+
+        } catch (Exception e) {
+            JSFUtil.addErrorMessage("handleFileUpload()" + e.getLocalizedMessage());
+        }
+
+    }
 }

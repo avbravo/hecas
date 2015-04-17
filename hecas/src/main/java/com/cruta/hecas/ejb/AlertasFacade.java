@@ -7,6 +7,7 @@ package com.cruta.hecas.ejb;
 
 import com.cruta.hecas.Alertas;
 import com.cruta.hecas.Alertas;
+import com.cruta.hecas.Plagas;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -41,7 +42,7 @@ public class AlertasFacade extends AbstractFacade<Alertas> {
 
    
  public List<Alertas> getAlertasOrdenados() {
-        Query query = em.createQuery("SELECT a FROM Alertas ORDER BY a.fecha DESC");
+        Query query = em.createQuery("SELECT a FROM Alertas a ORDER BY a.idalerta DESC");
         return query.getResultList();
     }
  public List<Alertas> findByIdalerta(Integer idalerta) {
@@ -49,7 +50,10 @@ public class AlertasFacade extends AbstractFacade<Alertas> {
         return query.setParameter("idalerta", idalerta).getResultList();
     }
  
- 
+ public List<Alertas> findByFoto(String foto) {
+        Query query = em.createQuery("SELECT a FROM Alertas a WHERE a.foto = :foto");
+        return query.setParameter("foto", foto).getResultList();
+    }
    
     public void deleteAll() {
         Query query = em.createQuery("DELETE FROM Alertas");
