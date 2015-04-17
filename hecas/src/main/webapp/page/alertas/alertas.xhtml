@@ -28,9 +28,9 @@
 
             <ui:define name="content">
                 <f:view>
-                  
+
                     <h:form id="form" prependId="false">
-                          <p:messages id="growl" autoUpdate="true"/>
+                        <p:messages id="growl" autoUpdate="true"/>
 
 
                         <div class="panel panel-primary">
@@ -38,91 +38,84 @@
                                 <h3 class="panel-title">ALERTAS</h3>
                             </div>
                             <div class="panel-body">
-              
-                                <p:dataTable  id="datatableAlertas"
-                                              value="#{alertasSearchController.alertasList}"
-                                      var="item"
-                                      rows="7"
-                                      paginator="true"
+                                <p:dataScroller value="#{alertasSearchController.alertasList}" var="car" chunkSize="10">
+                                    <f:facet name="header">
+                                        ALERTAS
+                                    </f:facet>
 
-                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                      rowsPerPageTemplate="5,10,15"
-                                      >
-                                    <p:column  filterBy="#{item.nombrecultivo}" sortBy="#{item.nombrecultivo}">
-                                <f:facet name="header">
-                                    <p:outputLabel value="Cultivo"/>
-                                </f:facet>
-                               
-                                     <p:fragment autoUpdate="true"> 
-                                         <p:commandLink  update=":form:panelAlertas" 
-                                                      oncomplete= "PF('dialogoCultivo').show()"
-                                                  value="#{item.nombrecultivo}"                                                 
-                                               title="Haga clic aqui"
-                                                      >
-                                        <f:setPropertyActionListener value="#{item}" target="#{alertasSearchController.selected}" />  
-                                         </p:commandLink>>  
-                                </p:fragment>
-                            </p:column>
-               
-                       
-                            <p:column filterBy="#{item.nombreplaga}" sortBy="#{item.nombreplaga}">
-                                 <f:facet name="header">
-                                    <p:outputLabel value="Plaga"/>
-                                </f:facet>
-                                <p:outputLabel value="#{item.nombreplaga}" />
-                                
-
-                            </p:column>
-<p:column>
-                                 <f:facet name="header">
-                                    <p:outputLabel value="Descripcion"/>
-                                </f:facet>
-    <p:outputLabel value="#{item.descripcion}" />
-                                
-
-                            </p:column>
+                                    <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                                        <p:gmap id="gmap" center="#{car.latitud},#{car.longitud}" zoom="10" type="HYBRID"  
+                                                style="width:340px;height:240px">
+                                        </p:gmap>
 
 
-                            
-                         
-                          
-                        </p:dataTable>
+
+                                        <p:outputPanel>
+                                            <h:panelGrid columns="2" cellpadding="5">
+
+                                                <p:outputLabel value="Cultivo"/>
+                                                <p:fragment autoUpdate="true"> 
+                                                    <p:commandLink  update=":form:panelAlertas" 
+                                                                    oncomplete= "PF('dialogoCultivo').show()"
+                                                                    value="#{car.nombrecultivo}"                                                 
+                                                                    title="Haga clic aqui"
+                                                                    >
+                                                        <f:setPropertyActionListener value="#{car}" target="#{alertasSearchController.selected}" />  
+                                                    </p:commandLink>
+                                                </p:fragment>
+
+                                                <p:outputLabel value="Plaga"/>
+                                                <p:outputLabel value="#{car.nombreplaga}"/>
+                                                <p:outputLabel value="Fecha"/>                                         
+                                                <h:outputText value="#{car.fecha}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                </h:outputText>
+                                                <p:outputLabel value="Grado afectación"/>                                         
+                                               <p:outputLabel value="#{car.gradoafectacion}"/>
+                                                <p:outputLabel value="Descripcion"/>
+                                                <p:outputLabel value="#{car.descripcion}"/>
+                                                <p:outputLabel value="Ubicacion"/>
+                                                <h:panelGroup>
+
+                                                    <p:outputLabel value="#{car.latitud}"/>
+                                                    <p:outputLabel value=","/>
+                                                    <p:outputLabel value="#{car.longitud}"/>
+
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+
+                                        </p:outputPanel>
+                                        <p:graphicImage name="demo/images/car/#{car.fruto}-big.gif" /> 
+                                    </h:panelGrid>
+                                </p:dataScroller>
 
 
-                                   
+
+
                             </div>
                             <div class="panel-footer">Haga clic en el nombre del cultivo para ver detalles</div>
                         </div>
 
-<p:dialog id="confirmDialog" modal="false" header="DETALLE DE LA ALERTA"
-                  height="250"  width="450" 
-                  
-                  widgetVar="dialogoCultivo">
-            <h:panelGrid columns="2" id="panelAlertas">
-               
-                <p:outputLabel value="Cultivo"/>
-                <p:outputLabel value="#{alertasSearchController.selected.nombrecultivo}"/>
-                <p:outputLabel value="Plaga"/>
-                <p:outputLabel value="#{alertasSearchController.selected.nombreplaga}"/>
-                 <p:outputLabel value="Descripcion"/>
-                 <p:outputLabel value="#{alertasSearchController.selected.descripcion}"/>
-                 <p:outputLabel value="Latitud"/>
-                 <p:outputLabel value="#{alertasSearchController.selected.latitud}"/>
-                 <p:outputLabel value="Longitud"/>
-                 <p:outputLabel value="#{alertasSearchController.selected.longitud}"/>
-                 <p:outputLabel value="Comentarios"/>
-                 <p:inputTextarea/>
-                 <p:rating stars="5"/>
-                 
-            </h:panelGrid>
-            <f:facet name="footer">
-          
+                        <p:dialog id="confirmDialog" modal="false" header="COMENTARIOS"
+                                  height="150"  width="450" 
 
-                <p:commandButton id="cancelButton" value="#{app['boton.no']}"
-                                 icon="ui-icon-close"
-                                 onclick="PF('dialogoCultivo').hide();" type="button" />
-            </f:facet>
-        </p:dialog>
+                                  widgetVar="dialogoCultivo">
+                            <h:panelGrid columns="2" id="panelAlertas">
+                                 
+                                <p:outputLabel value="Comentarios"/>
+                                <p:inputTextarea/>
+                                <p:outputLabel value="Puntuacion"/>
+                                <p:rating stars="5"/>
+
+                            </h:panelGrid>
+                            <f:facet name="footer">
+
+
+                                <p:commandButton id="cancelButton" value="#{app['boton.no']}"
+                                                 icon="ui-icon-close"
+                                                 onclick="PF('dialogoCultivo').hide();" type="button" />
+                            </f:facet>
+                        </p:dialog>
 
                     </h:form>
 

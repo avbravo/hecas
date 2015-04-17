@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            <!--            <ui:define name="top">
+                            top
+                        </ui:define>-->
+
+            <!--            <ui:define name="bottom">
+                            bottom
+                        </ui:define>
+            
+                        <ui:define name="left">
+                            left
+                        </ui:define>
+            
+                        <ui:define name="right">
+                            right
+                        </ui:define>-->
+
+            <ui:define name="content">
+                <f:view>
+
+                    <h:form id="form" prependId="false">
+                        <p:messages id="growl" autoUpdate="true"/>
+
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">ALERTAS</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p:dataScroller value="#{alertasSearchController.alertasList}" var="car" chunkSize="10">
+                                    <f:facet name="header">
+                                        ALERTAS
+                                    </f:facet>
+
+                                    <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                                        <p:gmap id="gmap" center="#{car.latitud},#{car.longitud}" zoom="10" type="HYBRID"  model="#{alertasSearchController.getSimpleModel2()}" 
+                                                style="width:340px;height:340px">
+                                        </p:gmap>
+
+
+
+                                        <p:outputPanel>
+                                            <h:panelGrid columns="2" cellpadding="5">
+
+                                                <p:outputLabel value="Cultivo"/>
+                                                <p:fragment autoUpdate="true"> 
+                                                    <p:commandLink  update=":form:panelAlertas" 
+                                                                    oncomplete= "PF('dialogoCultivo').show()"
+                                                                    value="#{car.nombrecultivo}"                                                 
+                                                                    title="Haga clic aqui"
+                                                                    >
+                                                        <f:setPropertyActionListener value="#{item}" target="#{alertasSearchController.selected}" />  
+                                                    </p:commandLink>
+                                                </p:fragment>
+                                                <p:outputLabel value="Cultivo"/>
+                                                <p:outputLabel value="#{car.nombrecultivo}"/>
+                                                <p:outputLabel value="Plaga"/>
+                                                <p:outputLabel value="#{car.nombreplaga}"/>
+                                                <p:outputLabel value="Descripcion"/>
+                                                <p:outputLabel value="#{car.descripcion}"/>
+                                                <p:outputLabel value="Latitud"/>
+                                                <p:outputLabel value="#{car.latitud}"/>
+                                                <p:outputLabel value="Longitud"/>
+                                                <p:outputLabel value="#{car.longitud}"/>
+                                            </h:panelGrid>
+                                        </p:outputPanel>
+                                    </h:panelGrid>
+                                </p:dataScroller>
+                                <ui:repeat value="#{cultivosSearchController.cultivosList}" var="o">
+                                    <p:accordionPanel dynamic="false" cache="true" multiple="false" widgetVar="accordion">
+                                        <p:tab title="#{o.nombrecultivo}" closable="true">
+                                            <ui:repeat value="#{alertasSearchController.alertasList}" var="valertas"> 
+                                                <p:accordionPanel dynamic="true" cache="true" multiple="false" widgetVar="accordion">
+                                                    <p:tab title="#{valertas.nombreplaga}" closable="true">
+
+
+                                                        <h:panelGrid columns="2" id="panelAlertas">
+
+
+<!--                                                            <p:outputLabel value="Descripcion"/>
+                                                            <p:outputLabel value="#{valertas.descripcion}"/>
+                                                            <p:outputLabel value="Latitud"/>
+                                                            <p:outputLabel value="#{valertas.latitud}"/>
+                                                            <p:outputLabel value="Longitud"/>
+                                                            <p:outputLabel value="#{valertas.longitud}"/>
+                                                            <p:outputLabel value="Mapa"/>
+                                                            <p:gmap id="gmap" center="#{valertas.latitud},#{valertas.longitud}" zoom="10" type="HYBRID"  model="#{alertasSearchController.getSimpleModel2()}" 
+                                                                    style="width:440px;height:440px">
+                                                            </p:gmap>-->
+
+
+
+
+                                                            <p:outputLabel value="Comentarios"/>
+                                                            <p:inputTextarea/>
+                                                            <p:rating stars="5"/>
+
+                                                        </h:panelGrid>
+                                                    </p:tab>
+                                                </p:accordionPanel>
+                                            </ui:repeat>
+                                            <!--                                            <p:dataTable  id="datatableAlertas"
+                                                                                                      value="#{alertasSearchController.alertasList}"
+                                                                                                      var="item"
+                                                                                                      rows="7"
+                                                                                                      paginator="true"
+                                            
+                                                                                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                                                      rowsPerPageTemplate="5,10,15"
+                                                                                                      >
+                                                                                            <p:column  filterBy="#{item.nombrecultivo}" sortBy="#{item.nombrecultivo}">
+                                                                                                <f:facet name="header">
+                                                                                                    <p:outputLabel value="Cultivo"/>
+                                                                                                </f:facet>
+                                            
+                                                                                                <p:fragment autoUpdate="true"> 
+                                                                                                    <p:commandLink  update=":form:panelAlertas" 
+                                                                                                                    oncomplete= "PF('dialogoCultivo').show()"
+                                                                                                                    value="#{item.nombrecultivo}"                                                 
+                                                                                                                    title="Haga clic aqui"
+                                                                                                                    >
+                                                                                                        <f:setPropertyActionListener value="#{item}" target="#{alertasSearchController.selected}" />  
+                                                                                                    </p:commandLink>>  
+                                                                                                </p:fragment>
+                                                                                            </p:column>
+                                            
+                                            
+                                                                                            <p:column filterBy="#{item.nombreplaga}" sortBy="#{item.nombreplaga}">
+                                                                                                <f:facet name="header">
+                                                                                                    <p:outputLabel value="Plaga"/>
+                                                                                                </f:facet>
+                                                                                                <p:outputLabel value="#{item.nombreplaga}" />
+                                            
+                                            
+                                                                                            </p:column>
+                                                                                            <p:column>
+                                                                                                <f:facet name="header">
+                                                                                                    <p:outputLabel value="Descripcion"/>
+                                                                                                </f:facet>
+                                                                                                <p:outputLabel value="#{item.descripcion}" />
+                                            
+                                            
+                                                                                            </p:column>
+                                            
+                                            
+                                            
+                                            
+                                            
+                                                                                        </p:dataTable>-->
+
+                                        </p:tab>
+
+                                    </p:accordionPanel>
+                                </ui:repeat>
+
+
+
+                            </div>
+                            <div class="panel-footer">Haga clic en el nombre del cultivo para ver detalles</div>
+                        </div>
+
+                        <p:dialog id="confirmDialog" modal="false" header="DETALLE DE LA ALERTA"
+                                  height="250"  width="450" 
+
+                                  widgetVar="dialogoCultivo">
+                            <h:panelGrid columns="2" id="panelAlertas">
+
+                                <p:outputLabel value="Cultivo"/>
+                                <p:outputLabel value="#{alertasSearchController.selected.nombrecultivo}"/>
+                                <p:outputLabel value="Plaga"/>
+                                <p:outputLabel value="#{alertasSearchController.selected.nombreplaga}"/>
+                                <p:outputLabel value="Descripcion"/>
+                                <p:outputLabel value="#{alertasSearchController.selected.descripcion}"/>
+                                <p:outputLabel value="Latitud"/>
+                                <p:outputLabel value="#{alertasSearchController.selected.latitud}"/>
+                                <p:outputLabel value="Longitud"/>
+                                <p:outputLabel value="#{alertasSearchController.selected.longitud}"/>
+                                <p:outputLabel value="Comentarios"/>
+                                <p:inputTextarea/>
+                                <p:rating stars="5"/>
+
+                            </h:panelGrid>
+                            <f:facet name="footer">
+
+
+                                <p:commandButton id="cancelButton" value="#{app['boton.no']}"
+                                                 icon="ui-icon-close"
+                                                 onclick="PF('dialogoCultivo').hide();" type="button" />
+                            </f:facet>
+                        </p:dialog>
+
+                    </h:form>
+
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

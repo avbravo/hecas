@@ -16,10 +16,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.map.MarkerDragEvent;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 /**
  *
@@ -44,6 +51,8 @@ public class AlertasSearchController implements Serializable, ISearchController 
     @Inject
     GestorImpresion gestorImpresion;
  private String page_call = "";
+ 
+    private MapModel simpleModel;
 
     public String getPage_call() {
         return page_call;
@@ -101,6 +110,7 @@ public class AlertasSearchController implements Serializable, ISearchController 
 
     @PostConstruct
     public void init() {
+    simpleModel = new DefaultMapModel();
 iniciar();
     }
 
@@ -276,5 +286,30 @@ alertasController.setDesactivar(false);
     public void onCellEdit(CellEditEvent event) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public MapModel getSimpleModel() {
+        //Shared coordinates
+        LatLng coord1 = new LatLng(8.44218663317722, -80.25163656100631);
+//                LatLng coord1 = new LatLng(alertas.getLatitud(),Integer.parseInt( alertas.getLongitud()));
+
+          
+        //Basic marker
+        simpleModel.addOverlay(new Marker(coord1, "Panama"));
+
+        return simpleModel;
+    }
+    public MapModel getSimpleModel2() {
+        //Shared coordinates
+ LatLng coord1 = new LatLng(8.44218663317722, -80.25163656100631);
+//              LatLng coord1 = new LatLng(alertas.getLatitud(),Integer.parseInt( alertas.getLongitud()));
+
+          
+        //Basic marker
+        simpleModel.addOverlay(new Marker(coord1, "Panama"));
+
+        return simpleModel;
+    }
+   
+    
 }
 

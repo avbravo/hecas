@@ -40,6 +40,10 @@ public class AlertasFacade extends AbstractFacade<Alertas> {
     }
 
    
+ public List<Alertas> getAlertasOrdenados() {
+        Query query = em.createQuery("SELECT a FROM Alertas ORDER BY a.fecha DESC");
+        return query.getResultList();
+    }
  public List<Alertas> findByIdalerta(Integer idalerta) {
         Query query = em.createNamedQuery("Alertas.findByIdalerta");
         return query.setParameter("idalerta", idalerta).getResultList();
