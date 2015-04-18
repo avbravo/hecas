@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.41, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.41, for debian-linux-gnu (i686)
 --
 -- Host: localhost    Database: hecas
 -- ------------------------------------------------------
--- Server version	5.5.41-0ubuntu0.14.04.1
+-- Server version	5.5.41-0ubuntu0.12.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -67,6 +67,7 @@ CREATE TABLE `alertas` (
   `raices` varchar(2) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `puntos` int(11) DEFAULT NULL,
+  `foto` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idalerta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -77,7 +78,7 @@ CREATE TABLE `alertas` (
 
 LOCK TABLES `alertas` WRITE;
 /*!40000 ALTER TABLE `alertas` DISABLE KEYS */;
-INSERT INTO `alertas` VALUES (1,'Aji','El picudo, barrenillo','la plaga ingreso en la noche','Alto',8.44218663317722,'-80.25163656100631',60,'Brote',NULL,'si','si','no','no','2015-04-16',0),(2,'Aji','El picudo, barrenillo','situacion critica','Alto',8.493401843406648,'-78.1397056581045',6,'Brote',NULL,'si','no','no','no','2015-04-07',0),(3,'Aji','El picudo, barrenillo','situacion critica','Alto',8.493401843406648,'-78.1397056581045',6,'Brote',NULL,'si','no','no','no','2015-04-07',0),(4,'Aji','El picudo, barrenillo','situacion critica','Alto',8.493401843406648,'-78.1397056581045',6,'Brote',NULL,'si','no','no','no','2015-04-07',0),(5,'Aji','El picudo, barrenillo','AS','Alto',8.495184516095525,'-78.13473835631157',2,'Brote',NULL,'no','no','no','no','2015-04-02',0),(6,'Aji','El picudo, barrenillo','AAA','Alto',7.985495533767262,'-80.71855550631881',5,'Brote',NULL,'no','no','no','no','2015-04-10',0);
+INSERT INTO `alertas` VALUES (1,'Maiz','El picudo, barrenillo','A picudo plage has been detected in corn crops in Los Santos, Panama','Medio',7.860405967540502,'-80.37463903601747',25,'Brote',NULL,'si','no','no','no','2015-04-18',0,'c0d84adc-05f7-4748-a7eb-ce4728ec36f0.JPG'),(2,'Maiz','El picudo, barrenillo','sddsf','Alto',7.534386471581775,'-80.45600663870573',6,'Brote',NULL,'no','no','no','no','2015-04-17',0,'8e11be3a-f9b0-4a05-8890-44af1bccc7a6.JPG'),(3,'Maiz','El picudo, barrenillo','ee','Alto',8.492609706210137,'-78.1349924117967',NULL,'Brote',NULL,'no','no','no','no','2015-04-17',0,'425c970e-14c8-4d5d-a2f9-54b9ab050751.JPG');
 /*!40000 ALTER TABLE `alertas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,7 +219,7 @@ CREATE TABLE `cultivos` (
 
 LOCK TABLES `cultivos` WRITE;
 /*!40000 ALTER TABLE `cultivos` DISABLE KEYS */;
-INSERT INTO `cultivos` VALUES ('Aji','aji','Son plantas arbustivas','bad264c8-5b2b-431d-861b-1ce9b3d1087d.jpg','Familias Solanaceas');
+INSERT INTO `cultivos` VALUES ('Aji','aji','Son plantas arbustivas','bad264c8-5b2b-431d-861b-1ce9b3d1087d.jpg','Familias Solanaceas'),('Maiz','Maiz','Cultivos de maiz','07bd1022-0421-4f9a-9264-bee822234550.jpg','maiz');
 /*!40000 ALTER TABLE `cultivos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -521,4 +522,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-13 11:43:00
+-- Dump completed on 2015-04-17 19:30:36
