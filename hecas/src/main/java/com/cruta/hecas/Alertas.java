@@ -48,11 +48,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Alertas.findByFruto", query = "SELECT a FROM Alertas a WHERE a.fruto = :fruto"),
     @NamedQuery(name = "Alertas.findByRaices", query = "SELECT a FROM Alertas a WHERE a.raices = :raices"),
     @NamedQuery(name = "Alertas.findByFecha", query = "SELECT a FROM Alertas a WHERE a.fecha = :fecha"),
-    @NamedQuery(name = "Alertas.findByPuntos", query = "SELECT a FROM Alertas a WHERE a.puntos = :puntos")})
+    @NamedQuery(name = "Alertas.findByPuntos", query = "SELECT a FROM Alertas a WHERE a.puntos = :puntos"),
+    @NamedQuery(name = "Alertas.findByFoto", query = "SELECT a FROM Alertas a WHERE a.foto = :foto")})
 public class Alertas implements Serializable {
-    @Size(max = 200)
-    @Column(name = "foto")
-    private String foto;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -79,9 +77,8 @@ public class Alertas implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "latitud")
     private Double latitud;
-    @Size(max = 45)
     @Column(name = "longitud")
-    private String longitud;
+    private Double longitud;
     @Column(name = "porcentajeafectacion")
     private Double porcentajeafectacion;
     @Size(max = 45)
@@ -107,6 +104,9 @@ public class Alertas implements Serializable {
     private Date fecha;
     @Column(name = "puntos")
     private Integer puntos;
+    @Size(max = 200)
+    @Column(name = "foto")
+    private String foto;
     @OneToMany(mappedBy = "idalerta")
     private Collection<Alertasfotos> alertasfotosCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idalerta")
@@ -173,11 +173,11 @@ public class Alertas implements Serializable {
         this.latitud = latitud;
     }
 
-    public String getLongitud() {
+    public Double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(String longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 
@@ -253,6 +253,14 @@ public class Alertas implements Serializable {
         this.puntos = puntos;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     @XmlTransient
     public Collection<Alertasfotos> getAlertasfotosCollection() {
         return alertasfotosCollection;
@@ -294,14 +302,6 @@ public class Alertas implements Serializable {
     @Override
     public String toString() {
         return "com.cruta.hecas.Alertas[ idalerta=" + idalerta + " ]";
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
     
 }

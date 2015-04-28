@@ -8,6 +8,7 @@ package com.cruta.hecas;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -61,8 +62,34 @@ public class Plagas implements Serializable {
     @Size(max = 200)
     @Column(name = "foto")
     private String foto;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "aparicion")
+    private String aparicion;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "dano")
+    private String dano;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "controlbiologico")
+    private String controlbiologico;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "controlquimico")
+    private String controlquimico;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "controlcultural")
+    private String controlcultural;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreplaga")
+    private Collection<Reglas> reglasCollection;
     @OneToMany(mappedBy = "nombreplaga")
     private Collection<Plagasporcultivos> plagasporcultivosCollection;
+    @OneToMany(mappedBy = "nombreplaga")
+    private Collection<Condiciones> condicionesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreplaga")
+    private Collection<Plagascultivos> plagascultivosCollection;
 
     public Plagas() {
     }
@@ -118,6 +145,55 @@ public class Plagas implements Serializable {
         this.foto = foto;
     }
 
+    public String getAparicion() {
+        return aparicion;
+    }
+
+    public void setAparicion(String aparicion) {
+        this.aparicion = aparicion;
+    }
+
+    public String getDano() {
+        return dano;
+    }
+
+    public void setDano(String dano) {
+        this.dano = dano;
+    }
+
+    public String getControlbiologico() {
+        return controlbiologico;
+    }
+
+    public void setControlbiologico(String controlbiologico) {
+        this.controlbiologico = controlbiologico;
+    }
+
+    public String getControlquimico() {
+        return controlquimico;
+    }
+
+    public void setControlquimico(String controlquimico) {
+        this.controlquimico = controlquimico;
+    }
+
+    public String getControlcultural() {
+        return controlcultural;
+    }
+
+    public void setControlcultural(String controlcultural) {
+        this.controlcultural = controlcultural;
+    }
+
+    @XmlTransient
+    public Collection<Reglas> getReglasCollection() {
+        return reglasCollection;
+    }
+
+    public void setReglasCollection(Collection<Reglas> reglasCollection) {
+        this.reglasCollection = reglasCollection;
+    }
+
     @XmlTransient
     public Collection<Plagasporcultivos> getPlagasporcultivosCollection() {
         return plagasporcultivosCollection;
@@ -125,6 +201,24 @@ public class Plagas implements Serializable {
 
     public void setPlagasporcultivosCollection(Collection<Plagasporcultivos> plagasporcultivosCollection) {
         this.plagasporcultivosCollection = plagasporcultivosCollection;
+    }
+
+    @XmlTransient
+    public Collection<Condiciones> getCondicionesCollection() {
+        return condicionesCollection;
+    }
+
+    public void setCondicionesCollection(Collection<Condiciones> condicionesCollection) {
+        this.condicionesCollection = condicionesCollection;
+    }
+
+    @XmlTransient
+    public Collection<Plagascultivos> getPlagascultivosCollection() {
+        return plagascultivosCollection;
+    }
+
+    public void setPlagascultivosCollection(Collection<Plagascultivos> plagascultivosCollection) {
+        this.plagascultivosCollection = plagascultivosCollection;
     }
 
     @Override

@@ -302,7 +302,7 @@ Plagas plagas =  new Plagas();
         LatLng latlng = event.getLatLng();
         alertas.setLatitud(latlng.getLat());
         
-                  alertas.setLongitud(String.valueOf(latlng.getLng()));
+                  alertas.setLongitud(latlng.getLng());
           System.out.println("codigo");
       }catch(Exception ex){
         JSFUtil.addErrorMessage("Error "+ex.getLocalizedMessage());

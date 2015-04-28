@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.41, for debian-linux-gnu (i686)
+-- MySQL dump 10.13  Distrib 5.5.43, for debian-linux-gnu (i686)
 --
 -- Host: localhost    Database: hecas
 -- ------------------------------------------------------
--- Server version	5.5.41-0ubuntu0.12.04.1
+-- Server version	5.5.43-0ubuntu0.12.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -57,7 +57,7 @@ CREATE TABLE `alertas` (
   `descripcion` text,
   `gradoafectacion` varchar(45) DEFAULT NULL,
   `latitud` double DEFAULT NULL,
-  `longitud` varchar(45) DEFAULT NULL,
+  `longitud` double DEFAULT NULL,
   `porcentajeafectacion` double DEFAULT NULL,
   `etapadelcultivo` varchar(45) DEFAULT NULL,
   `flor` varchar(2) DEFAULT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE `alertas` (
 
 LOCK TABLES `alertas` WRITE;
 /*!40000 ALTER TABLE `alertas` DISABLE KEYS */;
-INSERT INTO `alertas` VALUES (1,'Maiz','El picudo, barrenillo','A picudo plage has been detected in corn crops in Los Santos, Panama','Medio',7.860405967540502,'-80.37463903601747',25,'Brote',NULL,'si','no','no','no','2015-04-18',0,'c0d84adc-05f7-4748-a7eb-ce4728ec36f0.JPG'),(2,'Maiz','El picudo, barrenillo','sddsf','Alto',7.534386471581775,'-80.45600663870573',6,'Brote',NULL,'no','no','no','no','2015-04-17',0,'8e11be3a-f9b0-4a05-8890-44af1bccc7a6.JPG'),(3,'Maiz','El picudo, barrenillo','ee','Alto',8.492609706210137,'-78.1349924117967',NULL,'Brote',NULL,'no','no','no','no','2015-04-17',0,'425c970e-14c8-4d5d-a2f9-54b9ab050751.JPG');
+INSERT INTO `alertas` VALUES (1,'Maiz','El picudo, barrenillo','A picudo plage has been detected in corn crops in Los Santos, Panama','Medio',7.860405967540502,-80.37463903601747,25,'Brote',NULL,'si','no','no','no','2015-04-18',0,'c0d84adc-05f7-4748-a7eb-ce4728ec36f0.JPG'),(2,'Maiz','El picudo, barrenillo','sddsf','Alto',7.534386471581775,-80.45600663870573,6,'Brote',NULL,'no','no','no','no','2015-04-17',0,'8e11be3a-f9b0-4a05-8890-44af1bccc7a6.JPG'),(3,'Maiz','El picudo, barrenillo','ee','Alto',8.492609706210137,-78.1349924117967,NULL,'Brote',NULL,'no','no','no','no','2015-04-17',0,'425c970e-14c8-4d5d-a2f9-54b9ab050751.JPG'),(4,'Aji','El picudo, barrenillo','detalles','Alto',7.874566786263493,-80.9517677128315,5,'Brote',NULL,'si','no','no','no','2015-04-21',0,'173fb109-703f-4cd1-af58-abf65c904c79.JPG'),(5,'Aji','El picudo, barrenillo','este es un texto de mas de una linea de código que sera usado para probar la aplicación web de manera que podamos evaluar los detalles de la aplicación , mas de una vez para verificar el tamaño de la zanahoria que mas colocamos aquí.','Alto',8.489850664167701,-78.13353300327435,4,'Brote',NULL,'si','no','no','no','2015-04-08',0,'81d7f6db-80a7-4990-9d47-5b0a97094c6f.png'),(6,'Aji','El picudo, barrenillo','plaga',NULL,NULL,NULL,NULL,'Crecimiento',NULL,'si','si','no','no','2015-04-03',0,NULL),(7,'Aji','El picudo, barrenillo','probando push','Bajo',NULL,0,15,'Crecimiento','','no','no','no','no','2015-04-17',0,NULL),(8,'Maiz','plaga8','wda',NULL,7.888905114459831,-80.42369842529297,NULL,'Brote','','no','no','no','no','2015-04-04',0,NULL),(9,'Aji','plaga8','hola','Bajo',7.886809405009119,-80.43017864227295,20,'Fruto','','no','si','no','no','2015-04-24',0,NULL),(10,'Aji','plaga8','gg','Bajo',7.996133477588135,-81.49658203125,15,'Floracion','','no','si','si','no','2015-04-30',0,NULL),(11,'Maiz','plaga8','no se','Medio',7.892660096277669,-80.42592903242621,23,'Brote','','no','no','no','no','2015-04-04',0,NULL),(12,'Maiz','plaga8','fg','Bajo',7.8899820325805825,-80.42481323347602,4,'Brote','','no','no','no','si','2015-04-15',0,NULL),(13,'Aji','plaga8','fd','Bajo',7.890322105122848,-80.43064972029242,20,'Brote','','si','no','no','si','2015-04-23',0,NULL),(14,'Maiz','plaga8','dc',NULL,7.895210616998864,-80.43352504835639,NULL,'Floracion','','si','no','si','no','2015-04-17',0,NULL);
 /*!40000 ALTER TABLE `alertas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,6 +136,62 @@ CREATE TABLE `alertasfotos` (
 LOCK TABLES `alertasfotos` WRITE;
 /*!40000 ALTER TABLE `alertasfotos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `alertasfotos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `arduino`
+--
+
+DROP TABLE IF EXISTS `arduino`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `arduino` (
+  `idarduino` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha` date DEFAULT NULL,
+  `temperatura` double DEFAULT NULL,
+  `humedadrelativa` double DEFAULT NULL,
+  `humedadsuelo` double DEFAULT NULL,
+  `latitud` double DEFAULT NULL,
+  `longitud` double DEFAULT NULL,
+  PRIMARY KEY (`idarduino`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `arduino`
+--
+
+LOCK TABLES `arduino` WRITE;
+/*!40000 ALTER TABLE `arduino` DISABLE KEYS */;
+/*!40000 ALTER TABLE `arduino` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `condiciones`
+--
+
+DROP TABLE IF EXISTS `condiciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `condiciones` (
+  `idcondiciones` int(11) NOT NULL AUTO_INCREMENT,
+  `nombreplaga` varchar(80) DEFAULT NULL,
+  `idfactor` int(11) DEFAULT NULL,
+  `condicion` varchar(80) DEFAULT NULL,
+  `valor` double DEFAULT NULL,
+  PRIMARY KEY (`idcondiciones`),
+  KEY `fk_condiciones_1_idx` (`nombreplaga`),
+  CONSTRAINT `fk_condiciones_1` FOREIGN KEY (`nombreplaga`) REFERENCES `plagas` (`nombreplaga`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `condiciones`
+--
+
+LOCK TABLES `condiciones` WRITE;
+/*!40000 ALTER TABLE `condiciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `condiciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -209,6 +265,10 @@ CREATE TABLE `cultivos` (
   `descripcion` varchar(45) NOT NULL,
   `foto` varchar(200) DEFAULT NULL,
   `familia` varchar(100) DEFAULT NULL,
+  `latitud` double DEFAULT NULL,
+  `longitud` double DEFAULT NULL,
+  `areasdecultivo` text,
+  `datossiembra` text,
   PRIMARY KEY (`nombrecultivo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -219,8 +279,32 @@ CREATE TABLE `cultivos` (
 
 LOCK TABLES `cultivos` WRITE;
 /*!40000 ALTER TABLE `cultivos` DISABLE KEYS */;
-INSERT INTO `cultivos` VALUES ('Aji','aji','Son plantas arbustivas','bad264c8-5b2b-431d-861b-1ce9b3d1087d.jpg','Familias Solanaceas'),('Maiz','Maiz','Cultivos de maiz','07bd1022-0421-4f9a-9264-bee822234550.jpg','maiz');
+INSERT INTO `cultivos` VALUES ('Aji','aji','Son plantas arbustivas','bad264c8-5b2b-431d-861b-1ce9b3d1087d.jpg','Familias Solanaceas',NULL,NULL,NULL,NULL),('Maiz','Maiz','Cultivos de maiz','07bd1022-0421-4f9a-9264-bee822234550.jpg','maiz',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `cultivos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `factores`
+--
+
+DROP TABLE IF EXISTS `factores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `factores` (
+  `idfactores` int(11) NOT NULL AUTO_INCREMENT,
+  `factor` varchar(80) DEFAULT NULL,
+  `descripcion` text,
+  PRIMARY KEY (`idfactores`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `factores`
+--
+
+LOCK TABLES `factores` WRITE;
+/*!40000 ALTER TABLE `factores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `factores` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -407,6 +491,11 @@ CREATE TABLE `plagas` (
   `descripcion` text NOT NULL,
   `aquienafecta` text NOT NULL,
   `foto` varchar(200) CHARACTER SET big5 DEFAULT NULL,
+  `aparicion` text,
+  `dano` text,
+  `controlbiologico` text,
+  `controlquimico` text,
+  `controlcultural` text,
   PRIMARY KEY (`nombreplaga`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -417,8 +506,36 @@ CREATE TABLE `plagas` (
 
 LOCK TABLES `plagas` WRITE;
 /*!40000 ALTER TABLE `plagas` DISABLE KEYS */;
-INSERT INTO `plagas` VALUES ('El picudo, barrenillo','Anthonomus eugenii Cano','Plaga','Cultivos','b1021f6d-dae8-482e-b245-88a79e7d47aa.jpg');
+INSERT INTO `plagas` VALUES ('El picudo, barrenillo','Anthonomus eugenii Cano','Plaga','Cultivos','b1021f6d-dae8-482e-b245-88a79e7d47aa.jpg',NULL,NULL,NULL,NULL,NULL),('plaga8','plaga8','plaga','todos los cultivos','0bdcc3d8-dae0-442b-b187-c6d167ab2f64.png',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `plagas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `plagascultivos`
+--
+
+DROP TABLE IF EXISTS `plagascultivos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `plagascultivos` (
+  `idplagascultivos` int(11) NOT NULL AUTO_INCREMENT,
+  `nombreplaga` varchar(80) NOT NULL,
+  `nombrecultivo` varchar(80) NOT NULL,
+  PRIMARY KEY (`idplagascultivos`),
+  KEY `fk_plagascultivos_1_idx` (`nombreplaga`),
+  KEY `fk_plagascultivos_2_idx` (`nombrecultivo`),
+  CONSTRAINT `fk_plagascultivos_1` FOREIGN KEY (`nombreplaga`) REFERENCES `plagas` (`nombreplaga`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_plagascultivos_2` FOREIGN KEY (`nombrecultivo`) REFERENCES `cultivos` (`nombrecultivo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `plagascultivos`
+--
+
+LOCK TABLES `plagascultivos` WRITE;
+/*!40000 ALTER TABLE `plagascultivos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `plagascultivos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -481,6 +598,41 @@ INSERT INTO `provincias` VALUES (1,'Bocas del toro','si',0,0,507),(2,'Cocle','si
 UNLOCK TABLES;
 
 --
+-- Table structure for table `reglas`
+--
+
+DROP TABLE IF EXISTS `reglas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reglas` (
+  `idreglas` int(11) NOT NULL,
+  `nombreplaga` varchar(80) NOT NULL,
+  `temperaturainicial` double DEFAULT NULL,
+  `temperaturafinal` double DEFAULT NULL,
+  `aplicatemperatura` varchar(2) DEFAULT NULL,
+  `aplicahumedadrelativa` varchar(2) DEFAULT NULL,
+  `humedadrelativaminimo` double DEFAULT NULL,
+  `humedadrelativamaximo` double DEFAULT NULL,
+  `aplicahumedadsuelo` varchar(2) DEFAULT NULL,
+  `humedadsuelominimo` double DEFAULT NULL,
+  `humedadsuelomaximo` double DEFAULT NULL,
+  PRIMARY KEY (`idreglas`),
+  KEY `fk_reglas_1_idx` (`nombreplaga`),
+  CONSTRAINT `fk_reglas_1` FOREIGN KEY (`nombreplaga`) REFERENCES `plagas` (`nombreplaga`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reglas`
+--
+
+LOCK TABLES `reglas` WRITE;
+/*!40000 ALTER TABLE `reglas` DISABLE KEYS */;
+INSERT INTO `reglas` VALUES (0,'El picudo, barrenillo',10,25,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `reglas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuarios`
 --
 
@@ -522,4 +674,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-17 19:30:36
+-- Dump completed on 2015-04-28 16:15:32

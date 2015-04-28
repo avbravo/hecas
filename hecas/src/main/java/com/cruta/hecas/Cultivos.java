@@ -12,6 +12,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -34,7 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cultivos.findByNombrecientifico", query = "SELECT c FROM Cultivos c WHERE c.nombrecientifico = :nombrecientifico"),
     @NamedQuery(name = "Cultivos.findByDescripcion", query = "SELECT c FROM Cultivos c WHERE c.descripcion = :descripcion"),
     @NamedQuery(name = "Cultivos.findByFoto", query = "SELECT c FROM Cultivos c WHERE c.foto = :foto"),
-    @NamedQuery(name = "Cultivos.findByFamilia", query = "SELECT c FROM Cultivos c WHERE c.familia = :familia")})
+    @NamedQuery(name = "Cultivos.findByFamilia", query = "SELECT c FROM Cultivos c WHERE c.familia = :familia"),
+    @NamedQuery(name = "Cultivos.findByLatitud", query = "SELECT c FROM Cultivos c WHERE c.latitud = :latitud"),
+    @NamedQuery(name = "Cultivos.findByLongitud", query = "SELECT c FROM Cultivos c WHERE c.longitud = :longitud")})
 public class Cultivos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,10 +62,25 @@ public class Cultivos implements Serializable {
     @Size(max = 100)
     @Column(name = "familia")
     private String familia;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "latitud")
+    private Double latitud;
+    @Column(name = "longitud")
+    private Double longitud;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "areasdecultivo")
+    private String areasdecultivo;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "datossiembra")
+    private String datossiembra;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombrecultivo")
     private Collection<Miscultivos> miscultivosCollection;
     @OneToMany(mappedBy = "nombrecultivo")
     private Collection<Plagasporcultivos> plagasporcultivosCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombrecultivo")
+    private Collection<Plagascultivos> plagascultivosCollection;
 
     public Cultivos() {
     }
@@ -117,6 +135,38 @@ public class Cultivos implements Serializable {
         this.familia = familia;
     }
 
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getAreasdecultivo() {
+        return areasdecultivo;
+    }
+
+    public void setAreasdecultivo(String areasdecultivo) {
+        this.areasdecultivo = areasdecultivo;
+    }
+
+    public String getDatossiembra() {
+        return datossiembra;
+    }
+
+    public void setDatossiembra(String datossiembra) {
+        this.datossiembra = datossiembra;
+    }
+
     @XmlTransient
     public Collection<Miscultivos> getMiscultivosCollection() {
         return miscultivosCollection;
@@ -133,6 +183,15 @@ public class Cultivos implements Serializable {
 
     public void setPlagasporcultivosCollection(Collection<Plagasporcultivos> plagasporcultivosCollection) {
         this.plagasporcultivosCollection = plagasporcultivosCollection;
+    }
+
+    @XmlTransient
+    public Collection<Plagascultivos> getPlagascultivosCollection() {
+        return plagascultivosCollection;
+    }
+
+    public void setPlagascultivosCollection(Collection<Plagascultivos> plagascultivosCollection) {
+        this.plagascultivosCollection = plagascultivosCollection;
     }
 
     @Override

@@ -439,7 +439,7 @@ public static Integer getEdad(Date fecha){
      public static String getPathFotosPlagas() {
         try {             
         
-            String path = getPath() + "resources/fotos/";
+            String path = getPath() + "resources/plagas/";
  return path;
         } catch (Exception e) {
 
@@ -451,7 +451,7 @@ public static Integer getEdad(Date fecha){
      public static String getPathFotosAlertas() {
         try {             
         
-            String path = getPath() + "resources/fotos/";
+            String path = getPath() + "resources/alertas/";
  return path;
         } catch (Exception e) {
 
@@ -463,7 +463,7 @@ public static Integer getEdad(Date fecha){
           public static String getPathFotosCultivos() {
         try {             
         
-            String path = getPath() + "resources/fotos/";
+            String path = getPath() + "resources/cultivos/";
  return path;
         } catch (Exception e) {
 
@@ -475,11 +475,24 @@ public static Integer getEdad(Date fecha){
              public static String getPathFotosMisCultivos() {
         try {             
         
-            String path = getPath() + "resources/fotos/";
+            String path = getPath() + "resources/miscultivos/";
  return path;
         } catch (Exception e) {
 
             addErrorMessage("getPathFotosCultivos() " + e.getLocalizedMessage());
+        }
+        return null;
+
+    }
+             
+                      public static String getPathArduino() {
+        try {             
+        
+            String path = getPath() + "resources/arduino/";
+ return path;
+        } catch (Exception e) {
+
+            addErrorMessage("getPathArduino() " + e.getLocalizedMessage());
         }
         return null;
 
