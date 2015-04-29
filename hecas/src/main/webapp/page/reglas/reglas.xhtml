@@ -2,111 +2,155 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./../../template.xhtml">
 
+            <!--            <ui:define name="top">
+                            top
+                        </ui:define>-->
+
+            <!--            <ui:define name="bottom">
+                            bottom
+                        </ui:define>
+            
+                        <ui:define name="left">
+                            left
+                        </ui:define>
+            
+                        <ui:define name="right">
+                            right
+                        </ui:define>-->
+
             <ui:define name="content">
                 <f:view>
                     <h:form id="form" prependId="false">
                         <p:messages id="growl" autoUpdate="true"/>
+
+
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">REGLAS</h3>
                             </div>
                             <div class="panel-body">
 
+                                <p:dataTable  id="datatableMismiscultivos"
+                                              value="#{reglasSearchController.reglasList}"
+                                              var="item"
+                                              rows="7"
+                                              paginator="true"
+
+                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                              rowsPerPageTemplate="5,10,15"
+                                              >
+                                    <f:facet name="header">
+                                        REGLAS
+                                    </f:facet>
+
+                                    <p:columnGroup type="header">
+                                        <p:row>
+                                            <p:column rowspan="3" headerText="Plaga"  filterBy="#{item.nombreplaga.nombreplaga}"/>
+                                            <p:column colspan="6" headerText="Factores" />
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="2" headerText="Temperatura" />
+                                            <p:column colspan="2" headerText="Humedad Relativa" />
+                                            <p:column colspan="2" headerText="Humedad Suelo" />
+                                        </p:row>
+                                        <p:row>
+                                            <p:column headerText="Min" />
+                                            <p:column headerText="Max" />
+                                            <p:column headerText="Min" />
+                                            <p:column headerText="Max" />
+                                            <p:column headerText="Min" />
+                                            <p:column headerText="Max" />
+                                        </p:row>
+                                    </p:columnGroup>
+
+
+                                    <p:column>
+                                        <h:outputText value="#{item.nombreplaga.nombreplaga}" />
+                                    </p:column>
+
+                                    <p:column>
+                                        <h:outputText value="#{item.temperaturainicial}" />
+                                    </p:column>                    
+                                    <p:column>
+                                        <h:outputText value="#{item.temperaturafinal}" />
+                                    </p:column>      
+
+                                    <p:column>
+                                        <h:outputText value="#{item.humedadrelativaminimo}" />
+                                    </p:column>                    
+                                    <p:column>
+                                        <h:outputText value="#{item.humedadrelativamaximo}" />
+                                    </p:column>      
+
+                                    <p:column>
+                                        <h:outputText value="#{item.humedadsuelominimo}" />
+                                    </p:column>                    
+                                    <p:column>
+                                        <h:outputText value="#{item.humedadsuelomaximo}" />
+                                    </p:column>      
+
+                                </p:dataTable>
 
 
 
-                                <div class="form-group">
-                                    <p:outputLabel  value="Plaga"/>
-
-                                    <p:selectOneMenu converter="plagasConverter" 
-                                                     value="#{reglasController.reglas.nombreplaga}"
-                                                     filter="true" filterMatchMode="startsWith" effect="fade">
-
-                                        <!-- TODO: update below reference to list of available items-->
-                                        <f:selectItem itemLabel="Seleccione " itemValue="#{null}"/>
-                                        <f:selectItems value="#{plagasSearchController.items}"
-                                                       var="itemp"
-                                                       itemValue="#{itemp}"
-                                                       itemLabel="#{itemp.nombreplaga}" /> 
-
-
-                                    </p:selectOneMenu>
-                                </div>
-
-                                <div class="form-group">
-                                    <p:outputLabel  value="Temperatura"/>
-                                    <p:inputSwitch offLabel="No" onLabel="Si" value="#{reglasController.aplicatemperatura}">
-                                         <p:ajax  update="temperaturainicial" />
-                                    </p:inputSwitch>
-                                </div>
-                                <div class="form-group">
-                                    <p:outputPanel autoUpdate="true">
-                                        <p:outputLabel  value="Minima" />
-                                        <p:inputText id="temperaturainicial" value="#{reglasController.reglas.temperaturainicial}" disabled="#{!reglasController.aplicatemperatura}"/>
-                                    </p:outputPanel>
-                                </div>
-                                <div class="form-group">
-                                    <p:outputPanel autoUpdate="true">
-                                    <p:outputLabel  value="Maxima" />
-                                    <p:inputText value="#{reglasController.reglas.temperaturafinal}" disabled="#{!reglasController.aplicatemperatura}"/>
-                                    </p:outputPanel>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <p:outputLabel  value="Humedad Relativa"/>
-                                    <p:inputSwitch  offLabel="No" onLabel="Si" value="#{reglasController.aplicahumedadrelativa}">
-                                         <p:ajax  update="humedadsuelominimo" />
-                                    </p:inputSwitch>
-                                </div>
-                                <div class="form-group">
-                                    <p:outputPanel autoUpdate="true">
-                                    <p:outputLabel id="humedadrelativaminimo" value="Minima" />
-                                    <p:inputText value="#{reglasController.reglas.humedadrelativaminimo}" disabled="#{!reglasController.aplicahumedadrelativa}"/>
-                                    </p:outputPanel>
-                                </div>
-                                <div class="form-group">
-                                    <p:outputPanel autoUpdate="true">
-                                    <p:outputLabel  value="Maxima" />
-                                    <p:inputText value="#{reglasController.reglas.humedadrelativamaximo}" disabled ="#{!reglasController.aplicahumedadrelativa}"/>
-                                    </p:outputPanel>
-                                </div>
-
-                                
-                                <div class="form-group">
-                                    <p:outputLabel  value="Humedad Suelo"/>
-                                    <p:inputSwitch onchange="" offLabel="No" onLabel="Si" value="#{reglasController.aplicahumedadsuelo}">
-                                        <p:ajax  update="humedadsuelominimo" />
-                                    </p:inputSwitch>
-                                </div>
-                                <div class="form-group">
-                                    <p:outputPanel autoUpdate="true">
-                                        <p:outputLabel  value="Minima" />
-                                        <p:inputText id="humedadsuelominimo" value="#{reglasController.reglas.humedadsuelominimo}" disabled="#{!reglasController.aplicahumedadsuelo}"/>
-                                    </p:outputPanel>
-                                </div>
-                                <div class="form-group">
-                                    <p:outputPanel autoUpdate="true">
-                                        <p:outputLabel  value="Maxima" />
-                                        <p:inputText value="#{reglasController.reglas.humedadsuelomaximo}" disabled="#{!reglasController.aplicahumedadsuelo}" />
-                                    </p:outputPanel>
-                                </div>
                             </div>
                             <div class="panel-footer">
-                                <p:commandButton value="Guardar" update="form,growl" actionListener="#{reglasController.save()}"/>
+                                <li><a href="/hecas/faces/page/reglas/reglascrear.xhtml" >Registrar Reglas</a></li>
                             </div>
                         </div>
+
+                        <!--<p:dialog id="confirmDialog" modal="false" header="DETALLE DEL CULTIVO"
+                                          height="550"  width="550" 
+                                          
+                                          widgetVar="dialogoMisCultivo">
+                                    <h:panelGrid columns="2" id="panelMismiscultivos">
+                                       
+                                        <p:outputLabel value="Nombre "/>
+                                        <p:outputLabel value="#{reglasSearchController.selected.nombrecultivo.nombrecultivo}"/>
+                                        <p:outputLabel value="Nombre Cientifico"/>
+                                        <p:outputLabel value="#{reglasSearchController.selected.nombrecultivo.nombrecultivo}"/>
+                                         <p:outputLabel value="Descripcion"/>
+                                         <p:outputLabel value="#{reglasSearchController.selected.descripcion}"/>
+                                           <p:outputLabel value="Descripcion"/>
+                                           <p:outputLabel value="#{reglasSearchController.selected.datossiembra}"/>
+                                           
+                                        
+                                                            <p:outputLabel  value="Latitud"/>
+                                                      <p:outputLabel value="#{reglasSearchController.selected.latitud}"/>
+                                                     
+                                                    
+                                                            <p:outputLabel  value="Longitud"/>
+                                                       <p:outputLabel value="#{reglasSearchController.selected.longitud}"/>
+                                                   
+                        <p:gmap   id="gmap22" center="#{reglasSearchController.selected.latitud},#{reglasSearchController.selected.longitud}" zoom="15" type="ROADMAP" style="width:350px;height:350px">
+                        
+                                                            </p:gmap>
+                                                   
+                                                        
+                                    </h:panelGrid>
+                            
+                                    
+                                    <f:facet name="footer">
+                                  
+                        
+                                        <p:commandButton id="cancelButton" value="#{app['boton.no']}"
+                                                         icon="ui-icon-close"
+                                                         onclick="PF('dialogoMisCultivo').hide();" type="button" />
+                                    </f:facet>
+                                </p:dialog>-->
+
                     </h:form>
 
                 </f:view>
+
             </ui:define>
 
         </ui:composition>

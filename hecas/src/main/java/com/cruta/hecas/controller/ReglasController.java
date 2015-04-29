@@ -166,7 +166,7 @@ public class ReglasController implements Serializable, IController {
     @Override
     public String save() {
         try {
-   reglas.setIdreglas(0);
+   reglas.setIdreglas(reglasFacade.getMaximo() +1);
    reglas.setAplicahumedadrelativa(aplicahumedadrelativa==true?"si":"no");
    reglas.setAplicahumedadsuelo(aplicahumedadsuelo==true?"si":"no");
    reglas.setAplicatemperatura(aplicatemperatura==true?"si":"no");

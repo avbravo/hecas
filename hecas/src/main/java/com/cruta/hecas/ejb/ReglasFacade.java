@@ -60,6 +60,18 @@ public class ReglasFacade extends AbstractFacade<Reglas> {
         deleteRecords = query.executeUpdate();
     }
     
+     public Integer getMaximo() {
+        try {
+
+            Query q = em.createQuery("SELECT MAX(r.idreglas) FROM Reglas r");
+
+            Number result = (Number) q.getSingleResult();
+            return result.intValue();
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
      
 }
 

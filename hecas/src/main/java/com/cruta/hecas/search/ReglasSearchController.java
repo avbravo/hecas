@@ -102,6 +102,7 @@ public class ReglasSearchController implements Serializable, ISearchController {
 
     @PostConstruct
     public void init() {
+        iniciar();
 
     }
 
