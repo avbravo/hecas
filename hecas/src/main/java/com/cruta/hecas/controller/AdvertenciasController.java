@@ -5,8 +5,8 @@
  */
 package com.cruta.hecas.controller;
 
-import com.cruta.hecas.Reglas;
-import com.cruta.hecas.ejb.ReglasFacade;
+import com.cruta.hecas.Advertencias;
+import com.cruta.hecas.ejb.AdvertenciasFacade;
 import com.cruta.hecas.generales.GestorImpresion;
 import com.cruta.hecas.generales.JSFUtil;
 import com.cruta.hecas.generales.LoginBean;
@@ -27,13 +27,13 @@ import javax.validation.constraints.Size;
  */
 @Named
 @SessionScoped
-public class ReglasController implements Serializable, IController {
+public class AdvertenciasController implements Serializable, IController {
 
     private static final long serialVersionUID = 1L;
 
     @Inject
-    ReglasFacade reglasFacade;
-    Reglas reglas = new Reglas();
+    AdvertenciasFacade advertenciasFacade;
+    Advertencias advertencias = new Advertencias();
     private Boolean encontrado = false;
     @Inject
     ResourcesFiles rf;
@@ -95,12 +95,12 @@ public class ReglasController implements Serializable, IController {
         this.nuevoregistro = nuevoregistro;
     }
 
-    public Reglas getReglas() {
-        return reglas;
+    public Advertencias getAdvertencias() {
+        return advertencias;
     }
 
-    public void setReglas(Reglas reglas) {
-        this.reglas = reglas;
+    public void setAdvertencias(Advertencias advertencias) {
+        this.advertencias = advertencias;
     }
 
     public Boolean getEncontrado() {
@@ -112,36 +112,28 @@ public class ReglasController implements Serializable, IController {
     }
 
     /**
-     * Creates a new instance of ReglasController
+     * Creates a new instance of AdvertenciasController
      */
-    public ReglasController() {
+    public AdvertenciasController() {
     }
 
     @PostConstruct
     public void init() {   desactivar =true;
         nuevoregistro = false;
-  reglas = new Reglas();
+  advertencias = new Advertencias();
   limpiar();
     }
 
     private void limpiar(){
-         reglas.setHumedadrelativamaximo(0.0);
-            reglas.setHumedadrelativaminimo(0.0);
-            reglas.setHumedadsuelomaximo(0.0);
-            reglas.setHumedadsuelominimo(0.0);
-            reglas.setTemperaturafinal(0.0);
-            reglas.setTemperaturainicial(0.0);
-            reglas.setAplicahumedadrelativa("no");
-            reglas.setAplicahumedadsuelo("si");
-            reglas.setAplicatemperatura("si");
+       
     }
     @Override
     public String buscar() {
-        reglas = reglasFacade.find(reglas.getIdreglas());
-        if (reglas == null) {
+        advertencias = advertenciasFacade.find(advertencias.getIdadvertencias());
+        if (advertencias == null) {
             encontrado = false;
             JSFUtil.addWarningMessage(rf.getMensajeArb("warning.noexiste"));
-            reglas = new Reglas();
+            advertencias = new Advertencias();
         } else {
             encontrado = true;
         }
@@ -153,7 +145,7 @@ public class ReglasController implements Serializable, IController {
         try {
             nuevoregistro = true;
             encontrado = false;
-            reglas = new Reglas();
+            advertencias = new Advertencias();
          limpiar();
    
             
@@ -166,17 +158,11 @@ public class ReglasController implements Serializable, IController {
     @Override
     public String save() {
         try {
-   reglas.setIdreglas(reglasFacade.getMaximo() +1);
-   reglas.setAplicahumedadrelativa(aplicahumedadrelativa==true?"si":"no");
-   reglas.setAplicahumedadsuelo(aplicahumedadsuelo==true?"si":"no");
-   reglas.setAplicatemperatura(aplicatemperatura==true?"si":"no");
-//            if (reglasFacade.find(reglas.getIdreglas()) != null) {
-//                JSFUtil.addWarningMessage("Ya se registro anteriormente esa regla para esa plaga");
-//                return null;
-//            }
-            reglasFacade.create(reglas);
+   advertencias.setIdadvertencias(advertenciasFacade.getMaximo() +1);
+   advertencias.setFecha(JSFUtil.getFechaActual());
+            advertenciasFacade.create(advertencias);
             JSFUtil.addSuccessMessage("Guardado exitosamente");
-            reglas = new Reglas();
+            advertencias = new Advertencias();
             this.nuevoregistro = false;
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
@@ -188,7 +174,7 @@ public class ReglasController implements Serializable, IController {
     public String edit() {
         try {
 
-            reglasFacade.edit(reglas);
+            advertenciasFacade.edit(advertencias);
 
             JSFUtil.addSuccessMessage(rf.getMensajeArb("info.update"));
 
@@ -201,11 +187,11 @@ public class ReglasController implements Serializable, IController {
     @Override
     public String delete() {
         try {
-            reglasFacade.remove(reglas);
+            advertenciasFacade.remove(advertencias);
             JSFUtil.addSuccessMessage(rf.getMensajeArb("info.delete"));
 
             encontrado = false;
-            reglas = new Reglas();
+            advertencias = new Advertencias();
 
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
@@ -216,9 +202,9 @@ public class ReglasController implements Serializable, IController {
     @Override
     public String imprimir() {
 //        try {
-//            List<Reglas> list = new ArrayList<>();
-//            list.add(reglas);
-//            String ruta = "/resources/reportes/reglas/reglas.jasper";
+//            List<Advertencias> list = new ArrayList<>();
+//            list.add(advertencias);
+//            String ruta = "/resources/reportes/advertencias/advertencias.jasper";
 //            HashMap parameters = new HashMap();
 //            gestorImpresion.imprimir(list, ruta, parameters);
 //        } catch (Exception ex) {
@@ -229,9 +215,9 @@ public class ReglasController implements Serializable, IController {
 
     @Override
     public String imprimirTodos() {
-//        String ruta = "/resources/reportes/reglas/reglas.jasper";
+//        String ruta = "/resources/reportes/advertencias/advertencias.jasper";
 //        HashMap parameters = new HashMap();
-//        gestorImpresion.imprimir(reglasFacade.getReglasList(), ruta, parameters);
+//        gestorImpresion.imprimir(advertenciasFacade.getAdvertenciasList(), ruta, parameters);
         return null;
     }
 
@@ -247,7 +233,7 @@ public class ReglasController implements Serializable, IController {
 
     @Override
     public String habilitarConsultar() {        desactivar=true;
-        reglas.setIdreglas(0);
+        advertencias.setIdadvertencias(0);
         this.nuevoregistro = false;
         return "";
     }

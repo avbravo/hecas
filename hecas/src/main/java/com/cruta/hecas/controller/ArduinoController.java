@@ -5,9 +5,11 @@
  */
 package com.cruta.hecas.controller;
 
+import com.cruta.hecas.Advertencias;
 import com.cruta.hecas.Alertas;
 import com.cruta.hecas.Arduino;
 import com.cruta.hecas.Reglas;
+import com.cruta.hecas.ejb.AdvertenciasFacade;
 import com.cruta.hecas.ejb.AlertasFacade;
 import com.cruta.hecas.ejb.ArduinoFacade;
 import com.cruta.hecas.ejb.ReglasFacade;
@@ -45,10 +47,10 @@ import org.primefaces.model.map.LatLng;
 public class ArduinoController implements Serializable, IController {
 
     private static final long serialVersionUID = 1L;
-     @Inject
-    AlertasFacade alertasFacade;
-    Alertas alertas = new Alertas();
-   @Inject
+    @Inject
+    AdvertenciasFacade advertenciasFacade;
+    Advertencias advertencias = new Advertencias();
+    @Inject
     ReglasFacade reglasFacade;
     Reglas reglas = new Reglas();
     @Inject
@@ -185,11 +187,11 @@ public class ArduinoController implements Serializable, IController {
                 return null;
             }
             arduinoFacade.create(arduino);
-            JSFUtil.infoDialog("mensaje","Guardado exitosamente");
-          
+            JSFUtil.infoDialog("mensaje", "Guardado exitosamente");
+
             this.nuevoregistro = false;
             analizarReglas();
-              arduino = new Arduino();
+            arduino = new Arduino();
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
         }
@@ -286,7 +288,7 @@ public class ArduinoController implements Serializable, IController {
                 nuevoNombreLogo = JSFUtil.getUUID() + JSFUtil.getExtension(file.getFileName());
                 if (JSFUtil.copyFile(nuevoNombreLogo, file.getInputstream(), destination)) {
 
-                    FileReader f = new FileReader(destination + "/" + nuevoNombreLogo);
+                    FileReader f = new FileReader("/" + destination + nuevoNombreLogo);
                     String cadena;
                     BufferedReader b = new BufferedReader(f);
                     Integer contador = -1;
@@ -307,17 +309,16 @@ public class ArduinoController implements Serializable, IController {
                                 switch (indice) {
                                     case 0:
                                         fecha = texto;
-                                       
+
                                         Date apptDay = null;
                                         DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
-                                        
                                         java.sql.Date sqlDate;
                                         apptDay = (Date) df.parse(texto);
                                         sqlDate = new java.sql.Date(apptDay.getTime());
-                                        
+
                                         arduino.setFecha(sqlDate);
-                                        
+
 //                                       
 //                                      
                                         break;
@@ -342,11 +343,10 @@ public class ArduinoController implements Serializable, IController {
                                 }
 //                              
                             }
-                            
-                            arduino.setArchivo(nuevoNombreLogo);
-                            
-//                           
 
+                            arduino.setArchivo(nuevoNombreLogo);
+
+//                           
                         }
 
                     }
@@ -355,7 +355,7 @@ public class ArduinoController implements Serializable, IController {
                 }
             }
 
-            JSFUtil.infoDialog("mensaje", "Se subio archivo exitosamente ");
+            JSFUtil.addSuccessMessage( "Se subio archivo exitosamente ");
 
         } catch (Exception e) {
             JSFUtil.addErrorMessage("handleFileUpload()" + e.getLocalizedMessage());
@@ -371,47 +371,51 @@ public class ArduinoController implements Serializable, IController {
         arduino.setLongitud(latlng.getLng());
 
     }
-    
-    public String analizarReglas(){
+
+    public String analizarReglas() {
         try {
             List<Reglas> listReglas = reglasFacade.findAll();
-            if(!listReglas.isEmpty()){
-                for(Reglas r:listReglas){
-                    
-                    if(r.getAplicatemperatura().equals("si")){
-                        if(arduino.getTemperatura() >=r.getTemperaturainicial() && arduino.getTemperatura()<=r.getTemperaturafinal()){
-//                            alertas.setTallo(btallo?"si":"no");
-//            alertas.setHoja(bhoja?"si":"no");
-//            alertas.setFruto(bfruto?"si":"no");
-//            alertas.setRaices(braices?"si":"no");
-//            alertas.setIdalerta(alertasFacade.getMaximo()+1);
-// 
-//           alertas.setPuntos(0);
-//          alertas.setNombrecultivo(cultivos.getNombrecultivo());
-//          alertas.setNombreplaga(plagas.getNombreplaga());
-//            alertasFacade.create(alertas);
-                            JSFUtil.infoDialog("Temperatura", "Aparece plaga: "+r.getNombreplaga().getNombreplaga());
+            if (!listReglas.isEmpty()) {
+                for (Reglas r : listReglas) {
+
+                    if (r.getAplicatemperatura().equals("si")) {
+                        if (arduino.getTemperatura() >= r.getTemperaturainicial() && arduino.getTemperatura() <= r.getTemperaturafinal()) {
+                            advertencias.setIdadvertencias(advertenciasFacade.getMaximo() + 1);
+                            advertencias.setFecha(JSFUtil.getFechaActual());
+                            advertencias.setDescripcion("Variaciones en la temperatura de " + arduino.getTemperatura() + " pueden generar la aparcion de la plaga");
+                            advertencias.setNombreplaga(r.getNombreplaga());
+                            advertenciasFacade.create(advertencias);
+                            JSFUtil.infoDialog("Temperatura", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
                         }
-                         
+
                     }
-                    if(r.getAplicahumedadrelativa().equals("si")){
-                        if(arduino.getHumedadrelativa()>=r.getHumedadrelativaminimo() && arduino.getHumedadrelativa()<=r.getHumedadrelativamaximo()){
-                            JSFUtil.infoDialog("Humedad relativa", "Aparece plaga: "+r.getNombreplaga().getNombreplaga());
-                        }
-                    }
-                    if(r.getAplicahumedadsuelo().equals("si")){
-                       if(arduino.getHumedadsuelo()>=r.getHumedadsuelominimo()&& arduino.getHumedadsuelo()<=r.getHumedadsuelomaximo()){
-                            JSFUtil.infoDialog("Humedad suelo", "Aparece plaga: "+r.getNombreplaga().getNombreplaga());
+                    if (r.getAplicahumedadrelativa().equals("si")) {
+                        if (arduino.getHumedadrelativa() >= r.getHumedadrelativaminimo() && arduino.getHumedadrelativa() <= r.getHumedadrelativamaximo()) {
+                            advertencias.setIdadvertencias(advertenciasFacade.getMaximo() + 1);
+                            advertencias.setFecha(JSFUtil.getFechaActual());
+                            advertencias.setDescripcion("Variaciones en la humedad relativa de " + arduino.getHumedadrelativa() + " pueden generar la aparcion de la plaga");
+                            advertencias.setNombreplaga(r.getNombreplaga());
+                            advertenciasFacade.create(advertencias);
+                            JSFUtil.infoDialog("Humedad relativa", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
                         }
                     }
-                    
-                   
+                    if (r.getAplicahumedadsuelo().equals("si")) {
+                        if (arduino.getHumedadsuelo() >= r.getHumedadsuelominimo() && arduino.getHumedadsuelo() <= r.getHumedadsuelomaximo()) {
+                            advertencias.setIdadvertencias(advertenciasFacade.getMaximo() + 1);
+                            advertencias.setFecha(JSFUtil.getFechaActual());
+                            advertencias.setDescripcion("Variaciones en la humedad del suelo de " + arduino.getHumedadsuelo() + " pueden generar la aparcion de la plaga");
+                            advertencias.setNombreplaga(r.getNombreplaga());
+                            advertenciasFacade.create(advertencias);
+                            JSFUtil.infoDialog("Humedad suelo", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                        }
+                    }
+
                 }
-            }else{
-           JSFUtil.infoDialog("Mensaje","No hay reglas para analizar");
+            } else {
+                JSFUtil.infoDialog("Mensaje", "No hay reglas para analizar");
             }
         } catch (Exception e) {
-              JSFUtil.addErrorMessage("analizarReglas()" + e.getLocalizedMessage());
+            JSFUtil.addErrorMessage("analizarReglas()" + e.getLocalizedMessage());
         }
         return null;
     }

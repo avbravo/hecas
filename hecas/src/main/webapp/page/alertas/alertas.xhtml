@@ -31,20 +31,21 @@
 
                     <h:form id="form" prependId="false">
                         <p:messages id="growl" autoUpdate="true"/>
-  
+                        <p:poll interval="3" listener="#{alertasSearchController.iniciar()}" update="dataScroller" />
 
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">ALERTAS</h3>
                             </div>
+                            
                             <div class="panel-body">
-                                <p:dataScroller value="#{alertasSearchController.alertasList}" var="car" chunkSize="10">
+                                <p:dataScroller id="dataScroller" value="#{alertasSearchController.alertasList}" var="car" chunkSize="10">
                                     <f:facet name="header">
                                         ALERTAS
                                     </f:facet>
 
                                     <h:panelGrid columns="3" style="width:100%" columnClasses="logo,detail">
-                                     <p:graphicImage value="/resources/fotos/#{car.foto}" height="150" width="150"/>   
+                                     <p:graphicImage value="/resources/alertas/#{car.foto}" height="150" width="150"/>   
 
 
 

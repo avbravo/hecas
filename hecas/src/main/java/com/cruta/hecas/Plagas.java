@@ -89,6 +89,8 @@ public class Plagas implements Serializable {
     @OneToMany(mappedBy = "nombreplaga")
     private Collection<Condiciones> condicionesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreplaga")
+    private Collection<Advertencias> advertenciasCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreplaga")
     private Collection<Plagascultivos> plagascultivosCollection;
 
     public Plagas() {
@@ -210,6 +212,15 @@ public class Plagas implements Serializable {
 
     public void setCondicionesCollection(Collection<Condiciones> condicionesCollection) {
         this.condicionesCollection = condicionesCollection;
+    }
+
+    @XmlTransient
+    public Collection<Advertencias> getAdvertenciasCollection() {
+        return advertenciasCollection;
+    }
+
+    public void setAdvertenciasCollection(Collection<Advertencias> advertenciasCollection) {
+        this.advertenciasCollection = advertenciasCollection;
     }
 
     @XmlTransient
