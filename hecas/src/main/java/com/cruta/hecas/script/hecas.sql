@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.43, for debian-linux-gnu (i686)
+-- MySQL dump 10.13  Distrib 5.5.43, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: hecas
 -- ------------------------------------------------------
--- Server version	5.5.43-0ubuntu0.12.04.1
+-- Server version	5.5.43-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -153,6 +153,8 @@ CREATE TABLE `arduino` (
   `humedadsuelo` double DEFAULT NULL,
   `latitud` double DEFAULT NULL,
   `longitud` double DEFAULT NULL,
+  `archivo` varchar(200) DEFAULT NULL,
+  `hora` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`idarduino`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -628,7 +630,7 @@ CREATE TABLE `reglas` (
 
 LOCK TABLES `reglas` WRITE;
 /*!40000 ALTER TABLE `reglas` DISABLE KEYS */;
-INSERT INTO `reglas` VALUES (0,'El picudo, barrenillo',10,25,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `reglas` VALUES (0,'El picudo, barrenillo',10,25,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(1,'plaga8',0,0,'si','si',0,0,'si',4,5);
 /*!40000 ALTER TABLE `reglas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -674,4 +676,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-28 16:15:32
+-- Dump completed on 2015-04-28 23:21:13

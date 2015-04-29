@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -35,7 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Arduino.findByHumedadrelativa", query = "SELECT a FROM Arduino a WHERE a.humedadrelativa = :humedadrelativa"),
     @NamedQuery(name = "Arduino.findByHumedadsuelo", query = "SELECT a FROM Arduino a WHERE a.humedadsuelo = :humedadsuelo"),
     @NamedQuery(name = "Arduino.findByLatitud", query = "SELECT a FROM Arduino a WHERE a.latitud = :latitud"),
-    @NamedQuery(name = "Arduino.findByLongitud", query = "SELECT a FROM Arduino a WHERE a.longitud = :longitud")})
+    @NamedQuery(name = "Arduino.findByLongitud", query = "SELECT a FROM Arduino a WHERE a.longitud = :longitud"),
+    @NamedQuery(name = "Arduino.findByArchivo", query = "SELECT a FROM Arduino a WHERE a.archivo = :archivo"),
+    @NamedQuery(name = "Arduino.findByHora", query = "SELECT a FROM Arduino a WHERE a.hora = :hora")})
 public class Arduino implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,6 +60,12 @@ public class Arduino implements Serializable {
     private Double latitud;
     @Column(name = "longitud")
     private Double longitud;
+    @Size(max = 200)
+    @Column(name = "archivo")
+    private String archivo;
+    @Size(max = 15)
+    @Column(name = "hora")
+    private String hora;
 
     public Arduino() {
     }
@@ -119,6 +128,22 @@ public class Arduino implements Serializable {
 
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
+    }
+
+    public String getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     @Override
