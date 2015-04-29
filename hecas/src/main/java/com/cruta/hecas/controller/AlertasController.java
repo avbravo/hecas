@@ -200,7 +200,7 @@ Plagas plagas =  new Plagas();
     @Override
     public String save() {
         try {
-            System.out.println("Guardar");
+          
             alertas.setTallo(btallo?"si":"no");
             alertas.setHoja(bhoja?"si":"no");
             alertas.setFruto(bfruto?"si":"no");

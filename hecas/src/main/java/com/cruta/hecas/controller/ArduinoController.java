@@ -7,7 +7,10 @@ package com.cruta.hecas.controller;
 
 import com.cruta.hecas.Alertas;
 import com.cruta.hecas.Arduino;
+import com.cruta.hecas.Reglas;
+import com.cruta.hecas.ejb.AlertasFacade;
 import com.cruta.hecas.ejb.ArduinoFacade;
+import com.cruta.hecas.ejb.ReglasFacade;
 import com.cruta.hecas.generales.GestorImpresion;
 import com.cruta.hecas.generales.JSFUtil;
 import com.cruta.hecas.generales.LoginBean;
@@ -16,6 +19,7 @@ import com.cruta.hecas.interfaces.IController;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +32,9 @@ import javax.inject.Named;
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.map.PointSelectEvent;
 import org.primefaces.model.UploadedFile;
+import org.primefaces.model.map.LatLng;
 
 /**
  *
@@ -39,7 +45,12 @@ import org.primefaces.model.UploadedFile;
 public class ArduinoController implements Serializable, IController {
 
     private static final long serialVersionUID = 1L;
-
+     @Inject
+    AlertasFacade alertasFacade;
+    Alertas alertas = new Alertas();
+   @Inject
+    ReglasFacade reglasFacade;
+    Reglas reglas = new Reglas();
     @Inject
     ArduinoFacade arduinoFacade;
     Arduino arduino = new Arduino();
@@ -170,13 +181,15 @@ public class ArduinoController implements Serializable, IController {
             arduino.setIdarduino(arduinoFacade.getMaximo() + 1);
 
             if (arduinoFacade.find(arduino.getIdarduino()) != null) {
-                JSFUtil.addWarningMessage("Ya se registro anteriormente esa regla para esa plaga");
+                JSFUtil.addWarningMessage("Ya se registro anteriormente esa lectura");
                 return null;
             }
             arduinoFacade.create(arduino);
-            JSFUtil.addSuccessMessage("Guardado exitosamente");
-            arduino = new Arduino();
+            JSFUtil.infoDialog("mensaje","Guardado exitosamente");
+          
             this.nuevoregistro = false;
+            analizarReglas();
+              arduino = new Arduino();
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
         }
@@ -294,9 +307,19 @@ public class ArduinoController implements Serializable, IController {
                                 switch (indice) {
                                     case 0:
                                         fecha = texto;
-                                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy");
-                                        Date date = formatter.parse(fecha);
-                                        arduino.setFecha(date);
+                                       
+                                        Date apptDay = null;
+                                        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+
+                                        
+                                        java.sql.Date sqlDate;
+                                        apptDay = (Date) df.parse(texto);
+                                        sqlDate = new java.sql.Date(apptDay.getTime());
+                                        
+                                        arduino.setFecha(sqlDate);
+                                        
+//                                       
+//                                      
                                         break;
                                     case 1:
 //                                        hora = texto;
@@ -312,21 +335,17 @@ public class ArduinoController implements Serializable, IController {
                                         arduino.setHumedadrelativa(Double.parseDouble(humedadrelativa));
                                         break;
                                     case 4:
-                                        humedadsuelo  = texto.contains(",") ? texto.replaceAll(",", "") : texto;
-                                         arduino.setHumedadsuelo(Double.parseDouble(humedadsuelo));
+                                        humedadsuelo = texto.contains(",") ? texto.replaceAll(",", "") : texto;
+                                        arduino.setHumedadsuelo(Double.parseDouble(humedadsuelo));
                                         break;
 
                                 }
-//                               System.out.println(st.nextToken());
+//                              
                             }
-                            arduino.setIdarduino(arduinoFacade.getMaximo()+1);
+                            
                             arduino.setArchivo(nuevoNombreLogo);
-                            arduinoFacade.create(arduino);
-//                            System.out.println("Fecha " + fecha);
-//                            System.out.println("Hora " + hora);
-//                            System.out.println("Temperatura " + temperatura);
-//                            System.out.println("Humedad relativa " + humedadrelativa);
-//                            System.out.println("Humedad suelo" + humedadsuelo);
+                            
+//                           
 
                         }
 
@@ -335,11 +354,65 @@ public class ArduinoController implements Serializable, IController {
 
                 }
             }
-            JSFUtil.infoDialog("mensaje", "Se guardo el archivo exitosamente ");
+
+            JSFUtil.infoDialog("mensaje", "Se subio archivo exitosamente ");
 
         } catch (Exception e) {
             JSFUtil.addErrorMessage("handleFileUpload()" + e.getLocalizedMessage());
         }
 
+    }
+
+    public void onPointSelect(PointSelectEvent event) {
+        System.out.println("onPointSelect");
+        LatLng latlng = event.getLatLng();
+        arduino.setLatitud(latlng.getLat());
+
+        arduino.setLongitud(latlng.getLng());
+
+    }
+    
+    public String analizarReglas(){
+        try {
+            List<Reglas> listReglas = reglasFacade.findAll();
+            if(!listReglas.isEmpty()){
+                for(Reglas r:listReglas){
+                    
+                    if(r.getAplicatemperatura().equals("si")){
+                        if(arduino.getTemperatura() >=r.getTemperaturainicial() && arduino.getTemperatura()<=r.getTemperaturafinal()){
+//                            alertas.setTallo(btallo?"si":"no");
+//            alertas.setHoja(bhoja?"si":"no");
+//            alertas.setFruto(bfruto?"si":"no");
+//            alertas.setRaices(braices?"si":"no");
+//            alertas.setIdalerta(alertasFacade.getMaximo()+1);
+// 
+//           alertas.setPuntos(0);
+//          alertas.setNombrecultivo(cultivos.getNombrecultivo());
+//          alertas.setNombreplaga(plagas.getNombreplaga());
+//            alertasFacade.create(alertas);
+                            JSFUtil.infoDialog("Temperatura", "Aparece plaga: "+r.getNombreplaga().getNombreplaga());
+                        }
+                         
+                    }
+                    if(r.getAplicahumedadrelativa().equals("si")){
+                        if(arduino.getHumedadrelativa()>=r.getHumedadrelativaminimo() && arduino.getHumedadrelativa()<=r.getHumedadrelativamaximo()){
+                            JSFUtil.infoDialog("Humedad relativa", "Aparece plaga: "+r.getNombreplaga().getNombreplaga());
+                        }
+                    }
+                    if(r.getAplicahumedadsuelo().equals("si")){
+                       if(arduino.getHumedadsuelo()>=r.getHumedadsuelominimo()&& arduino.getHumedadsuelo()<=r.getHumedadsuelomaximo()){
+                            JSFUtil.infoDialog("Humedad suelo", "Aparece plaga: "+r.getNombreplaga().getNombreplaga());
+                        }
+                    }
+                    
+                   
+                }
+            }else{
+           JSFUtil.infoDialog("Mensaje","No hay reglas para analizar");
+            }
+        } catch (Exception e) {
+              JSFUtil.addErrorMessage("analizarReglas()" + e.getLocalizedMessage());
+        }
+        return null;
     }
 }
