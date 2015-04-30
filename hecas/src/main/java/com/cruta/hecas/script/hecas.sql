@@ -58,7 +58,7 @@ CREATE TABLE `advertencias` (
   PRIMARY KEY (`idadvertencias`),
   KEY `fk_advertencias_1_idx` (`nombreplaga`),
   CONSTRAINT `fk_advertencias_1` FOREIGN KEY (`nombreplaga`) REFERENCES `plagas` (`nombreplaga`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `advertencias` (
 
 LOCK TABLES `advertencias` WRITE;
 /*!40000 ALTER TABLE `advertencias` DISABLE KEYS */;
-INSERT INTO `advertencias` VALUES (6,'El picudo, barrenillo','Variaciones en la temperatura de 26.053999999999974 pueden generar la aparcion de la plaga','2015-04-29'),(7,'El picudo, barrenillo','Variaciones en la temperatura de 25.06 pueden generar la aparcion de la plaga','2015-04-29'),(8,'El picudo, barrenillo','Variaciones en la temperatura de 25.06 pueden generar la aparcion de la plaga','2015-04-29'),(9,'El picudo, barrenillo','Variaciones en la temperatura de 26.053999999999974 pueden generar la aparcion de la plaga','2015-04-29'),(10,'El picudo, barrenillo','Variaciones en la temperatura de 26.053999999999974 pueden generar la aparcion de la plaga','2015-04-29'),(11,'plaga8','Variaciones en la temperatura de 26.053999999999974 pueden generar la aparcion de la plaga','2015-04-29'),(12,'El picudo, barrenillo','Variaciones en la temperatura de 25.06 pueden generar la aparcion de la plaga','2015-04-29'),(13,'plaga8','Variaciones en la temperatura de 25.06 pueden generar la aparcion de la plaga','2015-04-29'),(14,'El picudo, barrenillo','Variaciones en la temperatura de 25.06 pueden generar la aparcion de la plaga','2015-04-29'),(15,'plaga8','Variaciones en la temperatura de 25.06 pueden generar la aparcion de la plaga','2015-04-29'),(16,'El picudo, barrenillo','Variaciones en la temperatura de 26.053999999999974 pueden generar la aparcion de la plaga','2015-04-29'),(17,'plaga8','Variaciones en la temperatura de 26.053999999999974 pueden generar la aparcion de la plaga','2015-04-29'),(18,'El picudo, barrenillo','Variaciones en la temperatura de 26.053999999999974 pueden generar la aparcion de la plaga','2015-04-29'),(19,'plaga8','Variaciones en la temperatura de 26.053999999999974 pueden generar la aparcion de la plaga','2015-04-29'),(20,'El picudo, barrenillo','Variaciones en la temperatura de 26.053999999999974 pueden generar la aparcion de la plaga','2015-04-29'),(21,'plaga8','Variaciones en la temperatura de 26.053999999999974 pueden generar la aparcion de la plaga','2015-04-29'),(22,'El picudo, barrenillo','Variaciones en la temperatura de 25.06 pueden generar la aparcion de la plaga','2015-04-29'),(23,'plaga8','Variaciones en la temperatura de 25.06 pueden generar la aparcion de la plaga','2015-04-29');
+INSERT INTO `advertencias` VALUES (1,'Picudo','Variaciones en la temperatura de 25.06 pueden generar la aparcion de la plaga','2015-04-30'),(2,'Picudo','Variaciones en la temperatura de 25.80000000000001 pueden generar la aparcion de la plaga','2015-04-30'),(3,'Picudo','Variaciones en la temperatura de 25.80000000000001 pueden generar la aparcion de la plaga','2015-04-30');
 /*!40000 ALTER TABLE `advertencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +106,7 @@ CREATE TABLE `alertas` (
 
 LOCK TABLES `alertas` WRITE;
 /*!40000 ALTER TABLE `alertas` DISABLE KEYS */;
-INSERT INTO `alertas` VALUES (1,'Maiz','El picudo, barrenillo','bbb','Alto',8.495102574763267,-78.12772408178716,6,'Brote',NULL,'si','no','no','no','2015-04-29',0,'3b8ddd4b-03fe-4ff0-9d9f-fc7ec4154e47.JPG'),(2,'Aji','plaga8','ataco en la noche','Alto',8.489098405389862,-78.1580978652346,6,'Brote',NULL,'si','no','no','no','2015-04-30',0,'0827b765-b22c-4a79-a360-ed52f4c3fbd4.JPG'),(3,'Aji','El picudo, barrenillo','prueba','Alto',8.496003221855192,-78.12595725059509,6,'Brote',NULL,'si','no','no','no',NULL,0,'d6aa792a-afee-43b9-ad14-06b95ad2d0b9.JPG'),(4,'Maiz','plaga8','dffddf','Alto',8.495810099663332,-78.1192946434021,5,'Floracion',NULL,'si','no','no','no','2015-04-28',0,'157fd891-4db5-45c2-878d-bea37403ebb7.JPG'),(5,'Aji','plaga8','te','Alto',8.49704876736305,-78.11892986297607,6,'Floracion',NULL,'si','no','no','no','2015-04-30',0,'18bb93c4-076f-4537-9b53-2f99c242a98f.JPG'),(6,'Maiz','plaga8','ertete','Alto',8.491501966844693,-78.11967015266418,6,'Brote',NULL,'si','no','no','no','2015-04-15',0,NULL),(7,'Aji','El picudo, barrenillo','datos de verificacion','Bajo',8.48689737518748,-78.12734127044678,3,'Brote',NULL,'si','si','no','no','2015-04-23',0,'dd915f07-7310-446b-a589-68cda71d0895.JPG');
+INSERT INTO `alertas` VALUES (1,'Aji','Picudo','ataco en la noche','Medio',8.143599781493974,-80.71218509227037,25,'Crecimiento',NULL,'no','no','no','no','2015-04-30',0,'afada182-2b95-4feb-bfe3-11206524d995.jpg'),(2,'Aji','Picudo','test','Alto',8.512757080002544,-78.2889175415039,4,'Brote',NULL,'no','no','no','no','2015-04-30',0,NULL);
 /*!40000 ALTER TABLE `alertas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +184,7 @@ CREATE TABLE `arduino` (
   `archivo` varchar(200) DEFAULT NULL,
   `hora` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`idarduino`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,7 +193,7 @@ CREATE TABLE `arduino` (
 
 LOCK TABLES `arduino` WRITE;
 /*!40000 ALTER TABLE `arduino` DISABLE KEYS */;
-INSERT INTO `arduino` VALUES (2,'2015-04-24',25.06,44,684,7.58426075725694,-80.44014003127813,'2cda8bf4-9298-4fe3-90fa-a3ac2366ee0e.TXT','10:50:23'),(3,'2015-04-24',25.06,44,684,7.8455457227756575,-80.37422206252813,'4a50e9d7-577d-44f3-aedb-122dfd36ef20.TXT','10:50:23'),(4,'2015-04-24',25.06,44,684,7.867312136896227,-81.20918300002813,'c5ca8ae5-c458-4e46-837c-1589ab99a14c.TXT','10:50:23'),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,'2015-04-29',299.054,100,0,8.99,NULL,'OpenWeatherMap','15:13:24'),(9,'2015-04-29',299.054,100,0,8.99,NULL,'OpenWeatherMap','15:14:11'),(10,'2015-04-29',299.054,100,0,8.99,NULL,'OpenWeatherMap','15:14:11'),(11,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:15:59'),(12,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:15:59'),(13,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:16:10'),(14,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:16:10'),(15,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:17:23'),(16,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:17:23'),(17,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:22:20'),(18,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:22:20'),(19,'2015-04-24',25.06,44,684,8.491395737362458,-78.12858238867193,'a4565b9a-e26a-40ba-8fd8-5fec5a7e1442.TXT','10:50:23'),(20,'2015-04-24',25.06,44,684,7.858922856497238,-80.35356536507607,'8229dd4a-4900-43e8-8aa5-684d88460d09.TXT','10:50:23'),(21,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:31:30'),(22,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:31:30'),(23,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:32:28'),(24,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:32:28'),(25,'2015-04-24',25.06,44,684,7.702070467450418,-80.46298993751407,'ee0f9101-ec94-42d1-9838-70067b2998f9.TXT','10:50:23'),(26,'2015-04-24',25.06,44,684,7.714923417215422,-80.55000331252813,'a229dd0c-1621-45b6-9263-4ad9aee9df61.TXT','10:50:23'),(27,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:43:42'),(28,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:43:42'),(29,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:46:21'),(30,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','15:46:21'),(31,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','16:07:46'),(32,'2015-04-29',26.053999999999974,100,0,8.99,0,'OpenWeatherMap','16:07:46'),(33,'2015-04-24',25.06,44,684,8.493093529940456,-78.13192978552252,'a802e225-c20b-4c47-8e36-927a1df5f48a.TXT','10:50:23');
+INSERT INTO `arduino` VALUES (1,'2015-04-24',25.06,44,684,7.788176341902402,-80.58584217214957,'b504ee6b-c25c-4a5a-9711-b4ac918fc17d.TXT','10:50:23'),(2,'2015-04-30',25.80000000000001,100,0,8.99,0,'OpenWeatherMap','15:27:20'),(3,'2015-04-30',25.80000000000001,100,0,8.99,0,'OpenWeatherMap','15:27:20'),(4,'2015-04-30',25.80000000000001,100,0,8.99,0,'OpenWeatherMap','16:25:30'),(5,'2015-04-30',25.80000000000001,100,0,8.99,0,'OpenWeatherMap','16:25:30');
 /*!40000 ALTER TABLE `arduino` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,7 +310,7 @@ CREATE TABLE `cultivos` (
 
 LOCK TABLES `cultivos` WRITE;
 /*!40000 ALTER TABLE `cultivos` DISABLE KEYS */;
-INSERT INTO `cultivos` VALUES ('Aji','aji','Son plantas arbustivas','bad264c8-5b2b-431d-861b-1ce9b3d1087d.jpg','Familias Solanaceas',NULL,NULL,NULL,NULL),('Maiz','Maiz','Cultivos de maiz','07bd1022-0421-4f9a-9264-bee822234550.jpg','maiz',NULL,NULL,NULL,NULL);
+INSERT INTO `cultivos` VALUES ('Aji','Aji','cultivo','88c2b633-1c77-4d96-972c-de2d22428178.JPG','',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `cultivos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,7 +423,7 @@ CREATE TABLE `miscultivos` (
 
 LOCK TABLES `miscultivos` WRITE;
 /*!40000 ALTER TABLE `miscultivos` DISABLE KEYS */;
-INSERT INTO `miscultivos` VALUES (1,'Aji','Son plantas arbustivas, anuales o perennes que pueden alcanzar 4 m de altura, aunque la mayoría no llega a los 2 m.','Requiere para su cultivo adecuado temperaturas de entre 7°C y 29°C con condiciones de precipitación de entre 300 mm',7.815917105379916,-80.3089237678796,NULL);
+INSERT INTO `miscultivos` VALUES (1,'Aji','aji','sembrado en diciembre',8.497566118011301,-78.24567645555362,NULL);
 /*!40000 ALTER TABLE `miscultivos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -537,7 +537,7 @@ CREATE TABLE `plagas` (
 
 LOCK TABLES `plagas` WRITE;
 /*!40000 ALTER TABLE `plagas` DISABLE KEYS */;
-INSERT INTO `plagas` VALUES ('El picudo, barrenillo','Anthonomus eugenii Cano','Plaga','Cultivos','b1021f6d-dae8-482e-b245-88a79e7d47aa.jpg',NULL,NULL,NULL,NULL,NULL),('plaga8','plaga8','plaga','todos los cultivos','0bdcc3d8-dae0-442b-b187-c6d167ab2f64.png',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `plagas` VALUES ('Picudo','Picudo','plaga','cultivos en general','fc7b01ce-b2f1-4ad7-b95c-645649b8e8ab.JPG',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `plagas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -659,7 +659,7 @@ CREATE TABLE `reglas` (
 
 LOCK TABLES `reglas` WRITE;
 /*!40000 ALTER TABLE `reglas` DISABLE KEYS */;
-INSERT INTO `reglas` VALUES (1,'El picudo, barrenillo',10,45,'si','no',0,0,'no',0,0),(2,'plaga8',10,50,'si','no',0,0,'no',0,0);
+INSERT INTO `reglas` VALUES (1,'Picudo',23,27,'si','no',0,0,'no',0,0);
 /*!40000 ALTER TABLE `reglas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -692,7 +692,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('avbravo@gmail.com','Aristides Villarreal','denver','','','Masculino',NULL,'programador','agricultor');
+INSERT INTO `usuarios` VALUES ('avbravo@gmail.com','Aristides Villarreal','denver','','','Masculino',NULL,'programador','agricultor'),('test@gmail.com','test','denver','','','Masculino',NULL,'','agricultor');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -705,4 +705,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-29 16:54:47
+-- Dump completed on 2015-04-30 16:54:17
