@@ -30,9 +30,9 @@ import org.primefaces.model.chart.HorizontalBarChartModel;
  *
  * @author avbravo
  */
-@Named(value = "chartView")
+@Named
 @ViewScoped
-public class ChartView implements Serializable {
+public class ChartViewCultivos implements Serializable {
  @Inject
  AlertasFacade alertasFacade;
  Alertas alertas = new Alertas();
@@ -69,16 +69,16 @@ public class ChartView implements Serializable {
         
       
    ChartSeries boys = new ChartSeries();
-   List<Plagas> listPlagas = plagasFacade.findAll();
+   List<Cultivos> listCultivos = cultivosFacade.findAll();
     Integer total ;
-   if(!listPlagas.isEmpty()){
-       for(Plagas p:listPlagas){
-          total = alertasFacade.getContadorPlagas(p.getNombreplaga());
+   if(!listCultivos.isEmpty()){
+       for(Cultivos p:listCultivos){
+          total = alertasFacade.getContadorCultivos(p.getNombrecultivo());
           ChartSeries b = new ChartSeries();
-          b.setLabel(p.getNombreplaga());
+          b.setLabel(p.getNombrecultivo());
           b.set("total", total);
             model.addSeries(b);
-          
+            System.out.println(p.getNombrecultivo()+"total "+total );
        }
    }
 
@@ -96,14 +96,14 @@ public class ChartView implements Serializable {
     private void createBarModel() {
         barModel = initBarModel();
          
-        barModel.setTitle("Plagas");
+        barModel.setTitle("Cultivos");
         barModel.setLegendPosition("ne");
          
         Axis xAxis = barModel.getAxis(AxisType.X);
         xAxis.setLabel("Total");
          
         Axis yAxis = barModel.getAxis(AxisType.Y);
-        yAxis.setLabel("Aparicion de plagas");
+        yAxis.setLabel("Cultivos Afectados");
         yAxis.setMin(0);
         yAxis.setMax(50);
     }

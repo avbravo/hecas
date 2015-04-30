@@ -72,4 +72,37 @@ public class AlertasFacade extends AbstractFacade<Alertas> {
         }
         return 0;
     }
+       
+       
+         public Integer getContadorPlagas(String nombreplaga) {
+        try {
+
+            Query q = em.createQuery("SELECT COUNT(a)  FROM Alertas a WHERE a.nombreplaga= :nombreplaga");
+            q.setParameter("nombreplaga", nombreplaga);
+
+            Number result = (Number) q.getSingleResult();
+            return result.intValue();
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
+          public Integer getContadorCultivos(String nombrecultivo) {
+        try {
+
+            Query q = em.createQuery("SELECT COUNT(a)  FROM Alertas a WHERE a.nombrecultivo= :nombrecultivo");
+            q.setParameter("nombrecultivo", nombrecultivo);
+
+            Number result = (Number) q.getSingleResult();
+            return result.intValue();
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
+       /*
+       devuelve un distinct de los años
+       */
+       
+         
 }
