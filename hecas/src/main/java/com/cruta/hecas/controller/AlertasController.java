@@ -8,7 +8,10 @@ package com.cruta.hecas.controller;
 import com.cruta.hecas.Alertas;
 import com.cruta.hecas.Cultivos;
 import com.cruta.hecas.Plagas;
+import com.cruta.hecas.Usuarios;
 import com.cruta.hecas.ejb.AlertasFacade;
+import com.cruta.hecas.ejb.UsuariosFacade;
+import com.cruta.hecas.email.EnviarEmail;
 import com.cruta.hecas.generales.GestorImpresion;
 import com.cruta.hecas.generales.JSFUtil;
 import com.cruta.hecas.generales.LoginBean;
@@ -57,7 +60,11 @@ private String imagenURL ="/resources/fotos/foto.png";
 private String imagen="foto.png";
 Cultivos cultivos= new Cultivos();
 Plagas plagas =  new Plagas();
-
+ @Inject 
+    UsuariosFacade usuariosFacade;
+    Usuarios usuarios = new Usuarios();
+    @Inject
+    EnviarEmail enviarEmail;
 
  private Boolean bflor;
  private Boolean btallo;
@@ -212,9 +219,11 @@ Plagas plagas =  new Plagas();
           alertas.setNombreplaga(plagas.getNombreplaga());
             alertasFacade.create(alertas);
             JSFUtil.addSuccessMessage("Guardado exitosamente");
-            alertas = new Alertas();
+            
             this.nuevoregistro = false;
 //             notificarPUSH();
+            procesarNotificacion("Alerta", "plaga: "+alertas.getNombreplaga() +" cultivo: "+alertas.getNombrecultivo() + " descripcion: "+alertas.getDescripcion());
+            alertas = new Alertas();
         } catch (Exception e) {
             JSFUtil.addErrorMessage(e.getLocalizedMessage());
         }
@@ -355,5 +364,24 @@ Plagas plagas =  new Plagas();
             JSFUtil.addErrorMessage("handleFileUpload()" + e.getLocalizedMessage());
         }
 
+    }
+    
+     public String procesarNotificacion(String titulo, String texto){
+        try {
+ 
+            List<Usuarios> listUsuarios = usuariosFacade.findAll();
+            if(!listUsuarios.isEmpty()){
+  
+                listUsuarios.stream().filter((u) -> (!u.getEmail().equals(""))).forEach((u) -> {
+         
+                    enviarEmail.enviar(u.getEmail(), titulo, texto);
+          
+                });
+            }
+        } catch (Exception e) {
+                JSFUtil.addErrorMessage("procesarNotificacion()" + e.getLocalizedMessage());
+        }
+        return null;
+        
     }
 }

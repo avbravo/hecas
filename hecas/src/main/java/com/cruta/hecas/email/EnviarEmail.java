@@ -35,7 +35,7 @@ public class EnviarEmail {
     public String enviar() {
         try {
            
-            final String username = "hecas@gmail.com";
+            final String username = "hecas.nasa@gmail.com";
             final String password = "azuero2015nasa";
 
             Properties props = new Properties();
@@ -64,6 +64,47 @@ public class EnviarEmail {
                 Transport.send(message);
 
                 System.out.println("Done");
+
+           
+        } catch (Exception ex) {
+JSFUtil.infoDialog("error", ex.getLocalizedMessage());
+            System.out.println("error "+ex.getLocalizedMessage());
+        }
+        return null;
+    }
+    
+    
+      public String enviar(String destino, String titulo, String mensaje) {
+        try {
+           
+            final String username = "hecas.nasa@gmail.com";
+            final String password = "azuero2015nasa";
+
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "587");
+
+            Session session = Session.getInstance(props,
+                    new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(username, password);
+                        }
+                    });
+
+      
+
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(destino));
+                message.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(destino));
+                message.setSubject(titulo);
+                message.setText(mensaje);
+
+                Transport.send(message);
+
+               
 
            
         } catch (Exception ex) {

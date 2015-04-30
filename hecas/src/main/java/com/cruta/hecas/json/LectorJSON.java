@@ -8,9 +8,12 @@ package com.cruta.hecas.json;
 import com.cruta.hecas.Advertencias;
 import com.cruta.hecas.Arduino;
 import com.cruta.hecas.Reglas;
+import com.cruta.hecas.Usuarios;
 import com.cruta.hecas.ejb.AdvertenciasFacade;
 import com.cruta.hecas.ejb.ArduinoFacade;
 import com.cruta.hecas.ejb.ReglasFacade;
+import com.cruta.hecas.ejb.UsuariosFacade;
+import com.cruta.hecas.email.EnviarEmail;
 import com.cruta.hecas.generales.JSFUtil;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +48,11 @@ private String lectura;
     @Inject
     ArduinoFacade arduinoFacade;
     Arduino arduino = new Arduino();
+     @Inject 
+    UsuariosFacade usuariosFacade;
+    Usuarios usuarios = new Usuarios();
+    @Inject
+    EnviarEmail enviarEmail;
     public String getLectura() {
         return lectura;
     }
@@ -160,6 +168,7 @@ StringBuilder sb = new StringBuilder();
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
                             JSFUtil.infoDialog("Temperatura", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                               procesarNotificacion("Temperatura","Aparece plaga: " + r.getNombreplaga().getNombreplaga());
                         }
 
                     }
@@ -171,6 +180,7 @@ StringBuilder sb = new StringBuilder();
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
                             JSFUtil.infoDialog("Humedad relativa", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                            procesarNotificacion("Humedad relativa", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
                         }
                     }
                     if (r.getAplicahumedadsuelo().equals("si")) {
@@ -181,6 +191,7 @@ StringBuilder sb = new StringBuilder();
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
                             JSFUtil.infoDialog("Humedad suelo", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                                procesarNotificacion("Humedad suelo", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
                         }
                     }
 
@@ -192,5 +203,24 @@ StringBuilder sb = new StringBuilder();
             JSFUtil.addErrorMessage("analizarReglas()" + e.getLocalizedMessage());
         }
         return null;
+    }
+     
+      public String procesarNotificacion(String titulo, String texto){
+        try {
+ 
+            List<Usuarios> listUsuarios = usuariosFacade.findAll();
+            if(!listUsuarios.isEmpty()){
+  
+                listUsuarios.stream().filter((u) -> (!u.getEmail().equals(""))).forEach((u) -> {
+         
+                    enviarEmail.enviar(u.getEmail(), titulo, texto);
+          
+                });
+            }
+        } catch (Exception e) {
+                JSFUtil.addErrorMessage("procesarNotificacion()" + e.getLocalizedMessage());
+        }
+        return null;
+        
     }
  }

@@ -6,13 +6,14 @@
 package com.cruta.hecas.controller;
 
 import com.cruta.hecas.Advertencias;
-import com.cruta.hecas.Alertas;
 import com.cruta.hecas.Arduino;
 import com.cruta.hecas.Reglas;
+import com.cruta.hecas.Usuarios;
 import com.cruta.hecas.ejb.AdvertenciasFacade;
-import com.cruta.hecas.ejb.AlertasFacade;
 import com.cruta.hecas.ejb.ArduinoFacade;
 import com.cruta.hecas.ejb.ReglasFacade;
+import com.cruta.hecas.ejb.UsuariosFacade;
+import com.cruta.hecas.email.EnviarEmail;
 import com.cruta.hecas.generales.GestorImpresion;
 import com.cruta.hecas.generales.JSFUtil;
 import com.cruta.hecas.generales.LoginBean;
@@ -27,12 +28,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.Column;
-import javax.validation.constraints.Size;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.map.PointSelectEvent;
 import org.primefaces.model.UploadedFile;
@@ -63,6 +61,12 @@ public class ArduinoController implements Serializable, IController {
     GestorImpresion gestorImpresion;
     @Inject
     LoginBean loginBean;
+    @Inject 
+    UsuariosFacade usuariosFacade;
+    Usuarios usuarios = new Usuarios();
+    @Inject
+    EnviarEmail enviarEmail;
+    
     private Boolean nuevoregistro = false;
     Boolean desactivar = true;
 
@@ -385,7 +389,9 @@ public class ArduinoController implements Serializable, IController {
                             advertencias.setDescripcion("Variaciones en la temperatura de " + arduino.getTemperatura() + " pueden generar la aparcion de la plaga");
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
+                            
                             JSFUtil.infoDialog("Temperatura", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                            procesarNotificacion("Temperatura","Aparece plaga: " + r.getNombreplaga().getNombreplaga());
                         }
 
                     }
@@ -397,6 +403,7 @@ public class ArduinoController implements Serializable, IController {
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
                             JSFUtil.infoDialog("Humedad relativa", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                              procesarNotificacion("Humedad relativa", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
                         }
                     }
                     if (r.getAplicahumedadsuelo().equals("si")) {
@@ -407,6 +414,7 @@ public class ArduinoController implements Serializable, IController {
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
                             JSFUtil.infoDialog("Humedad suelo", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                            procesarNotificacion("Humedad suelo", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
                         }
                     }
 
@@ -418,5 +426,26 @@ public class ArduinoController implements Serializable, IController {
             JSFUtil.addErrorMessage("analizarReglas()" + e.getLocalizedMessage());
         }
         return null;
+    }
+    /*
+    envia notificacion por email
+    */
+    public String procesarNotificacion(String titulo, String texto){
+        try {
+            System.out.println("voy a enviar");
+            List<Usuarios> listUsuarios = usuariosFacade.findAll();
+            if(!listUsuarios.isEmpty()){
+                System.out.println("no esta vacio");
+                listUsuarios.stream().filter((u) -> (!u.getEmail().equals(""))).forEach((u) -> {
+                    System.out.println("enviando a "+u.getEmail());
+                    enviarEmail.enviar(u.getEmail(), titulo, texto);
+                    System.out.println("enviado");
+                });
+            }
+        } catch (Exception e) {
+                JSFUtil.addErrorMessage("procesarNotificacion()" + e.getLocalizedMessage());
+        }
+        return null;
+        
     }
 }
