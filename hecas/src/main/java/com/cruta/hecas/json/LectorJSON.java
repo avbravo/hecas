@@ -15,6 +15,7 @@ import com.cruta.hecas.ejb.ReglasFacade;
 import com.cruta.hecas.ejb.UsuariosFacade;
 import com.cruta.hecas.email.EnviarEmail;
 import com.cruta.hecas.generales.JSFUtil;
+import com.cruta.hecas.twitter.MyTwitter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -53,6 +54,8 @@ private String lectura;
     Usuarios usuarios = new Usuarios();
     @Inject
     EnviarEmail enviarEmail;
+     @Inject
+    MyTwitter myTwitter;
     public String getLectura() {
         return lectura;
     }
@@ -167,8 +170,8 @@ StringBuilder sb = new StringBuilder();
                             advertencias.setDescripcion("Variaciones en la temperatura de " + arduino.getTemperatura() + " pueden generar la aparcion de la plaga");
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
-                            JSFUtil.infoDialog("Temperatura", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
-                               procesarNotificacion("Temperatura","Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                            JSFUtil.infoDialog("Temperatura", "Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
+                               procesarNotificacion("Temperatura","Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
                         }
 
                     }
@@ -179,8 +182,8 @@ StringBuilder sb = new StringBuilder();
                             advertencias.setDescripcion("Variaciones en la humedad relativa de " + arduino.getHumedadrelativa() + " pueden generar la aparcion de la plaga");
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
-                            JSFUtil.infoDialog("Humedad relativa", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
-                            procesarNotificacion("Humedad relativa", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                            JSFUtil.infoDialog("Humedad relativa", "Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
+                            procesarNotificacion("Humedad relativa","Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
                         }
                     }
                     if (r.getAplicahumedadsuelo().equals("si")) {
@@ -190,8 +193,8 @@ StringBuilder sb = new StringBuilder();
                             advertencias.setDescripcion("Variaciones en la humedad del suelo de " + arduino.getHumedadsuelo() + " pueden generar la aparcion de la plaga");
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
-                            JSFUtil.infoDialog("Humedad suelo", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
-                                procesarNotificacion("Humedad suelo", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                            JSFUtil.infoDialog("Humedad suelo", "Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
+                                procesarNotificacion("Humedad suelo", "Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
                         }
                     }
 
@@ -207,7 +210,7 @@ StringBuilder sb = new StringBuilder();
      
       public String procesarNotificacion(String titulo, String texto){
         try {
- 
+ myTwitter.enviar(texto);
             List<Usuarios> listUsuarios = usuariosFacade.findAll();
             if(!listUsuarios.isEmpty()){
   

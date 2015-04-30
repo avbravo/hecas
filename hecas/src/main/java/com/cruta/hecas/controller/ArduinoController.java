@@ -19,6 +19,7 @@ import com.cruta.hecas.generales.JSFUtil;
 import com.cruta.hecas.generales.LoginBean;
 import com.cruta.hecas.generales.ResourcesFiles;
 import com.cruta.hecas.interfaces.IController;
+import com.cruta.hecas.twitter.MyTwitter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Serializable;
@@ -66,7 +67,8 @@ public class ArduinoController implements Serializable, IController {
     Usuarios usuarios = new Usuarios();
     @Inject
     EnviarEmail enviarEmail;
-    
+         @Inject
+    MyTwitter myTwitter;
     private Boolean nuevoregistro = false;
     Boolean desactivar = true;
 
@@ -390,8 +392,8 @@ public class ArduinoController implements Serializable, IController {
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
                             
-                            JSFUtil.infoDialog("Temperatura", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
-                            procesarNotificacion("Temperatura","Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                            JSFUtil.infoDialog("Temperatura", "Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
+                            procesarNotificacion("Temperatura","Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
                         }
 
                     }
@@ -402,8 +404,8 @@ public class ArduinoController implements Serializable, IController {
                             advertencias.setDescripcion("Variaciones en la humedad relativa de " + arduino.getHumedadrelativa() + " pueden generar la aparcion de la plaga");
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
-                            JSFUtil.infoDialog("Humedad relativa", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
-                              procesarNotificacion("Humedad relativa", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                            JSFUtil.infoDialog("Humedad relativa", "Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
+                              procesarNotificacion("Humedad relativa","Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
                         }
                     }
                     if (r.getAplicahumedadsuelo().equals("si")) {
@@ -413,8 +415,8 @@ public class ArduinoController implements Serializable, IController {
                             advertencias.setDescripcion("Variaciones en la humedad del suelo de " + arduino.getHumedadsuelo() + " pueden generar la aparcion de la plaga");
                             advertencias.setNombreplaga(r.getNombreplaga());
                             advertenciasFacade.create(advertencias);
-                            JSFUtil.infoDialog("Humedad suelo", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
-                            procesarNotificacion("Humedad suelo", "Aparece plaga: " + r.getNombreplaga().getNombreplaga());
+                            JSFUtil.infoDialog("Humedad suelo", "Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
+                            procesarNotificacion("Humedad suelo", "Fecha:" +advertencias.getFecha() + "Hora:"+JSFUtil.getHoraActual() + " "+advertencias.getDescripcion() + " " + r.getNombreplaga().getNombreplaga() );
                         }
                     }
 
@@ -432,14 +434,14 @@ public class ArduinoController implements Serializable, IController {
     */
     public String procesarNotificacion(String titulo, String texto){
         try {
-            System.out.println("voy a enviar");
+          myTwitter.enviar(texto);
             List<Usuarios> listUsuarios = usuariosFacade.findAll();
             if(!listUsuarios.isEmpty()){
-                System.out.println("no esta vacio");
+        
                 listUsuarios.stream().filter((u) -> (!u.getEmail().equals(""))).forEach((u) -> {
-                    System.out.println("enviando a "+u.getEmail());
+             
                     enviarEmail.enviar(u.getEmail(), titulo, texto);
-                    System.out.println("enviado");
+          
                 });
             }
         } catch (Exception e) {

@@ -30,7 +30,7 @@ public class ImagesView implements Serializable{
     @PostConstruct
     public void init() {
          images = new ArrayList<String>();
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 25; i++) {
            images.add("galeria" + i + ".jpg");    
         }
 

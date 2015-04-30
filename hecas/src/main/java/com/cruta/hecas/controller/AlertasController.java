@@ -17,6 +17,7 @@ import com.cruta.hecas.generales.JSFUtil;
 import com.cruta.hecas.generales.LoginBean;
 import com.cruta.hecas.generales.ResourcesFiles;
 import com.cruta.hecas.interfaces.IController;
+import com.cruta.hecas.twitter.MyTwitter;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -65,6 +66,8 @@ Plagas plagas =  new Plagas();
     Usuarios usuarios = new Usuarios();
     @Inject
     EnviarEmail enviarEmail;
+    @Inject
+    MyTwitter myTwitter;
 
  private Boolean bflor;
  private Boolean btallo;
@@ -368,7 +371,7 @@ Plagas plagas =  new Plagas();
     
      public String procesarNotificacion(String titulo, String texto){
         try {
- 
+ myTwitter.enviar(texto);
             List<Usuarios> listUsuarios = usuariosFacade.findAll();
             if(!listUsuarios.isEmpty()){
   

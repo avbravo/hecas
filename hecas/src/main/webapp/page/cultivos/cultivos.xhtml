@@ -79,7 +79,7 @@
                                 <f:facet name="header">
                                     <p:outputLabel value="Foto"/>
                                 </f:facet>
-                             <h:graphicImage id="foto" value="/resources/fotos/#{item.foto}" height="30" width="30"/>
+                             <h:graphicImage id="foto" value="/resources/cultivos/#{item.foto}" height="30" width="30"/>
                             </p:column>
 
                          
@@ -99,7 +99,7 @@
             <h:panelGrid columns="2" id="panelCultivos">
                 <p:outputLabel value="Foto"/>
      
-                 <h:graphicImage id="foto" value="/resources/fotos/#{cultivosSearchController.selected.foto}" height="50" width="50"/>
+                 <h:graphicImage id="foto" value="/resources/cultivos/#{cultivosSearchController.selected.foto}" height="50" width="50"/>
                 <p:outputLabel value="Nombre "/>
                 <p:outputLabel value="#{cultivosSearchController.selected.nombrecultivo}"/>
                 <p:outputLabel value="Nombre Cientifico"/>
